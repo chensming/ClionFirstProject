@@ -80,7 +80,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/ClionProject/FirstProject/Sort/LinearSort.cpp">
+		<Unit filename="D:/ClionProject/FirstProject/DSModel/Tree/MinSpanningTree.cpp">
 			<Option target="FirstProject"/>
 		</Unit>
 		<Unit filename="D:/ClionProject/FirstProject/CMakeLists.txt">

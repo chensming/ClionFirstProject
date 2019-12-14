@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/FirstProject.dir/Sort/LinearSort.cpp.obj"
+  "CMakeFiles/FirstProject.dir/DSModel/Tree/MinSpanningTree.cpp.obj"
   "FirstProject.exe"
   "FirstProject.exe.manifest"
   "FirstProject.pdb"

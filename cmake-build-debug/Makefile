@@ -122,32 +122,32 @@ FirstProject/fast:
 	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/build
 .PHONY : FirstProject/fast
 
-Sort/LinearSort.obj: Sort/LinearSort.cpp.obj
+DSModel/Tree/MinSpanningTree.obj: DSModel/Tree/MinSpanningTree.cpp.obj
 
-.PHONY : Sort/LinearSort.obj
+.PHONY : DSModel/Tree/MinSpanningTree.obj
 
 # target to build an object file
-Sort/LinearSort.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Sort/LinearSort.cpp.obj
-.PHONY : Sort/LinearSort.cpp.obj
+DSModel/Tree/MinSpanningTree.cpp.obj:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Tree/MinSpanningTree.cpp.obj
+.PHONY : DSModel/Tree/MinSpanningTree.cpp.obj
 
-Sort/LinearSort.i: Sort/LinearSort.cpp.i
+DSModel/Tree/MinSpanningTree.i: DSModel/Tree/MinSpanningTree.cpp.i
 
-.PHONY : Sort/LinearSort.i
+.PHONY : DSModel/Tree/MinSpanningTree.i
 
 # target to preprocess a source file
-Sort/LinearSort.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Sort/LinearSort.cpp.i
-.PHONY : Sort/LinearSort.cpp.i
+DSModel/Tree/MinSpanningTree.cpp.i:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Tree/MinSpanningTree.cpp.i
+.PHONY : DSModel/Tree/MinSpanningTree.cpp.i
 
-Sort/LinearSort.s: Sort/LinearSort.cpp.s
+DSModel/Tree/MinSpanningTree.s: DSModel/Tree/MinSpanningTree.cpp.s
 
-.PHONY : Sort/LinearSort.s
+.PHONY : DSModel/Tree/MinSpanningTree.s
 
 # target to generate assembly for a file
-Sort/LinearSort.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Sort/LinearSort.cpp.s
-.PHONY : Sort/LinearSort.cpp.s
+DSModel/Tree/MinSpanningTree.cpp.s:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Tree/MinSpanningTree.cpp.s
+.PHONY : DSModel/Tree/MinSpanningTree.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... FirstProject
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... Sort/LinearSort.obj
-	@echo ... Sort/LinearSort.i
-	@echo ... Sort/LinearSort.s
+	@echo ... DSModel/Tree/MinSpanningTree.obj
+	@echo ... DSModel/Tree/MinSpanningTree.i
+	@echo ... DSModel/Tree/MinSpanningTree.s
 .PHONY : help
 
 

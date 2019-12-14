@@ -6,11 +6,15 @@
 
 #IncludeRegexTransform: 
 
-D:/ClionProject/FirstProject/Sort/LinearSort.cpp
+D:/ClionProject/FirstProject/DSModel/Tree/MinSpanningTree.cpp
 iostream
 -
-random
+queue
 -
-ctime
+iomanip
+-
+vector
+-
+algorithm
 -
 
