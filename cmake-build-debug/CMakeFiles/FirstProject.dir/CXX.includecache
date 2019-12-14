@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-D:/ClionProject/FirstProject/Student.cpp
-Student.h
-D:/ClionProject/FirstProject/Student.h
+D:/ClionProject/FirstProject/Sort/LinearSort.cpp
 iostream
 -
-
-D:/ClionProject/FirstProject/Student.h
+random
+-
+ctime
+-
 

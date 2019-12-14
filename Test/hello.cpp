@@ -12,4 +12,6 @@ int main()
     Student a;
     cout << "hello world" << endl;
     cout << "a ha" << endl;
+    cout << "end of hello.cpp" << endl;
+    system("pause");
 }

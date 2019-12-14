@@ -122,59 +122,32 @@ FirstProject/fast:
 	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/build
 .PHONY : FirstProject/fast
 
-Student.obj: Student.cpp.obj
+Sort/LinearSort.obj: Sort/LinearSort.cpp.obj
 
-.PHONY : Student.obj
-
-# target to build an object file
-Student.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Student.cpp.obj
-.PHONY : Student.cpp.obj
-
-Student.i: Student.cpp.i
-
-.PHONY : Student.i
-
-# target to preprocess a source file
-Student.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Student.cpp.i
-.PHONY : Student.cpp.i
-
-Student.s: Student.cpp.s
-
-.PHONY : Student.s
-
-# target to generate assembly for a file
-Student.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Student.cpp.s
-.PHONY : Student.cpp.s
-
-Test/hello.obj: Test/hello.cpp.obj
-
-.PHONY : Test/hello.obj
+.PHONY : Sort/LinearSort.obj
 
 # target to build an object file
-Test/hello.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Test/hello.cpp.obj
-.PHONY : Test/hello.cpp.obj
+Sort/LinearSort.cpp.obj:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Sort/LinearSort.cpp.obj
+.PHONY : Sort/LinearSort.cpp.obj
 
-Test/hello.i: Test/hello.cpp.i
+Sort/LinearSort.i: Sort/LinearSort.cpp.i
 
-.PHONY : Test/hello.i
+.PHONY : Sort/LinearSort.i
 
 # target to preprocess a source file
-Test/hello.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Test/hello.cpp.i
-.PHONY : Test/hello.cpp.i
+Sort/LinearSort.cpp.i:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Sort/LinearSort.cpp.i
+.PHONY : Sort/LinearSort.cpp.i
 
-Test/hello.s: Test/hello.cpp.s
+Sort/LinearSort.s: Sort/LinearSort.cpp.s
 
-.PHONY : Test/hello.s
+.PHONY : Sort/LinearSort.s
 
 # target to generate assembly for a file
-Test/hello.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Test/hello.cpp.s
-.PHONY : Test/hello.cpp.s
+Sort/LinearSort.cpp.s:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Sort/LinearSort.cpp.s
+.PHONY : Sort/LinearSort.cpp.s
 
 # Help Target
 help:
@@ -185,12 +158,9 @@ help:
 	@echo ... FirstProject
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... Student.obj
-	@echo ... Student.i
-	@echo ... Student.s
-	@echo ... Test/hello.obj
-	@echo ... Test/hello.i
-	@echo ... Test/hello.s
+	@echo ... Sort/LinearSort.obj
+	@echo ... Sort/LinearSort.i
+	@echo ... Sort/LinearSort.s
 .PHONY : help
 
 

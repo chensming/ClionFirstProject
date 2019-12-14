@@ -80,13 +80,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/ClionProject/FirstProject/Student.cpp">
-			<Option target="FirstProject"/>
-		</Unit>
-		<Unit filename="D:/ClionProject/FirstProject/Student.h">
-			<Option target="FirstProject"/>
-		</Unit>
-		<Unit filename="D:/ClionProject/FirstProject/Test/hello.cpp">
+		<Unit filename="D:/ClionProject/FirstProject/Sort/LinearSort.cpp">
 			<Option target="FirstProject"/>
 		</Unit>
 		<Unit filename="D:/ClionProject/FirstProject/CMakeLists.txt">

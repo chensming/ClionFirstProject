@@ -5,5 +5,6 @@ using namespace std;
 
 int main() {
     Student a;
-    return 0;
+    system("pause");
+    cout << "end of main" << endl;
 }
