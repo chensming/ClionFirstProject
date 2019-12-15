@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "D:/ClionProject/FirstProject/DSModel/Tree/MinSpanningTree.cpp" "D:/ClionProject/FirstProject/cmake-build-debug/CMakeFiles/FirstProject.dir/DSModel/Tree/MinSpanningTree.cpp.obj"
+  "D:/ClionProject/FirstProject/DSModel/Graph/MinSpanningTreeD.cpp" "D:/ClionProject/FirstProject/cmake-build-debug/CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

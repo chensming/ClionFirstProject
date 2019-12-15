@@ -2,40 +2,48 @@
 // Created by Dell on 2019/12/14.
 //
 
+//
+// Created by Dell on 2019/12/14.
+//
+
 #include <iostream>
 #include <queue>
 #include <iomanip>
 #include <vector>
 #include <algorithm>
+
 using namespace std;
 const int maxWeight = 9999;
 const int DefaultVertices = 30;
 const int DefaultUFsetsSize = 30;
 
 
-//ç‚¹çš„å€¼ç±»å‹ä¸ºTï¼Œè¾¹çš„æƒå€¼ç±»å‹ä¸ºE
+//×îĞ¡Éú³ÉÊ÷ÄÇÓÃµ½ÁË
 template<class T, class E>
-struct MSTEdgeNode
-{
-    int tail, head;  //ç‚¹çš„ç¼–å·
-    E cost; //æƒå€¼
+struct MSTEdgeNode {
+    int tail, head;
+    E cost;
 };
 
-template<class T,class E>
-bool cmp(const MSTEdgeNode<T, E>& a, const MSTEdgeNode<T, E>& b)
-{
-    return a.cost < b.cost;  //å‡åº
+template<class T, class E>
+bool cmp(const MSTEdgeNode<T, E>& a, const MSTEdgeNode<T, E>& b) {
+    return a.cost < b.cost;  //ÉıĞò
 }
 
 
 class UFsets {
 public:
     UFsets(int sz = DefaultUFsetsSize);
+
     ~UFsets() { delete[] parent; }
-    //ä¸ç®¡ç»“ç‚¹å¤šå°‘ï¼Œå°±æ˜¯æŠŠroot1ä½œä¸ºæ–°æ ‘çš„æ ¹
+
+    //root2Ö±½ÓºÏ²¢µ½root1
     void Union(int root1, int root2);
+
     int Find(int x);
+
     void WeightedUnion(int root1, int root2);
+
     void PrintParentList();
 
 private:
@@ -44,49 +52,59 @@ private:
 };
 
 
-
-template <class T, class E>
-class Graphmtx
-{
+template<class T, class E>
+class Graphmtx {
 public:
     Graphmtx(int sz = DefaultVertices);
-    ~Graphmtx()
-    {
+
+    ~Graphmtx() {
         delete[] verticesList;
         delete[] Edge;
     }
-    //å»é¡¶ç‚¹ i çš„å€¼ï¼Œiä¸åˆç†è¿”å›0
+
     T getValue(int i) {
         return i >= 0 && i <= numVertices ? verticesList[i] : 0;
     }
+
     E getWeight(int v1, int v2) {
         return v1 >= 0 && v1 <= numVertices && v2 >= 0 && v2 <= numVertices ? Edge[v1][v2] : 0;
     }
+
     int getFirstNeightBor(int v);
+
     int getNextNeighbor(int v, int w);
+
     bool insertVertex(const T vertex);
+
     bool insertEdge(int v1, int v2, E cost);
+
     bool removeVertex(int v);
+
     bool removeEdge(int v1, int v2);
+
     void showMatrix();
+
     void OuputGraphDest();
+
     void KruskalMinTree();
+
     void PrimMinTree();
+
     void Dijkstra();
+
     void printMinTree();
 
 
 private:
     int maxVertices;
-    int numVertices; // é¡¶ç‚¹æ•°
+    int numVertices; // ??????
     int numEdges;
     T* verticesList;
     E** Edge;
-    MSTEdgeNode<T, E>* mst;//æœ€å°ç”Ÿæˆæ ‘æ•°ç»„
+    MSTEdgeNode<T, E>* mst;//×îĞ¡Éú³ÉÊ÷Êı×é
 
 
-    int getVertexPos(T Vertex)
-    {
+    int getVertexPos(T Vertex) {
         for (int i = 0; i < numVertices; i++)
             if (verticesList[i] == Vertex)
                 return i;
@@ -96,10 +114,9 @@ private:
 
 
 ////////////////////////////////////////////////////////////////////////////
-//å¹¶æŸ¥é›†å‡½æ•°å®ç°éƒ¨åˆ†start
+//UFsets start
 
-UFsets::UFsets(int sz)
-{
+UFsets::UFsets(int sz) {
     size = sz;
     parent = new int[size];
     for (int i = 0; i < size; i++)
@@ -107,11 +124,7 @@ UFsets::UFsets(int sz)
 }
 
 
-void UFsets::Union(int root1, int root2)
-{
-    //æ ¹èŠ‚ç‚¹parentå€¼è¦å˜å°,
-    //å› ä¸ºweightUnionå‡½æ•°å¼æ ¹æ®æ ¹èŠ‚ç‚¹parent[root]çš„ç›¸åæ•°å¤§å°
-    //ä»è€Œæ¥å¾—çŸ¥å“ªä¸ªæ ‘èŠ‚ç‚¹å¤šçš„
+void UFsets::Union(int root1, int root2) {
     int x = root1;
     while (parent[x] > 0)
         x = parent[x];
@@ -120,10 +133,7 @@ void UFsets::Union(int root1, int root2)
 }
 
 
-
-
-int UFsets::Find(int x)
-{
+int UFsets::Find(int x) {
     if (parent[x] < 0)
         return x;
     else
@@ -131,22 +141,18 @@ int UFsets::Find(int x)
 }
 
 
-
-void UFsets::WeightedUnion(int root1, int root2)
-{
+void UFsets::WeightedUnion(int root1, int root2) {
     int r1 = Find(root1);
     int r2 = Find(root2);
     int temp = -1;
     if (r1 != r2)
         temp = parent[r1] + parent[r2];
-    //r1æ ‘ç»“ç‚¹å¤š
-    if (parent[r1] < parent[r2])
-    {
+    //r1µÄ½áµã¶à
+    if (parent[r1] < parent[r2]) {
         parent[r1] = temp;
         parent[r2] = r1;
     }
-    else
-    {
+    else {
         parent[r2] = temp;
         parent[r1] = r2;
     }
@@ -154,9 +160,7 @@ void UFsets::WeightedUnion(int root1, int root2)
 }
 
 
-
-void UFsets::PrintParentList()
-{
+void UFsets::PrintParentList() {
     for (int i = 0; i < size; i++)
         cout << i << "(" << parent[i] << ") ";
     cout << endl;
@@ -164,13 +168,12 @@ void UFsets::PrintParentList()
 
 
 
-//å¹¶æŸ¥é›†å‡½æ•°å®ç°éƒ¨åˆ†end
+//UFsets end
 ///////////////////////////////////////////////////////////////////////////////
 
 
 template<class T, class E>
-Graphmtx<T, E>::Graphmtx(int sz)
-{
+Graphmtx<T, E>::Graphmtx(int sz) {
     maxVertices = sz;
     numVertices = 0;
     numEdges = 0;
@@ -178,8 +181,7 @@ Graphmtx<T, E>::Graphmtx(int sz)
     int i, j;
     verticesList = new T[maxVertices];
     Edge = (E * *) new E * [maxVertices];
-    for (i = 0; i < maxVertices; i++)
-    {
+    for (i = 0; i < maxVertices; i++) {
         Edge[i] = new E[maxVertices];
     }
     for (i = 0; i < maxVertices; i++)
@@ -189,11 +191,9 @@ Graphmtx<T, E>::Graphmtx(int sz)
 
 
 template<class T, class E>
-int Graphmtx<T, E>::getFirstNeightBor(int v)
-{
+int Graphmtx<T, E>::getFirstNeightBor(int v) {
     if (v >= 0 && v < numVertices) {
-        for (int col = 0; col < numVertices; col++)
-        {
+        for (int col = 0; col < numVertices; col++) {
             if (Edge[v][col] && Edge[v][col] < maxWeight)
                 return col;
         }
@@ -202,18 +202,9 @@ int Graphmtx<T, E>::getFirstNeightBor(int v)
 }
 
 
-
-
-
-
-
-
-
 template<class T, class E>
-int Graphmtx<T, E>::getNextNeighbor(int v, int w)
-{
-    if (v >= 0 && v < numVertices && w >= 0 && w < numVertices)
-    {
+int Graphmtx<T, E>::getNextNeighbor(int v, int w) {
+    if (v >= 0 && v < numVertices && w >= 0 && w < numVertices) {
         for (int col = w + 1; col < numVertices; col++)
             if (Edge[v][col] && Edge[v][col] < maxWeight)
                 return col;
@@ -222,11 +213,8 @@ int Graphmtx<T, E>::getNextNeighbor(int v, int w)
 }
 
 
-
-
 template<class T, class E>
-bool Graphmtx<T, E>::insertVertex(const T vertex)
-{
+bool Graphmtx<T, E>::insertVertex(const T vertex) {
     if (numVertices == maxVertices)
         return false;
     verticesList[numVertices++] = vertex;
@@ -234,13 +222,9 @@ bool Graphmtx<T, E>::insertVertex(const T vertex)
 }
 
 
-
-
 template<class T, class E>
-bool Graphmtx<T, E>::insertEdge(int v1, int v2, E cost)
-{
-    if (v1 >= 0 && v1 < maxWeight && v2 >= 0 && v2 <= maxWeight)
-    {
+bool Graphmtx<T, E>::insertEdge(int v1, int v2, E cost) {
+    if (v1 >= 0 && v1 < maxWeight && v2 >= 0 && v2 <= maxWeight) {
         Edge[v1][v2] = Edge[v2][v1] = cost;
         numEdges++;
         return true;
@@ -249,24 +233,19 @@ bool Graphmtx<T, E>::insertEdge(int v1, int v2, E cost)
 }
 
 
-
-
 template<class T, class E>
-bool Graphmtx<T, E>::removeVertex(int v)
-{
+bool Graphmtx<T, E>::removeVertex(int v) {
     if (v < 0 || v >= numVertices)
         return false;
     if (numVertices == 1)
         return false;
     int i, j;
     verticesList[v] = verticesList[numVertices - 1];
-    for (i = 0; i < numVertices; i++)
-    {
+    for (i = 0; i < numVertices; i++) {
         if (Edge[i][v] > 0 && Edge[i][v] < maxWeight)
             numEdges--;
     }
-    for (i = 0; i < numVertices; i++)
-    {
+    for (i = 0; i < numVertices; i++) {
         Edge[i][v] = Edge[i][numVertices - 1];
     }
     for (j = 0; j < numVertices; j++)
@@ -275,12 +254,9 @@ bool Graphmtx<T, E>::removeVertex(int v)
 }
 
 
-
 template<class T, class E>
-bool Graphmtx<T, E>::removeEdge(int v1, int v2)
-{
-    if (v1 >= 0 && v1 < maxVertices && v2 >= 0 && v2 < maxWeight)
-    {
+bool Graphmtx<T, E>::removeEdge(int v1, int v2) {
+    if (v1 >= 0 && v1 < maxVertices && v2 >= 0 && v2 < maxWeight) {
         Edge[v1][v2] = Edge[v2][v1] = maxWeight;
         numEdges--;
         return true;
@@ -289,27 +265,16 @@ bool Graphmtx<T, E>::removeEdge(int v1, int v2)
 }
 
 
-
-
-
-
-
-
-
-
 template<class T, class E>
-void Graphmtx<T, E>::showMatrix()
-{
-    cout << "å›¾çš„é‚»æ¥çŸ©é˜µ: " << endl;
+void Graphmtx<T, E>::showMatrix() {
+    cout << "Í¼µÄÁÚ½Ó¾ØÕó: " << endl;
     cout << setw(8) << " ";
     for (int i = 0; i < numVertices; i++)
         cout << setw(8) << verticesList[i];
     cout << endl;
-    for (int row = 0; row < numVertices; row++)
-    {
+    for (int row = 0; row < numVertices; row++) {
         cout << setw(8) << verticesList[row];
-        for (int col = 0; col < numVertices; col++)
-        {
+        for (int col = 0; col < numVertices; col++) {
             cout << setw(8) << Edge[row][col];
         }
         cout << endl;
@@ -318,18 +283,13 @@ void Graphmtx<T, E>::showMatrix()
 }
 
 
-
 template<class T, class E>
-void Graphmtx<T, E>::OuputGraphDest()
-{
-    for (int row = 0; row < numVertices; row++)
-    {
-        cout << "ä¸ç¼–å·ä¸º " << row << ",å…¶å€¼ä¸º " << verticesList[row] << " çš„é¡¶ç‚¹ç›¸è¿çš„é¡¶ç‚¹: ";
-        cout << "é¡¶ç‚¹å€¼(ç¼–å·, æƒå€¼)" << endl;
-        for (int col = 0; col < numVertices; col++)
-        {
-            if (Edge[row][col] > 0 && Edge[row][col] < maxWeight)
-            {
+void Graphmtx<T, E>::OuputGraphDest() {
+    for (int row = 0; row < numVertices; row++) {
+        cout << "Óë±àºÅÎª " << row << ",ÆäÖµÎª " << verticesList[row] << " µÄ¶¥µãÏàÁ¬µÄ¶¥µã: ";
+        cout << "¶¥µãÖµ(±àºÅ, È¨Öµ)" << endl;
+        for (int col = 0; col < numVertices; col++) {
+            if (Edge[row][col] > 0 && Edge[row][col] < maxWeight) {
                 cout << verticesList[col] << "(" << col << ", " << Edge[row][col] << ") ";
             }
         }
@@ -338,72 +298,56 @@ void Graphmtx<T, E>::OuputGraphDest()
 }
 
 
-
-
-
-
-
-
-
-//int numVertices é¡¶ç‚¹æ•°
-//int numEdges è¾¹æ•°
+//int numVertices ¶¥µãÊı
+//int numEdges ±ßÊı
 template<class T, class E>
-void Graphmtx<T, E>::KruskalMinTree()
-{
+void Graphmtx<T, E>::KruskalMinTree() {
     if (mst != 0)
         delete[] mst;
-    mst = new MSTEdgeNode<T, E> [numVertices];
-
+    mst = new MSTEdgeNode<T, E>[numVertices];
 
 
     MSTEdgeNode<T, E>* p, leastNode;
     vector<MSTEdgeNode<T, E>> hp;
-    make_heap(hp.begin(), hp.end());
     UFsets ufset(numVertices);
 
 
 
-    //åˆå§‹åŒ–å·¥ä½œ
-    for(int u = 0; u < numVertices; u++)
-        for(int v = u + 1; v < numVertices; v++) //æ— å‘å›¾é‚»æ¥çŸ©é˜µå¯¹ç§°
-            if (Edge[u][v] < maxWeight)
-            {
-                p = new MSTEdgeNode<T,E>;
+    //³õÊ¼»¯¹¤×÷
+    for (int u = 0; u < numVertices; u++)
+        for (int v = u + 1; v < numVertices; v++)  //ÎŞÏòÍ¼ÁÚ½Ó¾ØÕó¶Ô³Æ
+            if (Edge[u][v] < maxWeight) {
+                p = new MSTEdgeNode<T, E>;
                 p->tail = u;
                 p->head = v;
                 p->cost = Edge[u][v];
                 hp.push_back(*p);
-                push_heap(hp.begin(), hp.end(), cmp);
+                make_heap(hp.begin(), hp.end(), cmp<T, E>);
+                sort_heap(hp.begin(), hp.end(), cmp<T, E>);
             }
-    int count = 1;//æœ€å°ç”Ÿæˆæ ‘è¾¹æ•°è®¡æ•°
-    while (count < numVertices)
-    {
+    int count = 1;//×îĞ¡Éú³ÉÊ÷±ßÊı¼ÆÊı
+    while (count < numVertices) {
         leastNode = hp.front();
         hp.erase(hp.begin());
 
         int u = ufset.Find(leastNode.tail);
         int v = ufset.Find(leastNode.head);
-        if (u != v) //åˆ¤æ–­æœ‰æ— æ„æˆç¯è·¯
+        if (u != v) //ÅĞ¶ÏÓĞÎŞ¹¹³É»·Â·
         {
             ufset.Union(u, v);
             mst[count - 1] = leastNode;
-            cout << leastNode.tail << "->" << leastNode.head << "(" << leastNode.cost << ")";
+            cout << leastNode.tail << "->" << leastNode.head << "(" << leastNode.cost << ") ";
             count++;
         }
     }
-    if (count == numVertices)
-    {
-        cout << "æœ€å°ç”Ÿæˆæ ‘ç”Ÿæˆ" << endl;
+    if (count == numVertices) {
+        cout << endl << "×îĞ¡Éú³ÉÊ÷Éú³É" << endl;
     }
 }
 
 
-
-
-
 template<class T, class E>
-void Graphmtx<T, E>::PrimMinTree()
-{
+void Graphmtx<T, E>::PrimMinTree() {
     if (mst != 0)
         delete mst;
     mst = new MSTEdgeNode<T, E>[numVertices];
@@ -416,40 +360,34 @@ void Graphmtx<T, E>::PrimMinTree()
     for (int i = 0; i < numVertices; i++)
         visited[i] = false;
 
-    cout << "è¯·è¾“å…¥å‡ºå‘ç‚¹ç¼–å· 0è‡³" << numVertices - 1 << endl;
+    cout << "ÇëÊäÈë³ö·¢µã±àºÅ 0ÖÁ" << numVertices - 1 << endl;
     int u;
     cin >> u;
-    if (u < 0 || u > numVertices - 1)
-    {
-        cout << "è¾“å…¥æœ‰è¯¯" << endl;
+    if (u < 0 || u > numVertices - 1) {
+        cout << "ÊäÈëÓĞÎó" << endl;
         return;
     }
 
     visited[u] = true;
     int count = 1;
 
-    while (count < numVertices)
-    {
-        for (int v = 0; v < numVertices; v++)
-        {
-            if ((visited[v] == false) && Edge[u][v] < maxWeight)
-            {
+    while (count < numVertices) {
+        for (int v = 0; v < numVertices; v++) {
+            if ((visited[v] == false) && Edge[u][v] < maxWeight) {
                 p = new MSTEdgeNode<T, E>;
                 p->tail = u;
                 p->head = v;
                 p->cost = Edge[u][v];
 
                 hp.push_back(*p);
-                make_heap(hp.begin(), hp.end(), cmp);
-                sort_heap(hp.begin(), hp.end(), cmp);
+                make_heap(hp.begin(), hp.end(), cmp<T, E>);
+                sort_heap(hp.begin(), hp.end(), cmp<T, E>);
             }
         }
-        while (!hp.empty() && count < numVertices)
-        {
+        while (!hp.empty() && count < numVertices) {
             leastNode = hp.front();
             hp.erase(hp.begin());
-            if (!visited[leastNode.head])
-            {
+            if (!visited[leastNode.head]) {
                 mst[count - 1] = leastNode;
                 cout << leastNode.tail << "->" << leastNode.head << "(" << leastNode.cost << ")";
                 u = leastNode.head;
@@ -459,98 +397,80 @@ void Graphmtx<T, E>::PrimMinTree()
             }
         }
     }
+    cout << endl;
 
 }
 
 
-
-
-
 template<class T, class E>
-void Graphmtx<T, E>::Dijkstra()
-{
+void Graphmtx<T, E>::Dijkstra() {
     int v0;
-    E dist[numVertices];
-    bool visited[numVertices];
+    E* dist = new E[numVertices];
+    bool* visited = new bool[numVertices];
     int pos;
 
 
-    cout << "è¯·è¾“å…¥å‡ºå‘ç‚¹ç¼–å· 0è‡³" << numVertices - 1 << endl;
+    cout << "ÇëÊäÈë³ö·¢µã±àºÅ 0ÖÁ" << numVertices - 1 << endl;
     cin >> v0;
 
     for (int i = 0; i < numVertices; i++)
         dist[i] = Edge[v0][i];
     visited[v0] = true;
-    for (int i = 0; i < numVertices - 1; i++)
-    {
-        int min = maxWeight;
-        for (int k = 0; k < numVertices; k++)
-        {
-            if (visited = false && dist[k] < min)
-            {
-                pos = k;
-                min = dist[k];
-            }
+    for (int i = 0; i < numVertices - 1; i++) {
+//        int min = maxWeight;
+//        for (int k = 0; k < numVertices; k++) {
+//            if (visited = false && dist[k] < min) {
+//                pos = k;
+//                min = dist[k];
+//            }
+            E min = maxWeight;
+            for(int k = 0; k < numVertices; k++){
+                if(!visited[k] && dist[k] < min){
+                    pos = k;
+                    min = dist[k];
+                }
             visited[pos] = 1;
-            for (int j = 0; j < numVertices; j++)
-            {
-                if (visited[j] == false && Edge[pos][j] + min < dist[j])
+            for (int j = 0; j < numVertices; j++) {
+                if (!visited[j] && Edge[pos][j] + min < dist[j])
                     dist[j] = Edge[pos][j] + min;
             }
 
         }
     }
 
+    cout << verticesList[v0] << "µ½ÆäËûµãµÄ×î¶Ì¾àÀë·Ö±ğÎª" << endl;
+    for(int i = 0; i < numVertices; i++)
+        cout << "To--"<< verticesList[i] << ":"<<dist[i] << "  ";
 
 
-
+    delete[] dist;
+    delete[] visited;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-template<class T,class E>
-void display(vector<MSTEdgeNode<T,E>>& v)//ä½¿ç”¨vectorè¿­ä»£å™¨éå†
+template<class T, class E>
+void display(vector<MSTEdgeNode<T, E>>& v)//Ê¹ÓÃvectorµü´úÆ÷±éÀú
 {
     //vector<MSTEdgeNode<T, E> >::iterator iter;
-    for (auto iter = v.begin(); iter < v.end(); iter++)
-    {
+    for (auto iter = v.begin(); iter < v.end(); iter++) {
         cout << (*iter).tail << "->" << (*iter).head << (*iter).cost << endl;
     }
     cout << endl << endl;
 }
 
 
-
-
 template<class T, class E>
-void Graphmtx<T, E>::printMinTree()
-{
-    if (mst == 0)
-    {
-        cout << "æœ€å°ç”Ÿæˆæ ‘ä¸ºç©º" << endl;
+void Graphmtx<T, E>::printMinTree() {
+    if (mst == 0) {
+        cout << "×îĞ¡Éú³ÉÊ÷Îª¿Õ" << endl;
         return;
     }
-    for(int i = 0; i < numVertices; i++)
-        cout << mst[i].tail << "->" << mst[i].head << mst[i].cost << endl;
-
+    for (int i = 0; i < numVertices - 1; i++)
+        cout << mst[i].tail << "->" << mst[i].head << "(" << mst[i].cost << ")" << endl;
 }
 
 
-
-
-
-int main()
-{
+int main() {
     Graphmtx<char, double> a;
     a.insertVertex('a');
     a.insertVertex('b');
@@ -571,17 +491,15 @@ int main()
     a.OuputGraphDest();
 
 
+    //    cout << endl;
+    //    a.KruskalMinTree();
+    //    a.printMinTree();
+    //
+    //    cout << endl;
+    //    a.PrimMinTree();
+    //    a.printMinTree();
 
-    cout << endl;
-    a.KruskalMinTree();
-    a.printMinTree();
-
-
-
-
-
-
-
+    a.Dijkstra();
 
     cout << endl;
 }

@@ -80,7 +80,10 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/ClionProject/FirstProject/DSModel/Tree/MinSpanningTree.cpp">
+		<Unit filename="D:/ClionProject/FirstProject/DSModel/Graph/MinSpanningTreeD.cpp">
+			<Option target="FirstProject"/>
+		</Unit>
+		<Unit filename="D:/ClionProject/FirstProject/DSModel/Graph/UFsets.h">
 			<Option target="FirstProject"/>
 		</Unit>
 		<Unit filename="D:/ClionProject/FirstProject/CMakeLists.txt">
