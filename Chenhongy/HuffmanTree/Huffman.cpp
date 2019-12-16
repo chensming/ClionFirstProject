@@ -505,17 +505,11 @@ void HuffmanTree::deCoding(string encodingFile, string outputFile) {
 
 int main() {
 
-//    float test[10] = {1, 5, 2, 6, 3, 7, 8, 4, 9, 10};
-//    char testch[10] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
-//    HuffmanTree ht1(test, testch, 10);
 
     HuffmanTree ht1;
     cout << "构建成功" << endl;
 
-
-//    ht1.LevelOrder();
-//    cout << endl;
-//    ht1.PrintGeneralizedList();
+ ht1.PrintGeneralizedList();
 
     ht1.setCode();
     ht1.getCode();
