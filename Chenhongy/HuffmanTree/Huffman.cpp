@@ -509,7 +509,7 @@ int main() {
     HuffmanTree ht1;
     cout << "构建成功" << endl;
 
- ht1.PrintGeneralizedList();
+    ht1.PrintGeneralizedList();
 
     ht1.setCode();
     ht1.getCode();
