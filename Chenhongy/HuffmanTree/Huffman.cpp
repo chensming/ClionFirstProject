@@ -527,6 +527,6 @@ int main() {
     ht1.deCoding("encodedFile.txt", "b.txt");
 
     cout << endl;
-//    system("pause");
+    system("pause");
 }
 
