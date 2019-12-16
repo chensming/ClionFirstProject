@@ -11,7 +11,11 @@ set(CMAKE_CXX_STANDARD 14)
 #add_executable(FirstProject main.cpp)
 
 
-add_executable(FirstProject DSModel/Graph/MinSpanningTreeD.cpp DSModel/Graph/UFsets.h)
+#add_executable(FirstProject DSModel/Graph/MinSpanningTreeD.cpp DSModel/Graph/UFsets.h)
 #add_executable(FirstProject DSModel/Graph/MinSpanningTreeM.cpp)
 
 #add_executable(FirstProject STL/MinHeapByVector2.cpp)
+
+
+add_executable(FirstProject Chenhongy/HuffmanTree/Huffman.cpp)
+#add_executable(FirstProject Chenhongy/HuffmanTree/test.cpp)

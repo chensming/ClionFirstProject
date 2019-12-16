@@ -6,19 +6,21 @@
 
 #IncludeRegexTransform: 
 
-D:/ClionProject/FirstProject/DSModel/Graph/MinSpanningTreeD.cpp
+D:/ClionProject/FirstProject/Chenhongy/HuffmanTree/Huffman.cpp
+utility
+-
+vector
+-
 iostream
+-
+algorithm
 -
 queue
 -
 iomanip
 -
-vector
+stack
 -
-algorithm
+fstream
 -
-UFsets.h
-D:/ClionProject/FirstProject/DSModel/Graph/UFsets.h
-
-D:/ClionProject/FirstProject/DSModel/Graph/UFsets.h
 

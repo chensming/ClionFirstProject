@@ -122,32 +122,32 @@ FirstProject/fast:
 	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/build
 .PHONY : FirstProject/fast
 
-DSModel/Graph/MinSpanningTreeD.obj: DSModel/Graph/MinSpanningTreeD.cpp.obj
+Chenhongy/HuffmanTree/Huffman.obj: Chenhongy/HuffmanTree/Huffman.cpp.obj
 
-.PHONY : DSModel/Graph/MinSpanningTreeD.obj
+.PHONY : Chenhongy/HuffmanTree/Huffman.obj
 
 # target to build an object file
-DSModel/Graph/MinSpanningTreeD.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.obj
-.PHONY : DSModel/Graph/MinSpanningTreeD.cpp.obj
+Chenhongy/HuffmanTree/Huffman.cpp.obj:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Chenhongy/HuffmanTree/Huffman.cpp.obj
+.PHONY : Chenhongy/HuffmanTree/Huffman.cpp.obj
 
-DSModel/Graph/MinSpanningTreeD.i: DSModel/Graph/MinSpanningTreeD.cpp.i
+Chenhongy/HuffmanTree/Huffman.i: Chenhongy/HuffmanTree/Huffman.cpp.i
 
-.PHONY : DSModel/Graph/MinSpanningTreeD.i
+.PHONY : Chenhongy/HuffmanTree/Huffman.i
 
 # target to preprocess a source file
-DSModel/Graph/MinSpanningTreeD.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.i
-.PHONY : DSModel/Graph/MinSpanningTreeD.cpp.i
+Chenhongy/HuffmanTree/Huffman.cpp.i:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Chenhongy/HuffmanTree/Huffman.cpp.i
+.PHONY : Chenhongy/HuffmanTree/Huffman.cpp.i
 
-DSModel/Graph/MinSpanningTreeD.s: DSModel/Graph/MinSpanningTreeD.cpp.s
+Chenhongy/HuffmanTree/Huffman.s: Chenhongy/HuffmanTree/Huffman.cpp.s
 
-.PHONY : DSModel/Graph/MinSpanningTreeD.s
+.PHONY : Chenhongy/HuffmanTree/Huffman.s
 
 # target to generate assembly for a file
-DSModel/Graph/MinSpanningTreeD.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.s
-.PHONY : DSModel/Graph/MinSpanningTreeD.cpp.s
+Chenhongy/HuffmanTree/Huffman.cpp.s:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Chenhongy/HuffmanTree/Huffman.cpp.s
+.PHONY : Chenhongy/HuffmanTree/Huffman.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... FirstProject
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... DSModel/Graph/MinSpanningTreeD.obj
-	@echo ... DSModel/Graph/MinSpanningTreeD.i
-	@echo ... DSModel/Graph/MinSpanningTreeD.s
+	@echo ... Chenhongy/HuffmanTree/Huffman.obj
+	@echo ... Chenhongy/HuffmanTree/Huffman.i
+	@echo ... Chenhongy/HuffmanTree/Huffman.s
 .PHONY : help
 
 
