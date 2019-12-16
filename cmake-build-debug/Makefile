@@ -122,32 +122,32 @@ FirstProject/fast:
 	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/build
 .PHONY : FirstProject/fast
 
-Chenhongy/HuffmanTree/Huffman.obj: Chenhongy/HuffmanTree/Huffman.cpp.obj
+SortClass/LinearSort.obj: SortClass/LinearSort.cpp.obj
 
-.PHONY : Chenhongy/HuffmanTree/Huffman.obj
+.PHONY : SortClass/LinearSort.obj
 
 # target to build an object file
-Chenhongy/HuffmanTree/Huffman.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Chenhongy/HuffmanTree/Huffman.cpp.obj
-.PHONY : Chenhongy/HuffmanTree/Huffman.cpp.obj
+SortClass/LinearSort.cpp.obj:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/SortClass/LinearSort.cpp.obj
+.PHONY : SortClass/LinearSort.cpp.obj
 
-Chenhongy/HuffmanTree/Huffman.i: Chenhongy/HuffmanTree/Huffman.cpp.i
+SortClass/LinearSort.i: SortClass/LinearSort.cpp.i
 
-.PHONY : Chenhongy/HuffmanTree/Huffman.i
+.PHONY : SortClass/LinearSort.i
 
 # target to preprocess a source file
-Chenhongy/HuffmanTree/Huffman.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Chenhongy/HuffmanTree/Huffman.cpp.i
-.PHONY : Chenhongy/HuffmanTree/Huffman.cpp.i
+SortClass/LinearSort.cpp.i:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/SortClass/LinearSort.cpp.i
+.PHONY : SortClass/LinearSort.cpp.i
 
-Chenhongy/HuffmanTree/Huffman.s: Chenhongy/HuffmanTree/Huffman.cpp.s
+SortClass/LinearSort.s: SortClass/LinearSort.cpp.s
 
-.PHONY : Chenhongy/HuffmanTree/Huffman.s
+.PHONY : SortClass/LinearSort.s
 
 # target to generate assembly for a file
-Chenhongy/HuffmanTree/Huffman.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Chenhongy/HuffmanTree/Huffman.cpp.s
-.PHONY : Chenhongy/HuffmanTree/Huffman.cpp.s
+SortClass/LinearSort.cpp.s:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/SortClass/LinearSort.cpp.s
+.PHONY : SortClass/LinearSort.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... FirstProject
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... Chenhongy/HuffmanTree/Huffman.obj
-	@echo ... Chenhongy/HuffmanTree/Huffman.i
-	@echo ... Chenhongy/HuffmanTree/Huffman.s
+	@echo ... SortClass/LinearSort.obj
+	@echo ... SortClass/LinearSort.i
+	@echo ... SortClass/LinearSort.s
 .PHONY : help
 
 

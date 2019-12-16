@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/FirstProject.dir/Chenhongy/HuffmanTree/Huffman.cpp.obj"
+  "CMakeFiles/FirstProject.dir/SortClass/LinearSort.cpp.obj"
   "FirstProject.exe"
   "FirstProject.exe.manifest"
   "FirstProject.pdb"

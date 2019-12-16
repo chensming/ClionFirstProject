@@ -80,7 +80,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/ClionProject/FirstProject/Chenhongy/HuffmanTree/Huffman.cpp">
+		<Unit filename="D:/ClionProject/FirstProject/SortClass/LinearSort.cpp">
 			<Option target="FirstProject"/>
 		</Unit>
 		<Unit filename="D:/ClionProject/FirstProject/CMakeLists.txt">

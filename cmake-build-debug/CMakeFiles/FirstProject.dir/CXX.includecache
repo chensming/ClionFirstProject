@@ -6,21 +6,11 @@
 
 #IncludeRegexTransform: 
 
-D:/ClionProject/FirstProject/Chenhongy/HuffmanTree/Huffman.cpp
-utility
--
-vector
--
+D:/ClionProject/FirstProject/SortClass/LinearSort.cpp
 iostream
 -
-algorithm
+random
 -
-queue
--
-iomanip
--
-stack
--
-fstream
+ctime
 -
 
