@@ -122,32 +122,32 @@ FirstProject/fast:
 	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/build
 .PHONY : FirstProject/fast
 
-SortClass/LinearSort.obj: SortClass/LinearSort.cpp.obj
+Chenhongy/Graph/GraphMatrix.obj: Chenhongy/Graph/GraphMatrix.cpp.obj
 
-.PHONY : SortClass/LinearSort.obj
+.PHONY : Chenhongy/Graph/GraphMatrix.obj
 
 # target to build an object file
-SortClass/LinearSort.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/SortClass/LinearSort.cpp.obj
-.PHONY : SortClass/LinearSort.cpp.obj
+Chenhongy/Graph/GraphMatrix.cpp.obj:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Chenhongy/Graph/GraphMatrix.cpp.obj
+.PHONY : Chenhongy/Graph/GraphMatrix.cpp.obj
 
-SortClass/LinearSort.i: SortClass/LinearSort.cpp.i
+Chenhongy/Graph/GraphMatrix.i: Chenhongy/Graph/GraphMatrix.cpp.i
 
-.PHONY : SortClass/LinearSort.i
+.PHONY : Chenhongy/Graph/GraphMatrix.i
 
 # target to preprocess a source file
-SortClass/LinearSort.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/SortClass/LinearSort.cpp.i
-.PHONY : SortClass/LinearSort.cpp.i
+Chenhongy/Graph/GraphMatrix.cpp.i:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Chenhongy/Graph/GraphMatrix.cpp.i
+.PHONY : Chenhongy/Graph/GraphMatrix.cpp.i
 
-SortClass/LinearSort.s: SortClass/LinearSort.cpp.s
+Chenhongy/Graph/GraphMatrix.s: Chenhongy/Graph/GraphMatrix.cpp.s
 
-.PHONY : SortClass/LinearSort.s
+.PHONY : Chenhongy/Graph/GraphMatrix.s
 
 # target to generate assembly for a file
-SortClass/LinearSort.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/SortClass/LinearSort.cpp.s
-.PHONY : SortClass/LinearSort.cpp.s
+Chenhongy/Graph/GraphMatrix.cpp.s:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Chenhongy/Graph/GraphMatrix.cpp.s
+.PHONY : Chenhongy/Graph/GraphMatrix.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... FirstProject
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... SortClass/LinearSort.obj
-	@echo ... SortClass/LinearSort.i
-	@echo ... SortClass/LinearSort.s
+	@echo ... Chenhongy/Graph/GraphMatrix.obj
+	@echo ... Chenhongy/Graph/GraphMatrix.i
+	@echo ... Chenhongy/Graph/GraphMatrix.s
 .PHONY : help
 
 
