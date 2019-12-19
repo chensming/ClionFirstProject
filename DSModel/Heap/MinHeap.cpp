@@ -76,9 +76,7 @@ void MinHeap<T>::siftDown(int start, int m)
     while (j <= m)
     {
         if (j < m && heap[j] > heap[j + 1])
-        {
             j++;
-        }
         if (temp < heap[j])
             break;
         else
@@ -151,7 +149,7 @@ bool MinHeap<T>::RemoveMin(T& x)
 template<class T>
 bool MinHeap<T>::IsEmpty() const
 {
-    return (currentSize == 0) ? true : false;
+    return currentSize == 0;
 }
 
 
