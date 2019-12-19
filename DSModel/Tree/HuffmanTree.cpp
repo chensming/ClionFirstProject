@@ -39,8 +39,8 @@ HuffmanNode::HuffmanNode(const HuffmanNode& h)
 	data = h.data;
 	leftchild = h.leftchild;
 	rightchild = h.rightchild;
-	//å…¶å®parentè¿™ä¸ªå†™ä¸å†™æ— æ‰€è°“ï¼Œå› ä¸ºå¦‚æœparentï¼=nullï¼Œ
-	//å°±è¯æ˜å·²ç»å’Œå…¶ä»–èŠ‚ç‚¹åˆæˆä¸€ä¸ªçˆ¶èŠ‚ç‚¹äº†,ä¸ä¼šè¢«æ”¾åˆ°å †é‡Œé¢
+	//ÆäÊµparentÕâ¸öĞ´²»Ğ´ÎŞËùÎ½£¬ÒòÎªÈç¹ûparent£¡=null£¬
+	//¾ÍÖ¤Ã÷ÒÑ¾­ºÍÆäËû½ÚµãºÏ³ÉÒ»¸ö¸¸½ÚµãÁË,²»»á±»·Åµ½¶ÑÀïÃæ
 	parent = h.parent;
 }
 */
@@ -60,6 +60,11 @@ public:
     ~HuffmanTree() {
         deleteTree(root);
         charactorSize = 0;
+        if(charactor != nullptr)
+        {
+            delete [] charactor;
+            charactor = nullptr;
+        }
     }
 
     void LevelOrder();
@@ -81,11 +86,11 @@ public:
 private:
     HuffmanNode *root;
 
-    string map[256];//å­˜å­—ç¬¦å¯¹åº”çš„ç¼–ç 
+    string map[256];//´æ×Ö·û¶ÔÓ¦µÄ±àÂë
 
-    char *charactor;//åˆ¤æ–­å­˜äº†å“ªäº›å­—ç¬¦
+    char *charactor;//ÅĞ¶Ï´æÁËÄÄĞ©×Ö·û
 
-    int charactorSize;//å­˜çš„å­—ç¬¦ä¸ªæ•°
+    int charactorSize;//´æµÄ×Ö·û¸öÊı
 
     void buildHuffmanTree(const float w[], const char ch[], int n);
 
@@ -97,33 +102,35 @@ private:
 };
 
 
-void display(vector<HuffmanNode> &v);//ä½¿ç”¨vectorè¿­ä»£å™¨éå†
+void display(vector<HuffmanNode> &v);//Ê¹ÓÃvectorµü´úÆ÷±éÀú
 
 HuffmanTree::HuffmanTree() {
+    charactor = nullptr;
+    root = nullptr;
     int n;
     char ch[256];
     float weight[256];
-    cout << "è¯·è¾“å…¥è¦ç¼–ç çš„å­—ç¬¦ä¸ªæ•°" << endl;
+    cout << "ÇëÊäÈëÒª±àÂëµÄ×Ö·û¸öÊı(1<n<256)" << endl;
     cin >> n;
-    cout << "è¯·åˆ†åˆ«è¾“å…¥è¦ç¼–ç çš„å­—ç¬¦" << endl;
+    cout << "Çë·Ö±ğÊäÈëÒª±àÂëµÄ×Ö·û" << endl;
     for (int i = 0; i < n; i++)
         cin >> ch[i];
-    cout << "è¯·åˆ†åˆ«è¾“å…¥å¯¹åº”å­—ç¬¦çš„æƒé‡" << endl;
-    for (int i = 1; i < n; i++)
+    cout << "Çë·Ö±ğÊäÈë¶ÔÓ¦×Ö·ûµÄÈ¨ÖØ" << endl;
+    for (int i = 0; i < n; i++)
         cin >> weight[i];
     buildHuffmanTree(weight, ch, n);
 }
 
 
 HuffmanTree::HuffmanTree(const float w[], const char ch[], int n) {
-    //ä¸ºäº†æ¶ˆé™¤è­¦å‘Šï¼Œroot = 0ï¼Œå…¶å®æ²¡å¿…è¦ï¼Œæœ€åroot = parent
-    //å·²ç»åŒ…æ‹¬è¿™ä¸ªæƒ…å†µäº†
+    //ÎªÁËÏû³ı¾¯¸æ£¬root = 0£¬ÆäÊµÃ»±ØÒª£¬×îºóroot = parent
+    //ÒÑ¾­°üÀ¨Õâ¸öÇé¿öÁË
     root = nullptr;
     vector<HuffmanNode> hp;
-    HuffmanNode *parent = 0, *first, *second, *work;
+    HuffmanNode *parent = nullptr, *first, *second, *work;
     HuffmanNode tempFirst, tempSecond;
     charactor = new char[n];
-    //å­˜å¯ç¼–ç çš„å­—ç¬¦
+    //´æ¿É±àÂëµÄ×Ö·û
     for (int i = 0; i < n; i++) {
         charactor[i] = ch[i];
     }
@@ -145,7 +152,7 @@ HuffmanTree::HuffmanTree(const float w[], const char ch[], int n) {
     sort_heap(hp.begin(), hp.end(), cmp);
     for (int i = 0; i < n - 1; i++) {
         if (hp.empty()) {
-            cout << "å †empty" << endl;
+            cout << "¶Ñempty" << endl;
             return;
         }
         tempFirst = hp.front();
@@ -157,8 +164,8 @@ HuffmanTree::HuffmanTree(const float w[], const char ch[], int n) {
         first->parent = tempFirst.parent;
         hp.erase(hp.begin());
 
-//        cout << "æŠŠfirstå–å‡ºæ¥å¹¶åˆ é™¤,å…¶å€¼ä¸º " << (*first).data;
-//        cout << " ,å¯¹åº”çš„å­—ç¬¦ä¸º " << (*first).ch << " ,åˆ é™¤åçš„å †ä¸­å…ƒç´ : " << endl;
+//        cout << "°ÑfirstÈ¡³öÀ´²¢É¾³ı,ÆäÖµÎª " << (*first).data;
+//        cout << " ,¶ÔÓ¦µÄ×Ö·ûÎª " << (*first).ch << " ,É¾³ıºóµÄ¶ÑÖĞÔªËØ: " << endl;
 //        display(hp);
 
         tempSecond = hp.front();
@@ -170,8 +177,8 @@ HuffmanTree::HuffmanTree(const float w[], const char ch[], int n) {
         second->parent = tempSecond.parent;
         hp.erase(hp.begin());
 
-//        cout << "æŠŠsecondå–å‡ºæ¥å¹¶åˆ é™¤,å…¶å€¼ä¸º " << (*second).data;
-//        cout << " ,å¯¹åº”çš„å­—ç¬¦ä¸º " << (*second).ch << " ,åˆ é™¤åçš„å †ä¸­å…ƒç´ : " << endl;
+//        cout << "°ÑsecondÈ¡³öÀ´²¢É¾³ı,ÆäÖµÎª " << (*second).data;
+//        cout << " ,¶ÔÓ¦µÄ×Ö·ûÎª " << (*second).ch << " ,É¾³ıºóµÄ¶ÑÖĞÔªËØ: " << endl;
 //        display(hp);
 
         mergeTree(first, second, parent);
@@ -179,9 +186,9 @@ HuffmanTree::HuffmanTree(const float w[], const char ch[], int n) {
         make_heap(hp.begin(), hp.end(), cmp);
         sort_heap(hp.begin(), hp.end(), cmp);
 
-//        cout << "æŠŠ " << (*first).data << " ä¸ " << (*second).data << " mergeï¼Œç„¶åå¾—åˆ°å€¼ ";
-//        cout << (*parent).data << " ,å¯¹åº”å­—ç¬¦ä¸º " << (*parent).ch;
-//        cout << " ,æŠŠå®ƒæ’å…¥åå †ä¸­å…ƒç´ : " << endl;
+//        cout << "°Ñ " << (*first).data << " Óë " << (*second).data << " merge£¬È»ºóµÃµ½Öµ ";
+//        cout << (*parent).data << " ,¶ÔÓ¦×Ö·ûÎª " << (*parent).ch;
+//        cout << " ,°ÑËü²åÈëºó¶ÑÖĞÔªËØ: " << endl;
 //        display(hp);
 //        cout << endl;
     }
@@ -189,15 +196,21 @@ HuffmanTree::HuffmanTree(const float w[], const char ch[], int n) {
 }
 
 
-void HuffmanTree::buildHuffmanTree(const float *w, const char *ch, int n) {
-    //ä¸ºäº†æ¶ˆé™¤è­¦å‘Šï¼Œroot = 0ï¼Œå…¶å®æ²¡å¿…è¦ï¼Œæœ€åroot = parent
-    //å·²ç»åŒ…æ‹¬è¿™ä¸ªæƒ…å†µäº†
-    root = nullptr;
+void HuffmanTree::buildHuffmanTree(const float w[], const char ch[], int n) {
+//    cout << endl;
+//    for(int i = 0; i < n; i++)
+//        cout << w[i] << " ";
+//    cout << endl;
+//    for(int i = 0; i < n; i++)
+//        cout << ch[i] << " ";
+//    cout << endl;
+//    ÎªÁËÏû³ı¾¯¸æ£¬root = 0£¬ÆäÊµÃ»±ØÒª£¬×îºóroot = parent
+//    ÒÑ¾­°üÀ¨Õâ¸öÇé¿öÁË
     vector<HuffmanNode> hp;
     HuffmanNode *parent = 0, *first, *second, *work;
     HuffmanNode tempFirst, tempSecond;
     charactor = new char[n];
-    //å­˜å¯ç¼–ç çš„å­—ç¬¦
+    //´æ¿É±àÂëµÄ×Ö·û
     for (int i = 0; i < n; i++) {
         charactor[i] = ch[i];
     }
@@ -219,7 +232,7 @@ void HuffmanTree::buildHuffmanTree(const float *w, const char *ch, int n) {
     sort_heap(hp.begin(), hp.end(), cmp);
     for (int i = 0; i < n - 1; i++) {
         if (hp.empty()) {
-            cout << "å †empty" << endl;
+            cout << "¶Ñempty" << endl;
             return;
         }
         tempFirst = hp.front();
@@ -231,8 +244,8 @@ void HuffmanTree::buildHuffmanTree(const float *w, const char *ch, int n) {
         first->parent = tempFirst.parent;
         hp.erase(hp.begin());
 
-//        cout << "æŠŠfirstå–å‡ºæ¥å¹¶åˆ é™¤,å…¶å€¼ä¸º " << (*first).data;
-//        cout << " ,å¯¹åº”çš„å­—ç¬¦ä¸º " << (*first).ch << " ,åˆ é™¤åçš„å †ä¸­å…ƒç´ : " << endl;
+//        cout << "°ÑfirstÈ¡³öÀ´²¢É¾³ı,ÆäÖµÎª " << (*first).data;
+//        cout << " ,¶ÔÓ¦µÄ×Ö·ûÎª " << (*first).ch << " ,É¾³ıºóµÄ¶ÑÖĞÔªËØ: " << endl;
 //        display(hp);
 
         tempSecond = hp.front();
@@ -244,8 +257,8 @@ void HuffmanTree::buildHuffmanTree(const float *w, const char *ch, int n) {
         second->parent = tempSecond.parent;
         hp.erase(hp.begin());
 
-//        cout << "æŠŠsecondå–å‡ºæ¥å¹¶åˆ é™¤,å…¶å€¼ä¸º " << (*second).data;
-//        cout << " ,å¯¹åº”çš„å­—ç¬¦ä¸º " << (*second).ch << " ,åˆ é™¤åçš„å †ä¸­å…ƒç´ : " << endl;
+//        cout << "°ÑsecondÈ¡³öÀ´²¢É¾³ı,ÆäÖµÎª " << (*second).data;
+//        cout << " ,¶ÔÓ¦µÄ×Ö·ûÎª " << (*second).ch << " ,É¾³ıºóµÄ¶ÑÖĞÔªËØ: " << endl;
 //        display(hp);
 
         mergeTree(first, second, parent);
@@ -253,9 +266,9 @@ void HuffmanTree::buildHuffmanTree(const float *w, const char *ch, int n) {
         make_heap(hp.begin(), hp.end(), cmp);
         sort_heap(hp.begin(), hp.end(), cmp);
 
-//        cout << "æŠŠ " << (*first).data << " ä¸ " << (*second).data << " mergeï¼Œç„¶åå¾—åˆ°å€¼ ";
-//        cout << (*parent).data << " ,å¯¹åº”å­—ç¬¦ä¸º " << (*parent).ch;
-//        cout << " ,æŠŠå®ƒæ’å…¥åå †ä¸­å…ƒç´ : " << endl;
+//        cout << "°Ñ " << (*first).data << " Óë " << (*second).data << " merge£¬È»ºóµÃµ½Öµ ";
+//        cout << (*parent).data << " ,¶ÔÓ¦×Ö·ûÎª " << (*parent).ch;
+//        cout << " ,°ÑËü²åÈëºó¶ÑÖĞÔªËØ: " << endl;
 //        display(hp);
 //        cout << endl;
     }
@@ -274,14 +287,14 @@ void HuffmanTree::deleteTree(HuffmanNode *t) {
 
 void HuffmanTree::mergeTree(HuffmanNode *h1, HuffmanNode *h2, HuffmanNode *&parent) {
     parent = new HuffmanNode;
-    parent->leftchild = h2;//è®©æ•°æ®é å³è¾¹
+    parent->leftchild = h2;//ÈÃÊı¾İ¿¿ÓÒ±ß
     parent->rightchild = h1;
     parent->data = h1->data + h2->data;
     h1->parent = h2->parent = parent;
 }
 
 
-void display(vector<HuffmanNode> &v)//ä½¿ç”¨vectorè¿­ä»£å™¨éå†
+void display(vector<HuffmanNode> &v)//Ê¹ÓÃvectorµü´úÆ÷±éÀú
 {
     vector<HuffmanNode>::iterator i;
     for (i = v.begin(); i < v.end(); i++) {
@@ -344,7 +357,7 @@ void HuffmanTree::PrintGeneralizedList(HuffmanNode *BT) {
 
 void HuffmanTree::setCode() {
     if (root == nullptr) {
-        cout << "è¯¥æ ‘ä¸ºç©ºï¼Œæ— æ³•è®¾ç½®ç¼–ç " << endl;
+        cout << "¸ÃÊ÷Îª¿Õ£¬ÎŞ·¨ÉèÖÃ±àÂë" << endl;
         return;
     }
     setCode("", root);
@@ -361,7 +374,7 @@ void HuffmanTree::setCode(string s, HuffmanNode *ptr) {
 
 void HuffmanTree::getCode() {
     if (root == nullptr) {
-        cout << "è¯¥æ ‘ä¸ºç©ºï¼Œæ— æ³•è¿›è¡Œç¼–ç " << endl;
+        cout << "¸ÃÊ÷Îª¿Õ£¬ÎŞ·¨½øĞĞ±àÂë" << endl;
         return;
     }
     stack<HuffmanNode *> S;
@@ -383,7 +396,7 @@ void HuffmanTree::getCode() {
             p = p->rightchild;
         }
     } while (p != nullptr || !S.empty());
-    cout << endl << "ç¼–ç æˆåŠŸ";
+    cout << endl << "±àÂë³É¹¦";
     cout << endl;
 }
 
@@ -392,9 +405,9 @@ void HuffmanTree::enCoding(string originalFile, string encodingFile) {
     char ch;
     string temp1 = originalFile;
     string temp2 = encodingFile;
-    originalFile = "./FirstProject/Chenhongy/HuffmanTree/Files/" + originalFile;
+    originalFile = "./Chenhongy/HuffmanTree/Files/" + originalFile;
     ifstream infile(originalFile, ios::in);
-    encodingFile = "./FirstProject/Chenhongy/HuffmanTree/Files/" + encodingFile;
+    encodingFile = "./Chenhongy/HuffmanTree/Files/" + encodingFile;
     ofstream outfile(encodingFile, ios::out);
     if (!infile) {
         cerr << "open error when read file" << endl;
@@ -407,20 +420,22 @@ void HuffmanTree::enCoding(string originalFile, string encodingFile) {
     while (infile.get(ch)) {
         if (ch == ' ') {
             outfile << ' ';
+        } else if (ch == '\n') {
+            outfile << '\n';
         } else {
             outfile << map[ch % 256];
         }
     }
     infile.close();
     outfile.close();
-    cout << endl << "ä» ";
-    cout << temp1 << " ç¼–ç åˆ° " << temp2 << " ä¸­" << endl;
+    cout << endl << "´Ó ";
+    cout << temp1 << " ±àÂëµ½ " << temp2 << " ÖĞ" << endl;
     cout << endl;
 }
 
 void HuffmanTree::BuildDeCodingTree() {
     if (root == nullptr) {
-        cout << "è¯¥æ ‘ä¸ºç©º,ä¸èƒ½è¿›è¡Œè¯‘ç " << endl;
+        cout << "¸ÃÊ÷Îª¿Õ,²»ÄÜ½øĞĞÒëÂë" << endl;
         return;
     }
     deleteTree(root);
@@ -432,7 +447,7 @@ void HuffmanTree::BuildDeCodingTree() {
         ch = charactor[i];
         code = map[ch];
         p = root;
-        //åˆ°å€’æ•°ç¬¬äºŒä¸ªç¼–ç ï¼Œç•™ä¸‹æœ€åä¸€ä¸ªç¼–ç å•ç‹¬å¤„ç†
+        //µ½µ¹ÊıµÚ¶ş¸ö±àÂë£¬ÁôÏÂ×îºóÒ»¸ö±àÂëµ¥¶À´¦Àí
         for (int j = 0; j < code.length() - 1; j++) {
             if (code[j] == '0') {
                 if (p->leftchild == nullptr) {
@@ -448,9 +463,9 @@ void HuffmanTree::BuildDeCodingTree() {
                 p = p->rightchild;
             }
         }
-        //æœ€ä¸ºç¼–ç çš„ä¸€å®šæ˜¯å¶å­ç»“ç‚¹ï¼Œè‚¯å®šè¦new
+        //×îÎª±àÂëµÄÒ»¶¨ÊÇÒ¶×Ó½áµã£¬¿Ï¶¨Òªnew
         q = new HuffmanNode;
-        //åªæœ‰chè¦ç”¨åˆ°ï¼Œå…¶ä»–é»˜è®¤å³å¯
+        //Ö»ÓĞchÒªÓÃµ½£¬ÆäËûÄ¬ÈÏ¼´¿É
         q->ch = ch;
         if (code[code.length() - 1] == '0') {
             p->leftchild = q;
@@ -458,7 +473,7 @@ void HuffmanTree::BuildDeCodingTree() {
             p->rightchild = q;
         }
     }
-    cout << "å»ºç«‹è¯‘ç æ ‘å®Œæ¯•." << endl << endl;
+    cout << "½¨Á¢ÒëÂëÊ÷Íê±Ï." << endl << endl;
 }
 
 void HuffmanTree::deCoding(string encodingFile, string outputFile) {
@@ -466,8 +481,8 @@ void HuffmanTree::deCoding(string encodingFile, string outputFile) {
     HuffmanNode *p = root;
     string temp1 = encodingFile;
     string temp2 = outputFile;
-    encodingFile = "./FirstProject/Chenhongy/HuffmanTree/Files/" + encodingFile;
-    outputFile = "./FirstProject/Chenhongy/HuffmanTree/Files/" + outputFile;
+    encodingFile = "./Chenhongy/HuffmanTree/Files/" + encodingFile;
+    outputFile = "./Chenhongy/HuffmanTree/Files/" + outputFile;
     ifstream infile(encodingFile, ios::in);
     ofstream outfile(outputFile, ios::out);
     if (!infile) {
@@ -481,16 +496,18 @@ void HuffmanTree::deCoding(string encodingFile, string outputFile) {
     while (infile.get(ch)) {
         if (ch == ' ')
             outfile << ' ';
+        else if (ch == '\n')
+            outfile << '\n';
         else {
             if (ch == '0' && p->leftchild != nullptr) {
-                //ä¸æ˜¯å¶å­ç»“ç‚¹ï¼Œæ²¡æœ‰æ•°æ®ï¼Œå‘å·¦
+                //²»ÊÇÒ¶×Ó½áµã£¬Ã»ÓĞÊı¾İ£¬Ïò×ó
                 p = p->leftchild;
             } else if (ch == '1' && p->rightchild != nullptr) {
-                //ä¸æ˜¯å¶å­ç»“ç‚¹ï¼Œæ²¡æœ‰æ•°æ®ï¼Œå‘å·¦
+                //²»ÊÇÒ¶×Ó½áµã£¬Ã»ÓĞÊı¾İ£¬Ïò×ó
                 p = p->rightchild;
             }
             if (p->leftchild == nullptr && p->rightchild == nullptr) {
-                //æ˜¯å¶å­ç»“ç‚¹ï¼Œæœ‰æ•°æ®ï¼Œå¼€å§‹ä¸‹ä¸€æ¬¡æŸ¥æ‰¾
+                //ÊÇÒ¶×Ó½áµã£¬ÓĞÊı¾İ£¬¿ªÊ¼ÏÂÒ»´Î²éÕÒ
                 outfile << p->ch;
                 p = root;
             }
@@ -498,32 +515,34 @@ void HuffmanTree::deCoding(string encodingFile, string outputFile) {
     }
     infile.close();
     outfile.close();
-    cout << "ä»å·²ç¼–ç æ–‡ä»¶ " << temp1 << " è¯‘ç åˆ° " << temp2 << " å·²å®Œæˆ" << endl;
+    cout << "´ÓÒÑ±àÂëÎÄ¼ş " << temp1 << " ÒëÂëµ½ " << temp2 << " ÒÑÍê³É" << endl;
     cout << endl << endl;
 }
 
 
 int main() {
 
-//    float test[10] = {1, 5, 2, 6, 3, 7, 8, 4, 9, 10};
-//    char testch[10] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
-//    HuffmanTree ht1(test, testch, 10);
-
+//    char ch[31] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+//                   'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ',', '.', 'I', 'M', '?'};
+//    float weight[31] = {1, 5, 2, 6, 3, 7, 8, 4, 9, 10, 1, 5, 2, 6, 3, 7, 8, 4,
+//                        9, 10, 5, 8, 6, 9, 2, 5, 2, 3, 5, 4, 1};
+//    HuffmanTree ht1(weight, ch, 31);
     HuffmanTree ht1;
-    cout << "æ„å»ºæˆåŠŸ" << endl;
+    cout << "¹¹½¨³É¹¦" << endl;
 
-
-//    ht1.LevelOrder();
-//    cout << endl;
-//    ht1.PrintGeneralizedList();
+    cout << "Ê÷µÄ½á¹¹" << endl;
+    ht1.LevelOrder();
+    ht1.PrintGeneralizedList();
 
     ht1.setCode();
+    cout << endl << "×Ö·û¶ÔÓ¦µÄ±àÂë" << endl;
     ht1.getCode();
     ht1.enCoding("a.txt", "encodedFile.txt");
     ht1.BuildDeCodingTree();
 
-//    ht1.LevelOrder();
-//    ht1.PrintGeneralizedList();
+    cout << "ÖØ½¨ÓÃÀ´ÒëÂëµÄ¹ş·òÂüÊ÷³É¹¦,Ê÷µÄ¼òÒªĞÅÏ¢ÈçÏÂ($ÊÇHuffmanNode×Ö·û³ÉÔ±µÄÄ¬ÈÏÖµ): " << endl;
+    ht1.LevelOrder();
+    ht1.PrintGeneralizedList();
     ht1.deCoding("encodedFile.txt", "b.txt");
 
     cout << endl;

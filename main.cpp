@@ -1,10 +1,17 @@
 #include <iostream>
-#include "Student.h"
+
 using namespace std;
 
 
 int main() {
-    Student a;
-    system("pause");
-    cout << "end of main" << endl;
+    double matrix[5][5];
+    for(auto & i : matrix)
+        for(double & j : i)
+            j = 0.0;
+        for(auto & i : matrix){
+            for(double j : i)
+                cout << j << " ";
+            cout << endl;
+        }
+
 }

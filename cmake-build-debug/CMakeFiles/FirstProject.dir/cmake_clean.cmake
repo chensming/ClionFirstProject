@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/FirstProject.dir/Chenhongy/Graph/GraphMatrix.cpp.obj"
+  "CMakeFiles/FirstProject.dir/DSModel/Heap/MinHeap.cpp.obj"
   "FirstProject.exe"
   "FirstProject.exe.manifest"
   "FirstProject.pdb"

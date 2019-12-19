@@ -60,6 +60,11 @@ public:
     ~HuffmanTree() {
         deleteTree(root);
         charactorSize = 0;
+        if(charactor != nullptr)
+        {
+            delete [] charactor;
+            charactor = nullptr;
+        }
     }
 
     void LevelOrder();
@@ -100,16 +105,18 @@ private:
 void display(vector<HuffmanNode> &v);//使用vector迭代器遍历
 
 HuffmanTree::HuffmanTree() {
+    charactor = nullptr;
+    root = nullptr;
     int n;
     char ch[256];
     float weight[256];
-    cout << "请输入要编码的字符个数" << endl;
+    cout << "请输入要编码的字符个数(1<n<256)" << endl;
     cin >> n;
     cout << "请分别输入要编码的字符" << endl;
     for (int i = 0; i < n; i++)
         cin >> ch[i];
     cout << "请分别输入对应字符的权重" << endl;
-    for (int i = 1; i < n; i++)
+    for (int i = 0; i < n; i++)
         cin >> weight[i];
     buildHuffmanTree(weight, ch, n);
 }
@@ -120,7 +127,7 @@ HuffmanTree::HuffmanTree(const float w[], const char ch[], int n) {
     //已经包括这个情况了
     root = nullptr;
     vector<HuffmanNode> hp;
-    HuffmanNode *parent = 0, *first, *second, *work;
+    HuffmanNode *parent = nullptr, *first, *second, *work;
     HuffmanNode tempFirst, tempSecond;
     charactor = new char[n];
     //存可编码的字符
@@ -189,10 +196,16 @@ HuffmanTree::HuffmanTree(const float w[], const char ch[], int n) {
 }
 
 
-void HuffmanTree::buildHuffmanTree(const float *w, const char *ch, int n) {
-    //为了消除警告，root = 0，其实没必要，最后root = parent
-    //已经包括这个情况了
-    root = nullptr;
+void HuffmanTree::buildHuffmanTree(const float w[], const char ch[], int n) {
+//    cout << endl;
+//    for(int i = 0; i < n; i++)
+//        cout << w[i] << " ";
+//    cout << endl;
+//    for(int i = 0; i < n; i++)
+//        cout << ch[i] << " ";
+//    cout << endl;
+//    为了消除警告，root = 0，其实没必要，最后root = parent
+//    已经包括这个情况了
     vector<HuffmanNode> hp;
     HuffmanNode *parent = 0, *first, *second, *work;
     HuffmanNode tempFirst, tempSecond;
@@ -392,9 +405,9 @@ void HuffmanTree::enCoding(string originalFile, string encodingFile) {
     char ch;
     string temp1 = originalFile;
     string temp2 = encodingFile;
-    originalFile = "./FirstProject/Chenhongy/HuffmanTree/Files/" + originalFile;
+    originalFile = "./Chenhongy/HuffmanTree/Files/" + originalFile;
     ifstream infile(originalFile, ios::in);
-    encodingFile = "./FirstProject/Chenhongy/HuffmanTree/Files/" + encodingFile;
+    encodingFile = "./Chenhongy/HuffmanTree/Files/" + encodingFile;
     ofstream outfile(encodingFile, ios::out);
     if (!infile) {
         cerr << "open error when read file" << endl;
@@ -407,6 +420,8 @@ void HuffmanTree::enCoding(string originalFile, string encodingFile) {
     while (infile.get(ch)) {
         if (ch == ' ') {
             outfile << ' ';
+        } else if (ch == '\n') {
+            outfile << '\n';
         } else {
             outfile << map[ch % 256];
         }
@@ -466,8 +481,8 @@ void HuffmanTree::deCoding(string encodingFile, string outputFile) {
     HuffmanNode *p = root;
     string temp1 = encodingFile;
     string temp2 = outputFile;
-    encodingFile = "./FirstProject/Chenhongy/HuffmanTree/Files/" + encodingFile;
-    outputFile = "./FirstProject/Chenhongy/HuffmanTree/Files/" + outputFile;
+    encodingFile = "./Chenhongy/HuffmanTree/Files/" + encodingFile;
+    outputFile = "./Chenhongy/HuffmanTree/Files/" + outputFile;
     ifstream infile(encodingFile, ios::in);
     ofstream outfile(outputFile, ios::out);
     if (!infile) {
@@ -481,6 +496,8 @@ void HuffmanTree::deCoding(string encodingFile, string outputFile) {
     while (infile.get(ch)) {
         if (ch == ' ')
             outfile << ' ';
+        else if (ch == '\n')
+            outfile << '\n';
         else {
             if (ch == '0' && p->leftchild != nullptr) {
                 //不是叶子结点，没有数据，向左
@@ -505,19 +522,27 @@ void HuffmanTree::deCoding(string encodingFile, string outputFile) {
 
 int main() {
 
-
+//    char ch[31] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+//                   'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ',', '.', 'I', 'M', '?'};
+//    float weight[31] = {1, 5, 2, 6, 3, 7, 8, 4, 9, 10, 1, 5, 2, 6, 3, 7, 8, 4,
+//                        9, 10, 5, 8, 6, 9, 2, 5, 2, 3, 5, 4, 1};
+//    HuffmanTree ht1(weight, ch, 31);
     HuffmanTree ht1;
     cout << "构建成功" << endl;
 
+    cout << "树的结构" << endl;
+    ht1.LevelOrder();
     ht1.PrintGeneralizedList();
 
     ht1.setCode();
+    cout << endl << "字符对应的编码" << endl;
     ht1.getCode();
     ht1.enCoding("a.txt", "encodedFile.txt");
     ht1.BuildDeCodingTree();
 
-//    ht1.LevelOrder();
-//    ht1.PrintGeneralizedList();
+    cout << "重建用来译码的哈夫曼树成功,树的简要信息如下($是HuffmanNode字符成员的默认值): " << endl;
+    ht1.LevelOrder();
+    ht1.PrintGeneralizedList();
     ht1.deCoding("encodedFile.txt", "b.txt");
 
     cout << endl;

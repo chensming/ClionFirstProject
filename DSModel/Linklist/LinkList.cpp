@@ -67,12 +67,12 @@ LinkList<T>::LinkList(LinkList<T>& L)
 
     while (srcptr->next != 0)
     {
-        value = srcptr->next->data;// è¡¨å¤´ç»“ç‚¹æ— æ•°æ®ï¼Œç›´æ¥è·³è¿‡
+        value = srcptr->next->data;// ±íÍ·½áµãÎŞÊı¾İ£¬Ö±½ÓÌø¹ı
         destptr->next = new LinkNode<T>(value);
         destptr = destptr->next;
         srcptr = srcptr->next;
     }
-    destptr->next = 0; //å…¶å®åˆå§‹åŒ–æ˜¯å·²ç»ç½®ä¸ºé›¶äº†,è¿™é‡Œå†ç¡®ä¿ä¸€ä¸‹
+    destptr->next = 0; //ÆäÊµ³õÊ¼»¯ÊÇÒÑ¾­ÖÃÎªÁãÁË,ÕâÀïÔÙÈ·±£Ò»ÏÂ
 }
 
 
@@ -90,16 +90,16 @@ void LinkList<T>::InputFront()
     T value, endValue;
     makeEmpty();
 
-    cout << "è¯·è¾“å…¥ç»“æŸæ ‡å¿—" << endl;
+    cout << "ÇëÊäÈë½áÊø±êÖ¾" << endl;
     cin >> endValue;
-    cout << "è¯·åˆ†åˆ«è¾“å…¥ç»“ç‚¹çš„å€¼" << endl;
+    cout << "Çë·Ö±ğÊäÈë½áµãµÄÖµ" << endl;
     cin >> value;
     while (value != endValue)
     {
         newNode = new LinkNode<T>(value);
         if (newNode == 0)
         {
-            cerr << "å­˜å‚¨åˆ†é…é”™è¯¯(from LinkList<T>::InputFront()" << endl;
+            cerr << "´æ´¢·ÖÅä´íÎó(from LinkList<T>::InputFront()" << endl;
             exit(1);
         }
         newNode->next = head->next;
@@ -107,7 +107,7 @@ void LinkList<T>::InputFront()
         cin >> value;
     }
 
-    cout << "å¤´æ’æ³•å»ºé“¾æˆåŠŸ" << endl;
+    cout << "Í·²å·¨½¨Á´³É¹¦" << endl;
 }
 
 
@@ -118,16 +118,16 @@ void LinkList<T>::InputRear()
     T value, endValue;
     makeEmpty();
 
-    cout << "è¯·è¾“å…¥ç»“æŸæ ‡å¿—" << endl;
+    cout << "ÇëÊäÈë½áÊø±êÖ¾" << endl;
     cin >> endValue;
-    cout << "è¯·åˆ†åˆ«è¾“å…¥ç»“ç‚¹çš„å€¼" << endl;
+    cout << "Çë·Ö±ğÊäÈë½áµãµÄÖµ" << endl;
     cin >> value;
     while (value != endValue)
     {
         newNode = new LinkNode<T>(value);
         if (newNode == 0)
         {
-            cerr << "å­˜å‚¨åˆ†é…é”™è¯¯(from LinkList<T>::InputRear()" << endl;
+            cerr << "´æ´¢·ÖÅä´íÎó(from LinkList<T>::InputRear()" << endl;
             exit(1);
         }
         last->next = newNode;
@@ -136,26 +136,12 @@ void LinkList<T>::InputRear()
     }
     last->next = 0;
 
-    cout << "å°¾æ’å…¥å»ºé“¾æˆåŠŸ" << endl;
+    cout << "Î²²åÈë½¨Á´³É¹¦" << endl;
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//ä¸è¿‡ä¸åˆ é™¤è¡¨å¤´ç»“ç‚¹
+//²»¹ı²»É¾³ı±íÍ·½áµã
 template<class T>
 void LinkList<T>::makeEmpty()
 {
@@ -167,7 +153,6 @@ void LinkList<T>::makeEmpty()
         delete q;
     }
 }
-
 
 
 
@@ -184,11 +169,6 @@ int LinkList<T>::Length() const
     }
     return count;
 }
-
-
-
-
-
 
 
 
@@ -212,8 +192,7 @@ LinkNode<T>* LinkList<T>::Search(T x)
 
 
 
-
-//è¿”å›ç¬¬ i ä¸ªå…ƒç´ çš„åœ°å€
+//·µ»ØµÚ i ¸öÔªËØµÄµØÖ·
 template<class T>
 LinkNode<T>* LinkList<T>::Locate(int i)
 {
@@ -233,8 +212,7 @@ LinkNode<T>* LinkList<T>::Locate(int i)
 
 
 
-
-//å–å‡ºç¬¬ i ä¸ªå…ƒç´ çš„å€¼
+//È¡³öµÚ i ¸öÔªËØµÄÖµ
 template<class T>
 bool LinkList<T>::getData(int i, T& x)
 {
@@ -246,8 +224,6 @@ bool LinkList<T>::getData(int i, T& x)
     x = current->data;
     return true;
 }
-
-
 
 
 
@@ -264,19 +240,17 @@ bool LinkList<T>::setData(int i, T& x)
 }
 
 
-
-
-//å°†æ–°ç»“ç‚¹æ’å…¥åˆ°ç¬¬ i ä¸ªç»“ç‚¹ä¹‹å
+//½«ĞÂ½áµã²åÈëµ½µÚ i ¸ö½áµãÖ®ºó
 template<class T>
 bool LinkList<T>::Insert(int i, T& x)
 {
     LinkNode<T>* current = Locate(i);
     if (current == 0)
         return false;
-    LinkNode<T>* newNode = new LinkNode<T>(x);
-    if (newNode == 0)
+    auto* newNode = new LinkNode<T>(x);
+    if (newNode == nullptr)
     {
-        cerr << "å­˜å‚¨åˆ†é…é”™è¯¯(from LinkList<T>::Insert)" << endl;
+        cerr << "´æ´¢·ÖÅä´íÎó(from LinkList<T>::Insert)" << endl;
         exit(1);
     }
 
@@ -288,17 +262,16 @@ bool LinkList<T>::Insert(int i, T& x)
 
 
 
-
-//åˆ é™¤ç¬¬ i ä¸ªç»“ç‚¹
+//É¾³ıµÚ i ¸ö½áµã
 template<class T>
 bool LinkList<T>::Remove(int i, T& x)
 {
-    //æ‰¾åˆ°è¦åˆ é™¤çš„ç»“ç‚¹çš„å‰ä¸€ä¸ªç»“ç‚¹
+    //ÕÒµ½ÒªÉ¾³ıµÄ½áµãµÄÇ°Ò»¸ö½áµã
     LinkNode<T>* current = Locate(i - 1);
     if (current == 0 || current->next == 0)
         return false;
 
-    //æŒ‡å‘è¦åˆ é™¤çš„ç»“ç‚¹
+    //Ö¸ÏòÒªÉ¾³ıµÄ½áµã
     LinkNode<T>* del = current->next;
     current->next = del->next;
     x = del->data;
@@ -310,9 +283,8 @@ bool LinkList<T>::Remove(int i, T& x)
 template<class T>
 bool LinkList<T>::IsEmpty() const
 {
-    return (head->next == 0) ? true : false;
+    return head->next == 0;
 }
-
 
 
 
@@ -336,7 +308,6 @@ void LinkList<T>::output()
 
 
 
-
 template<class T>
 LinkList<T>& LinkList<T>::operator=(LinkList<T>& L)
 {
@@ -345,7 +316,7 @@ LinkList<T>& LinkList<T>::operator=(LinkList<T>& L)
     LinkNode<T>* destptr = head = new LinkList<T>;
     while (srcptr->next != 0)
     {
-        value = srcptr->next->data; //ç›´æ¥è·³è¿‡è¡¨å¤´ç»“ç‚¹
+        value = srcptr->next->data; //Ö±½ÓÌø¹ı±íÍ·½áµã
         destptr->next = new LinkNode<T>(value);
         destptr = destptr->next;
         srcptr = srcptr->next;
@@ -365,12 +336,12 @@ void IsInsertSucc(LinkList<T>& a, int i, T& x)
 {
     if (a.Insert(i, x))
     {
-        cout << "åœ¨ç¬¬ " << i << " ä¸ªç»“ç‚¹ä¹‹åæ’å…¥æ–°ç»“ç‚¹æˆåŠŸ" << endl;
-        cout << "å®ƒçš„å€¼ä¸º " << x << endl;
+        cout << "ÔÚµÚ " << i << " ¸ö½áµãÖ®ºó²åÈëĞÂ½áµã³É¹¦" << endl;
+        cout << "ËüµÄÖµÎª " << x << endl;
     }
     else
     {
-        cout << "åœ¨ç¬¬ " << i << " ä¸ªç»“ç‚¹ä¹‹åæ’å…¥æ–°ç»“ç‚¹æˆåŠŸ" << endl;
+        cout << "ÔÚµÚ " << i << " ¸ö½áµãÖ®ºó²åÈëĞÂ½áµã³É¹¦" << endl;
     }
     cout << endl;
 
@@ -382,12 +353,12 @@ void IsRemoveSucc(LinkList<T>& a, int i, T& x)
 {
     if (a.Remove(i, x))
     {
-        cout << "åˆ é™¤ç¬¬ " << i << " ä¸ªç»“ç‚¹æˆåŠŸ" << endl;
-        cout << "å®ƒçš„å€¼ä¸º " << x << endl;
+        cout << "É¾³ıµÚ " << i << " ¸ö½áµã³É¹¦" << endl;
+        cout << "ËüµÄÖµÎª " << x << endl;
     }
     else
     {
-        cout << "åˆ é™¤ç¬¬ " << i << " ä¸ªç»“ç‚¹å¤±è´¥" << endl;
+        cout << "É¾³ıµÚ " << i << " ¸ö½áµãÊ§°Ü" << endl;
     }
     cout << endl;
 }
@@ -421,7 +392,7 @@ int main()
     IsInsertSucc(a, 0, x);
 
     cout << endl;
-    cout << "aä¸­çš„å…ƒç´ " << endl;
+    cout << "aÖĞµÄÔªËØ" << endl;
     a.output();
 
     cout << endl;
@@ -434,53 +405,53 @@ int main()
     IsRemoveSucc(a, 2, x);
 
     cout << endl;
-    cout << "aä¸­çš„å…ƒç´ " << endl;
+    cout << "aÖĞµÄÔªËØ" << endl;
     a.output();
 
     cout << endl;
-    cout << "bä¸­çš„å…ƒç´ " << endl;
+    cout << "bÖĞµÄÔªËØ" << endl;
     b.output();
 
     cout << endl;
-    cout << "cä¸­çš„å…ƒç´ " << endl;
+    cout << "cÖĞµÄÔªËØ" << endl;
     c.output();
 /*
 	cout << endl << endl;
-	cout << "é‡æ–°å»ºç«‹ a é“¾,å¤´æ’" << endl;
+	cout << "ÖØĞÂ½¨Á¢ a Á´,Í·²å" << endl;
 	a.InputFront();
 
 
 	cout << endl << endl;
-	cout << "é‡æ–°å»ºç«‹ b é“¾,å°¾æ’" << endl;
+	cout << "ÖØĞÂ½¨Á¢ b Á´,Î²²å" << endl;
 	b.InputRear();
 
 	cout << endl;
-	cout << "aä¸­çš„å…ƒç´ " << endl;
+	cout << "aÖĞµÄÔªËØ" << endl;
 	a.output();
 
 	cout << endl;
-	cout << "bä¸­çš„å…ƒç´ " << endl;
+	cout << "bÖĞµÄÔªËØ" << endl;
 	b.output();
 */
 
     cout << endl << endl;
     a.getData(2, x);
     i = 2;
-    cout << "aé“¾ç¬¬ " << i << " ä¸ªå…ƒç´ çš„å€¼: " << x << endl;
+    cout << "aÁ´µÚ " << i << " ¸öÔªËØµÄÖµ: " << x << endl;
     cout << endl;
 
 
     cout << endl;
-    cout << "aä¸­çš„å…ƒç´ " << endl;
+    cout << "aÖĞµÄÔªËØ" << endl;
     a.output();
 
 
     cout << endl;
     x = 1000;
     i = 3;
-    cout << "aé“¾ç¬¬ "<< i << " ä¸ªå…ƒç´ çš„å€¼å˜ä¸º " << x << endl;
+    cout << "aÁ´µÚ "<< i << " ¸öÔªËØµÄÖµ±äÎª " << x << endl;
     a.setData(i, x);
-    cout << "aä¸­çš„å…ƒç´ " << endl;
+    cout << "aÖĞµÄÔªËØ" << endl;
     a.output();
 
 

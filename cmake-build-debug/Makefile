@@ -122,32 +122,32 @@ FirstProject/fast:
 	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/build
 .PHONY : FirstProject/fast
 
-Chenhongy/Graph/GraphMatrix.obj: Chenhongy/Graph/GraphMatrix.cpp.obj
+DSModel/Heap/MinHeap.obj: DSModel/Heap/MinHeap.cpp.obj
 
-.PHONY : Chenhongy/Graph/GraphMatrix.obj
+.PHONY : DSModel/Heap/MinHeap.obj
 
 # target to build an object file
-Chenhongy/Graph/GraphMatrix.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Chenhongy/Graph/GraphMatrix.cpp.obj
-.PHONY : Chenhongy/Graph/GraphMatrix.cpp.obj
+DSModel/Heap/MinHeap.cpp.obj:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Heap/MinHeap.cpp.obj
+.PHONY : DSModel/Heap/MinHeap.cpp.obj
 
-Chenhongy/Graph/GraphMatrix.i: Chenhongy/Graph/GraphMatrix.cpp.i
+DSModel/Heap/MinHeap.i: DSModel/Heap/MinHeap.cpp.i
 
-.PHONY : Chenhongy/Graph/GraphMatrix.i
+.PHONY : DSModel/Heap/MinHeap.i
 
 # target to preprocess a source file
-Chenhongy/Graph/GraphMatrix.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Chenhongy/Graph/GraphMatrix.cpp.i
-.PHONY : Chenhongy/Graph/GraphMatrix.cpp.i
+DSModel/Heap/MinHeap.cpp.i:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Heap/MinHeap.cpp.i
+.PHONY : DSModel/Heap/MinHeap.cpp.i
 
-Chenhongy/Graph/GraphMatrix.s: Chenhongy/Graph/GraphMatrix.cpp.s
+DSModel/Heap/MinHeap.s: DSModel/Heap/MinHeap.cpp.s
 
-.PHONY : Chenhongy/Graph/GraphMatrix.s
+.PHONY : DSModel/Heap/MinHeap.s
 
 # target to generate assembly for a file
-Chenhongy/Graph/GraphMatrix.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/Chenhongy/Graph/GraphMatrix.cpp.s
-.PHONY : Chenhongy/Graph/GraphMatrix.cpp.s
+DSModel/Heap/MinHeap.cpp.s:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Heap/MinHeap.cpp.s
+.PHONY : DSModel/Heap/MinHeap.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... FirstProject
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... Chenhongy/Graph/GraphMatrix.obj
-	@echo ... Chenhongy/Graph/GraphMatrix.i
-	@echo ... Chenhongy/Graph/GraphMatrix.s
+	@echo ... DSModel/Heap/MinHeap.obj
+	@echo ... DSModel/Heap/MinHeap.i
+	@echo ... DSModel/Heap/MinHeap.s
 .PHONY : help
 
 

@@ -194,8 +194,8 @@ int main() {
     GraphDest g1(numVertex, numEdge, isDirectGraph, vertexes, edges);
     g1.PrintDest();
 
-//    cout << "深度优先遍历: " << endl;
-//    g1.DFS();
+    cout << "深度优先遍历: " << endl;
+    g1.DFS();
 
     cout << endl << "广度优先遍历: " << endl;
     g1.BFS();

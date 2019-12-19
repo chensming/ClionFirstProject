@@ -3,11 +3,16 @@
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/Chenhongy/Graph/GraphDest.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/Chenhongy/Graph/GraphMatrix.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/Chenhongy/HuffmanTree/Files/测试数据.txt" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Chenhongy/HuffmanTree/Huffman.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/DSModel/Graph/MinSpanningTreeD.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/DSModel/Graph/MinSpanningTreeM.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/DSModel/Linklist/LinkList.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/DSModel/Matrix/SpareMatrix.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/DSModel/Tree/HuffmanTree.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/DSModel/Tree/MinSpanningTree.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/SortClass/LinearSort.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/main.cpp" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
