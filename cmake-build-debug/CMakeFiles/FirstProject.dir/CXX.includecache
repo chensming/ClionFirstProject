@@ -6,23 +6,15 @@
 
 #IncludeRegexTransform: 
 
-D:/ClionProject/FirstProject/Chenhongy/LinkedStudent/main.cpp
+D:/ClionProject/FirstProject/DSModel/Graph/MinSpanningTreeM.cpp
 iostream
 -
-studentUnit.h
-D:/ClionProject/FirstProject/Chenhongy/LinkedStudent/studentUnit.h
-
-D:/ClionProject/FirstProject/Chenhongy/LinkedStudent/studentUnit.cpp
-studentUnit.h
-D:/ClionProject/FirstProject/Chenhongy/LinkedStudent/studentUnit.h
-fstream
+queue
 -
-iostream
+iomanip
 -
-string
+vector
 -
-cstring
+algorithm
 -
-
-D:/ClionProject/FirstProject/Chenhongy/LinkedStudent/studentUnit.h
 

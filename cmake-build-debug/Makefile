@@ -122,32 +122,32 @@ FirstProject/fast:
 	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/build
 .PHONY : FirstProject/fast
 
-DSModel/Graph/MinSpanningTreeD.obj: DSModel/Graph/MinSpanningTreeD.cpp.obj
+DSModel/Graph/MinSpanningTreeM.obj: DSModel/Graph/MinSpanningTreeM.cpp.obj
 
-.PHONY : DSModel/Graph/MinSpanningTreeD.obj
+.PHONY : DSModel/Graph/MinSpanningTreeM.obj
 
 # target to build an object file
-DSModel/Graph/MinSpanningTreeD.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.obj
-.PHONY : DSModel/Graph/MinSpanningTreeD.cpp.obj
+DSModel/Graph/MinSpanningTreeM.cpp.obj:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeM.cpp.obj
+.PHONY : DSModel/Graph/MinSpanningTreeM.cpp.obj
 
-DSModel/Graph/MinSpanningTreeD.i: DSModel/Graph/MinSpanningTreeD.cpp.i
+DSModel/Graph/MinSpanningTreeM.i: DSModel/Graph/MinSpanningTreeM.cpp.i
 
-.PHONY : DSModel/Graph/MinSpanningTreeD.i
+.PHONY : DSModel/Graph/MinSpanningTreeM.i
 
 # target to preprocess a source file
-DSModel/Graph/MinSpanningTreeD.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.i
-.PHONY : DSModel/Graph/MinSpanningTreeD.cpp.i
+DSModel/Graph/MinSpanningTreeM.cpp.i:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeM.cpp.i
+.PHONY : DSModel/Graph/MinSpanningTreeM.cpp.i
 
-DSModel/Graph/MinSpanningTreeD.s: DSModel/Graph/MinSpanningTreeD.cpp.s
+DSModel/Graph/MinSpanningTreeM.s: DSModel/Graph/MinSpanningTreeM.cpp.s
 
-.PHONY : DSModel/Graph/MinSpanningTreeD.s
+.PHONY : DSModel/Graph/MinSpanningTreeM.s
 
 # target to generate assembly for a file
-DSModel/Graph/MinSpanningTreeD.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.s
-.PHONY : DSModel/Graph/MinSpanningTreeD.cpp.s
+DSModel/Graph/MinSpanningTreeM.cpp.s:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeM.cpp.s
+.PHONY : DSModel/Graph/MinSpanningTreeM.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... FirstProject
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... DSModel/Graph/MinSpanningTreeD.obj
-	@echo ... DSModel/Graph/MinSpanningTreeD.i
-	@echo ... DSModel/Graph/MinSpanningTreeD.s
+	@echo ... DSModel/Graph/MinSpanningTreeM.obj
+	@echo ... DSModel/Graph/MinSpanningTreeM.i
+	@echo ... DSModel/Graph/MinSpanningTreeM.s
 .PHONY : help
 
 

@@ -22,7 +22,7 @@ struct MSTEdgeNode {
 };
 
 template<class T, class E>
-bool cmp(const MSTEdgeNode<T, E>& a, const MSTEdgeNode<T, E>& b) {
+bool cmp(const MSTEdgeNode<T, E> &a, const MSTEdgeNode<T, E> &b) {
     return a.cost < b.cost;  //升序
 }
 
@@ -30,22 +30,25 @@ bool cmp(const MSTEdgeNode<T, E>& a, const MSTEdgeNode<T, E>& b) {
 template<class T, class E>
 struct Edge {
     int dest;    //边的另一个顶点位置
-    E cost;			//边上的权值
-    Edge<T, E>* link;
-    Edge():dest(-1),cost(-1),link(nullptr) {}
-    Edge(int num, E weight) : dest(num),cost(weight),link(0){}
+    E cost;            //边上的权值
+    Edge<T, E> *link;
+
+    Edge() : dest(-1), cost(-1), link(nullptr) {}
+
+    Edge(int num, E weight) : dest(num), cost(weight), link(0) {}
 };
 
 template<class T, class E>
 struct Vertex {
     T data;
-    Edge<T, E>* adj;
+    Edge<T, E> *adj;
 };
 
 template<class T, class E>
 class GraphLinked {
 public:
     explicit GraphLinked(int sz = DefaultVertices);
+
     ~GraphLinked();
 
     T getValue(int i) {
@@ -53,22 +56,33 @@ public:
     }
 
     E getWeight(int v1, int v2);
-    bool insertVertex(const T& vertex);
+
+    bool insertVertex(const T &vertex);
+
     bool removeVertex(int v);
+
     bool insertEdge(int v1, int v2, E weight);
+
     bool removeEdge(int v1, int v2);
 
     int getFirstNeighbor(int v);
+
     int getNextNeighbor(int v, int w);
 
     void CreateNodeTable();
+
     void PrintDest(); //把邻接表的样子输出来
     void KruskalMinTree();
+
     void PrimMinTree();
-    void Dikstra();
+
+    void Dijkstra();
+
+    void printMinTree();
 
     //遍历
     void DFS();
+
     void BFS();
 
 
@@ -76,54 +90,47 @@ private:
     int numVertices;
     int maxVertices;
     int numEdges;
-    bool* visited; //用于dfs和bfs
+    bool *visited; //用于dfs和bfs
 
-    Vertex<T, E>* NodeTable; //结点表
-    MSTEdgeNode<T, E>* mst;//最小生成树数组
+    Vertex<T, E> *NodeTable; //结点表
+    MSTEdgeNode<T, E> *mst;//最小生成树数组
 
     int getVertexPos(const T vertex) {
-        for (int i = 0; i < numVertices; i++)
-        {
+        for (int i = 0; i < numVertices; i++) {
             if (NodeTable[i].data == vertex)
                 return i;
         }
         return -1;
     }
+
     void DFS(int v);
 };
 
 
-
 template<class T, class E>
-GraphLinked<T, E>::GraphLinked(int sz)
-{
+GraphLinked<T, E>::GraphLinked(int sz) {
+    mst = nullptr;
     maxVertices = sz;
     numVertices = 0;
     numEdges = 0;
+    visited = nullptr;
 
     NodeTable = new Vertex<T, E>[maxVertices];
-    if (NodeTable == 0)
-    {
+    if (NodeTable == nullptr) {
         cerr << "分存分配错误" << endl;
         exit(1);
     }
-    for (int i = 0; i < maxVertices; i++)
-    {
-        NodeTable[i].adj = 0;
+    for (int i = 0; i < maxVertices; i++) {
+        NodeTable[i].adj = nullptr;
     }
 }
 
 
-
-
 template<class T, class E>
-GraphLinked<T, E>::~GraphLinked()
-{
-    for (int i = 0; i < numVertices; i++)
-    {
-        Edge<T, E>* p = NodeTable[i].adj;
-        while (p != nullptr)
-        {
+GraphLinked<T, E>::~GraphLinked() {
+    for (int i = 0; i < numVertices; i++) {
+        Edge<T, E> *p = NodeTable[i].adj;
+        while (p != nullptr) {
             NodeTable[i].adj = p->link;
             delete p;
             p = NodeTable[i].adj;
@@ -134,13 +141,10 @@ GraphLinked<T, E>::~GraphLinked()
 
 
 template<class T, class E>
-E GraphLinked<T, E>::getWeight(int v1, int v2)
-{
-    if (v1 >= 0 && v1 < numVertices && v2 >= 0 && v2 < numVertices)
-    {
-        Edge<T, E>* p = NodeTable[v1].adj;
-        while (p != nullptr && p->dest != v2)
-        {
+E GraphLinked<T, E>::getWeight(int v1, int v2) {
+    if (v1 >= 0 && v1 < numVertices && v2 >= 0 && v2 < numVertices) {
+        Edge<T, E> *p = NodeTable[v1].adj;
+        while (p != nullptr && p->dest != v2) {
             p = p->link;
         }
         if (p != nullptr)
@@ -150,10 +154,8 @@ E GraphLinked<T, E>::getWeight(int v1, int v2)
 }
 
 
-
 template<class T, class E>
-bool GraphLinked<T, E>::insertVertex(const T& vertex)
-{
+bool GraphLinked<T, E>::insertVertex(const T &vertex) {
     if (numVertices == maxVertices)
         return false;
     NodeTable[numVertices].data = vertex;
@@ -162,21 +164,18 @@ bool GraphLinked<T, E>::insertVertex(const T& vertex)
 }
 
 
-
 template<class T, class E>
-bool GraphLinked<T, E>::removeVertex(int v)
-{
+bool GraphLinked<T, E>::removeVertex(int v) {
     if (numVertices == 1 || v < 0 || v >= numVertices)
         return false;
-    Edge<T, E>* p, * s, * t;
+    Edge<T, E> *p, *s, *t;
     int k;
     while (NodeTable[v].adj != nullptr) {
         p = NodeTable[v].adj;
         k = p->dest;
         s = NodeTable[k].adj;  //找对称存放的边结点
         t = nullptr;                 //t 是 s的前一个指针，跟着s走，方便后续删除结点
-        while (s != nullptr && s->dest != v)
-        {
+        while (s != nullptr && s->dest != v) {
             t = s;
             s = s->link;
         }
@@ -198,15 +197,12 @@ bool GraphLinked<T, E>::removeVertex(int v)
     p = NodeTable[v].adj = NodeTable[numVertices].adj;
     while (p != nullptr) {
         s = NodeTable[p->dest].adj;
-        while (s != nullptr)
-        {
-            if (s->dest == numVertices)
-            {
+        while (s != nullptr) {
+            if (s->dest == numVertices) {
                 //将原本与编号为numVertices的该为v,因为它已经搬到v了
                 s->dest = v;
                 break;
-            }
-            else
+            } else
                 s = s->link;
         }
         ///////////////////////////////////////////////
@@ -219,15 +215,10 @@ bool GraphLinked<T, E>::removeVertex(int v)
 }
 
 
-
-
-
 template<class T, class E>
-bool GraphLinked<T, E>::insertEdge(int v1, int v2, E weight)
-{
-    if (v1 >= 0 && v1 < numVertices && v2 >= 0 && v2 < numVertices)
-    {
-        Edge<T, E>* q, * p = NodeTable[v1].adj;
+bool GraphLinked<T, E>::insertEdge(int v1, int v2, E weight) {
+    if (v1 >= 0 && v1 < numVertices && v2 >= 0 && v2 < numVertices) {
+        Edge<T, E> *q, *p = NodeTable[v1].adj;
         while (p != nullptr && p->dest != v2)
             p = p->link;
         if (p != nullptr)
@@ -256,37 +247,29 @@ bool GraphLinked<T, E>::insertEdge(int v1, int v2, E weight)
 }
 
 
-
-
 template<class T, class E>
-bool GraphLinked<T, E>::removeEdge(int v1, int v2)
-{
-    if (v1 >= 0 && v1 < numVertices && v2 >= 0 && v2 < numVertices)
-    {
-        Edge<T, E>* p = NodeTable[v1].adj;
-        Edge<T, E>* q = 0, *s = p; //q是p上一个指针,方便删除操作
+bool GraphLinked<T, E>::removeEdge(int v1, int v2) {
+    if (v1 >= 0 && v1 < numVertices && v2 >= 0 && v2 < numVertices) {
+        Edge<T, E> *p = NodeTable[v1].adj;
+        Edge<T, E> *q = 0, *s = p; //q是p上一个指针,方便删除操作
 
-        while (p != 0 && p->dest != v2)
-        {
+        while (p != 0 && p->dest != v2) {
             q = p;
             p = p->link;
         }
-        if (p != 0)
-        {
+        if (p != 0) {
             if (p == s)    //要删的结点被头指针指着
                 NodeTable[v1].adj = p->link;
             else
                 q->link = p->link;
             delete p;
-        }
-        else
+        } else
             return false; // p == 0，没找到这条边
 
         p = NodeTable[v2].adj;  //v2对应边链表中删除
         q = 0;
         s = p;
-        while (p->dest != v1)
-        {
+        while (p->dest != v1) {
             q = p;
             p = p->link;
         }
@@ -301,17 +284,10 @@ bool GraphLinked<T, E>::removeEdge(int v1, int v2)
 }
 
 
-
-
-
-
-
 template<class T, class E>
-int GraphLinked<T, E>::getFirstNeighbor(int v)
-{
-    if (v >= 0 && v < numVertices)
-    {
-        Edge<T, E>* p = NodeTable[v].adj;
+int GraphLinked<T, E>::getFirstNeighbor(int v) {
+    if (v >= 0 && v < numVertices) {
+        Edge<T, E> *p = NodeTable[v].adj;
         if (p != nullptr)
             return p->dest;//存在，返回第一个临界点
     }
@@ -319,17 +295,10 @@ int GraphLinked<T, E>::getFirstNeighbor(int v)
 }
 
 
-
-
-
-
-
 template<class T, class E>
-int GraphLinked<T, E>::getNextNeighbor(int v, int w)
-{
-    if (v >= 0 && v < numVertices)
-    {
-        Edge<T, E>* p = NodeTable[v].adj;
+int GraphLinked<T, E>::getNextNeighbor(int v, int w) {
+    if (v >= 0 && v < numVertices) {
+        Edge<T, E> *p = NodeTable[v].adj;
         while (p != nullptr && p->dest != nullptr)
             p = p->link;
         if (p != nullptr && p->link != nullptr)
@@ -339,26 +308,20 @@ int GraphLinked<T, E>::getNextNeighbor(int v, int w)
 }
 
 
-
-
-
 //建立邻接表结构
 template<class T, class E>
-void GraphLinked<T, E>::CreateNodeTable()
-{
+void GraphLinked<T, E>::CreateNodeTable() {
     int n, i, j, m;
-    Edge<T, E>* p;
+    Edge<T, E> *p;
 
     cout << "请输入要创建的结点个数" << endl;
     cin >> n; //结点个数
-    if (n > maxVertices)
-    {
+    if (n > maxVertices) {
         cout << "超过最大结点数" << endl;
         return;
     }
     numVertices = n;
-    for (i = 0; i < n; i++)
-    {
+    for (i = 0; i < n; i++) {
         NodeTable[i].adj = 0;  //预设为空链
         cout << "请输入编号为 " << i << "的结点的值: ";
         cin >> NodeTable[i].data;
@@ -366,8 +329,7 @@ void GraphLinked<T, E>::CreateNodeTable()
         cout << "请输入" << NodeTable[i].data << "的邻接点个数：";
         cin >> m;
         cout << "请输入它的 " << m << "个邻接点(相邻顶点编号 权重)" << endl;
-        for (j = 0; j < m; j++)
-        {
+        for (j = 0; j < m; j++) {
             p = new Edge<T, E>;
             cin >> p->dest;
             cin >> p->cost;
@@ -379,18 +341,12 @@ void GraphLinked<T, E>::CreateNodeTable()
 }
 
 
-
-
-
-
 template<class T, class E>
-void GraphLinked<T, E>::DFS(int v)
-{
+void GraphLinked<T, E>::DFS(int v) {
     visited[v] = true;
     cout << NodeTable[v].data << " ";
-    Edge<T, E>* p = NodeTable[v].adj;
-    while (p != 0)
-    {
+    Edge<T, E> *p = NodeTable[v].adj;
+    while (p != 0) {
         if (!visited[p->dest])
             DFS(p->dest);
         p = p->link;
@@ -398,11 +354,8 @@ void GraphLinked<T, E>::DFS(int v)
 }
 
 
-
-
 template<class T, class E>
-void GraphLinked<T, E>::DFS()
-{
+void GraphLinked<T, E>::DFS() {
     visited = new bool[numVertices];
     for (int i = 0; i < numVertices; i++)
         visited[i] = false;
@@ -414,32 +367,26 @@ void GraphLinked<T, E>::DFS()
 }
 
 
-
-
 template<class T, class E>
-void GraphLinked<T, E>::BFS()
-{
+void GraphLinked<T, E>::BFS() {
     visited = new bool[numVertices];
     for (int i = 0; i < numVertices; i++)
         visited[i] = false;
     int v;
-    Edge<T, E>* p;
-    queue<int>Q;
+    Edge<T, E> *p;
+    queue<int> Q;
     cout << "请输入广度优先遍历的出发点编号：0至 " << numVertices - 1 << endl;
     cin >> v;
     Q.push(v);
 
-    while (!Q.empty())
-    {
+    while (!Q.empty()) {
         v = Q.front();
         Q.pop();
-        if (!visited[v])
-        {
+        if (!visited[v]) {
             visited[v] = true;
             cout << NodeTable[v].data << " ";
             p = NodeTable[v].adj;
-            while (p != 0)
-            {
+            while (p != 0) {
                 if (!visited[p->dest])
                     Q.push(p->dest);
                 p = p->link;
@@ -450,21 +397,14 @@ void GraphLinked<T, E>::BFS()
 }
 
 
-
-
-
-
 template<class T, class E>
-void GraphLinked<T, E>::PrintDest()
-{
-    Edge<T, E>* p;
-    for (int i = 0; i < numVertices; i++)
-    {
+void GraphLinked<T, E>::PrintDest() {
+    Edge<T, E> *p;
+    for (int i = 0; i < numVertices; i++) {
         cout << "-----与" << "编号为 " << i << " ,值为 ";
         cout << NodeTable[i].data << " 相连的点 : 顶点值(编号,权值)" << endl;
         p = NodeTable[i].adj;
-        while (p != 0)
-        {
+        while (p != 0) {
             cout << NodeTable[p->dest].data;
             cout << "( " << p->dest << ", " << p->cost << ")" << " ";
             p = p->link;
@@ -476,44 +416,205 @@ void GraphLinked<T, E>::PrintDest()
 
 template<class T, class E>
 void GraphLinked<T, E>::KruskalMinTree() {
-    if(mst != 0)
-        delete [] mst;
-    mst = new MSTEdgeNode<T,E> [numVertices];
+    if (mst != nullptr)
+        delete[] mst;
+    mst = new MSTEdgeNode<T, E>[numVertices];
 
-    if(visited != nullptr)
+    if (visited != nullptr)
         delete[] visited;
     visited = new bool[numVertices];
-    for(int i = 0; i < numVertices; i++){
+    for (int i = 0; i < numVertices; i++) {
         visited[i] = false;
     }
 
-    MSTEdgeNode<T,E>* p, leastNode;
-    vector<MSTEdgeNode<T,E>>hp;
+    MSTEdgeNode<T, E> *p, leastNode;
+    vector<MSTEdgeNode<T, E>> hp;
     UFsets fsets(numVertices);
 
     //初始化工作
-    Edge<T,E> *edgePtr;
-    for(int i = 0; i < numVertices; i++){
+    Edge<T, E> *edgePtr;
+    for (int i = 0; i < numVertices; i++) {
         edgePtr = NodeTable[i].adj;
-        while(edgePtr != 0){
-            if(!visited[edgePtr->dest]){
+        while (edgePtr != nullptr) {
+            if (!visited[edgePtr->dest]) {
 
             }
-            p = new MSTEdgeNode<T,E>;
+            p = new MSTEdgeNode<T, E>;
             p->tail = i;
             p->head = edgePtr->dest;
             p->cost = edgePtr->cost;
             hp.push_back(*p);
-            make_heap(hp.begin(),hp.end(),cmp<T,E>);
-            sort_heap(hp.begin(),hp.end(),cmp<T,E>);
             edgePtr = edgePtr->link;
         }
     }
+    make_heap(hp.begin(), hp.end(), cmp<T, E>);
+    sort_heap(hp.begin(), hp.end(), cmp<T, E>);
+    display(hp);
+
+    int count = 1; //最小生成树计数器
+    while (count < numVertices) {
+        leastNode = hp.front();
+        hp.erase(hp.begin());
+
+        int u = fsets.Find(leastNode.tail);
+        int v = fsets.Find(leastNode.head);
+        if (u != v) { //不会产生回路
+            fsets.Union(u, v);
+            mst[count - 1] = leastNode;
+            cout << leastNode.tail << "(" << NodeTable[leastNode.tail].data << ")->";
+            cout << leastNode.head << "(" << NodeTable[leastNode.head].data;
+            cout << "),w(" << leastNode.cost << ")  ";
+            count++;
+        }
+    }
+    cout << endl;
+    if (count == numVertices)
+        cout << "最小生成树生成" << endl;
 }
 
 
-int main()
+template<class T, class E>
+void GraphLinked<T, E>::PrimMinTree() {
+    if (mst != nullptr)
+        delete mst;
+    mst = new MSTEdgeNode<T, E>[numVertices];
+    MSTEdgeNode<T, E> *p, leastNode;
+    vector<MSTEdgeNode<T, E>> hp;
+    UFsets fsets(numVertices);
+    if (visited != nullptr)
+        delete[] visited;
+    visited = new bool[numVertices];
+
+    for (int i = 0; i < numVertices; i++)
+        visited[i] = false;
+
+    cout << "请输入出发点编号 0至" << numVertices - 1 << endl;
+    int u;
+    cin >> u;
+    if (u < 0 || u > numVertices - 1) {
+        cout << "输入有误" << endl;
+        return;
+    }
+
+    visited[u] = true;
+    int count = 1;
+
+    Edge<T, E> *edgePtr;
+    while (count < numVertices) {
+        edgePtr = NodeTable[u].adj;
+        while (edgePtr != nullptr) {
+            if (!visited[edgePtr->dest]) {
+                p = new MSTEdgeNode<T, E>;
+                p->tail = u;
+                p->head = edgePtr->dest;
+                p->cost = edgePtr->cost;
+
+                hp.push_back(*p);
+            }
+            edgePtr = edgePtr->link;
+        }
+        make_heap(hp.begin(), hp.end(), cmp<T, E>);
+        sort_heap(hp.begin(), hp.end(), cmp<T, E>);
+        while (!hp.empty() && count < numVertices) {
+            leastNode = hp.front();
+            hp.erase(hp.begin());
+            if (!visited[leastNode.head]) {
+                mst[count - 1] = leastNode;
+                cout << leastNode.tail << "(" << NodeTable[leastNode.tail].data << ")->";
+                cout << leastNode.head << "(" << NodeTable[leastNode.head].data;
+                cout << "),w(" << leastNode.cost << ")  ";
+                u = leastNode.head;
+                visited[u] = true;
+                count++;
+                break;
+            }
+        }
+    }
+    cout << endl;
+}
+
+template<class T, class E>
+void GraphLinked<T, E>::Dijkstra() {
+    int v0;
+    E *dist = new E[numVertices];
+    for (int i = 0; i < numVertices; i++)
+        dist[i] = maxWeight;
+
+    if (visited != nullptr)
+        delete[] visited;
+    visited = new bool[numVertices];
+
+    for (int i = 0; i < numVertices; i++)
+        visited[i] = false;
+    int pos;
+
+
+    cout << "请输入出发点编号 0至" << numVertices - 1 << endl;
+    cin >> v0;
+    if (v0 < 0 || v0 > numVertices - 1) {
+        cout << "输入有误" << endl;
+        return;
+    }
+    dist[v0] = 0;
+    //初始化工作
+    Edge<T, E> *edgePtr = NodeTable[v0].adj;
+    while (edgePtr != nullptr) {
+        dist[edgePtr->dest] = edgePtr->cost;
+        edgePtr = edgePtr->link;
+    }
+    visited[v0] = true;
+
+    int count = 1;
+    while (count < numVertices) {
+        E min = 9999;
+        for (int k = 0; k < numVertices; k++) {
+            if (!visited[k] && dist[k] < min) {
+                pos = k;
+                min = dist[k];
+            }
+        }
+        visited[pos] = true;
+        count++;
+        edgePtr = NodeTable[pos].adj;
+        while (edgePtr != nullptr) {
+            if (!visited[edgePtr->dest] && edgePtr->cost + min < dist[edgePtr->dest])
+                dist[edgePtr->dest] = edgePtr->cost + min;
+            edgePtr = edgePtr->link;
+        }
+    }
+    cout << NodeTable[v0].data << "到其他点的最短距离分别为" << endl;
+    for (int i = 0; i < numVertices; i++)
+        cout << "To--" << NodeTable[i].data << ":" << dist[i] << "  ";
+
+
+    delete[] dist;
+    delete[] visited;
+}
+
+
+template<class T, class E>
+void display(vector<MSTEdgeNode<T, E>> &v)//使用vector迭代器遍历
 {
+    //vector<MSTEdgeNode<T, E> >::iterator iter;
+    for (auto iter = v.begin(); iter < v.end(); iter++) {
+        cout << (*iter).tail << "->" << (*iter).head << " : " << (*iter).cost << endl;
+    }
+    cout << endl << endl;
+}
+
+
+template<class T, class E>
+void GraphLinked<T, E>::printMinTree() {
+    if (mst == 0) {
+        cout << "最小生成树为空" << endl;
+        return;
+    }
+    for (int i = 0; i < numVertices - 1; i++)
+        cout << mst[i].tail << "->" << mst[i].head << "(" << mst[i].cost << ")" << endl;
+}
+
+
+int main() {
     GraphLinked<char, double> a;
     //a.CreateNodeTable();
 
@@ -536,9 +637,13 @@ int main()
 
     a.PrintDest();
 
-    a.KruskalMinTree();
+//    cout << endl << "kruskal: " << endl;
+//    a.KruskalMinTree();
 
+//    cout << endl << "prim: " << endl;
+//    a.PrimMinTree();
 
+    a.Dijkstra();
 
     cout << endl;
 }

@@ -322,9 +322,10 @@ void Graphmtx<T, E>::KruskalMinTree() {
                 p->head = v;
                 p->cost = Edge[u][v];
                 hp.push_back(*p);
-                make_heap(hp.begin(), hp.end(), cmp<T, E>);
-                sort_heap(hp.begin(), hp.end(), cmp<T, E>);
             }
+    make_heap(hp.begin(), hp.end(), cmp<T, E>);
+    sort_heap(hp.begin(), hp.end(), cmp<T, E>);
+
     int count = 1;//最小生成树边数计数
     while (count < numVertices) {
         leastNode = hp.front();
@@ -348,7 +349,7 @@ void Graphmtx<T, E>::KruskalMinTree() {
 
 template<class T, class E>
 void Graphmtx<T, E>::PrimMinTree() {
-    if (mst != 0)
+    if (mst != nullptr)
         delete mst;
     mst = new MSTEdgeNode<T, E>[numVertices];
 
@@ -389,7 +390,7 @@ void Graphmtx<T, E>::PrimMinTree() {
             hp.erase(hp.begin());
             if (!visited[leastNode.head]) {
                 mst[count - 1] = leastNode;
-                cout << leastNode.tail << "->" << leastNode.head << "(" << leastNode.cost << ")";
+                cout << leastNode.tail << "->" << leastNode.head << "(" << leastNode.cost << ") ";
                 u = leastNode.head;
                 visited[u] = true;
                 count++;
@@ -498,7 +499,13 @@ int main() {
     //    cout << endl;
     //    a.PrimMinTree();
     //    a.printMinTree();
+    cout << endl << "KruskalMinTree: " << endl;
+    a.KruskalMinTree();
 
+    cout << endl << "Prim: " << endl;
+    a.PrimMinTree();
+
+    cout << endl << "Dijkstra: " << endl;
     a.Dijkstra();
 
     cout << endl;
