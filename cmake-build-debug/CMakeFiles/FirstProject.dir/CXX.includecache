@@ -6,7 +6,23 @@
 
 #IncludeRegexTransform: 
 
-D:/ClionProject/FirstProject/DSModel/LinearList/LinkedList.cpp
+D:/ClionProject/FirstProject/Chenhongy/LinkedStudent/main.cpp
 iostream
 -
+studentUnit.h
+D:/ClionProject/FirstProject/Chenhongy/LinkedStudent/studentUnit.h
+
+D:/ClionProject/FirstProject/Chenhongy/LinkedStudent/studentUnit.cpp
+studentUnit.h
+D:/ClionProject/FirstProject/Chenhongy/LinkedStudent/studentUnit.h
+fstream
+-
+iostream
+-
+string
+-
+cstring
+-
+
+D:/ClionProject/FirstProject/Chenhongy/LinkedStudent/studentUnit.h
 

@@ -12,4 +12,5 @@ set(CMAKE_CXX_STANDARD 14)
 
 
 #add_executable(FirstProject DSModel/Heap/MinHeap.cpp)
-add_executable(FirstProject DSModel/LinearList/SeqList.cpp)
+add_executable(FirstProject DSModel/Graph/MinSpanningTreeD.cpp)
+

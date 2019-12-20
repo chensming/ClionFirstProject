@@ -247,7 +247,7 @@ bool Graphlnk<T, E>::insertEdge(int v1, int v2, E weight)
 template<class T, class E>
 bool Graphlnk<T, E>::removeEdge(int v1, int v2)
 {
-    if (v1 >= 0 || v1 < numVertices || v2 >= 0 && v2 < numVertices)
+    if (v1 >= 0 && v1 < numVertices && v2 >= 0 && v2 < numVertices)
     {
         Edge<T, E>* p = NodeTable[v1].adj;
         Edge<T, E>* q = 0, *s = p; //q是p上一个指针,方便删除操作

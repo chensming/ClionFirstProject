@@ -1,0 +1,3 @@
+D:/ClionProject/DSPHomework/LinkedStudent/cmake-build-debug/CMakeFiles/LinkedStudent.dir
+D:/ClionProject/DSPHomework/LinkedStudent/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/ClionProject/DSPHomework/LinkedStudent/cmake-build-debug/CMakeFiles/rebuild_cache.dir

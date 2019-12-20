@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/ClionProject/DSPHomework/LinearStudent/studUnit.cpp
+studUnit.h
+D:/ClionProject/DSPHomework/LinearStudent/studUnit.h
+iostream
+-
+string
+-
+fstream
+-
+cstring
+-
+
+D:/ClionProject/DSPHomework/LinearStudent/studUnit.h
+

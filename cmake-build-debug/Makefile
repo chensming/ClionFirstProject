@@ -122,32 +122,32 @@ FirstProject/fast:
 	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/build
 .PHONY : FirstProject/fast
 
-DSModel/LinearList/SeqList.obj: DSModel/LinearList/SeqList.cpp.obj
+DSModel/Graph/MinSpanningTreeD.obj: DSModel/Graph/MinSpanningTreeD.cpp.obj
 
-.PHONY : DSModel/LinearList/SeqList.obj
+.PHONY : DSModel/Graph/MinSpanningTreeD.obj
 
 # target to build an object file
-DSModel/LinearList/SeqList.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/LinearList/SeqList.cpp.obj
-.PHONY : DSModel/LinearList/SeqList.cpp.obj
+DSModel/Graph/MinSpanningTreeD.cpp.obj:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.obj
+.PHONY : DSModel/Graph/MinSpanningTreeD.cpp.obj
 
-DSModel/LinearList/SeqList.i: DSModel/LinearList/SeqList.cpp.i
+DSModel/Graph/MinSpanningTreeD.i: DSModel/Graph/MinSpanningTreeD.cpp.i
 
-.PHONY : DSModel/LinearList/SeqList.i
+.PHONY : DSModel/Graph/MinSpanningTreeD.i
 
 # target to preprocess a source file
-DSModel/LinearList/SeqList.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/LinearList/SeqList.cpp.i
-.PHONY : DSModel/LinearList/SeqList.cpp.i
+DSModel/Graph/MinSpanningTreeD.cpp.i:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.i
+.PHONY : DSModel/Graph/MinSpanningTreeD.cpp.i
 
-DSModel/LinearList/SeqList.s: DSModel/LinearList/SeqList.cpp.s
+DSModel/Graph/MinSpanningTreeD.s: DSModel/Graph/MinSpanningTreeD.cpp.s
 
-.PHONY : DSModel/LinearList/SeqList.s
+.PHONY : DSModel/Graph/MinSpanningTreeD.s
 
 # target to generate assembly for a file
-DSModel/LinearList/SeqList.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/LinearList/SeqList.cpp.s
-.PHONY : DSModel/LinearList/SeqList.cpp.s
+DSModel/Graph/MinSpanningTreeD.cpp.s:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.s
+.PHONY : DSModel/Graph/MinSpanningTreeD.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... FirstProject
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... DSModel/LinearList/SeqList.obj
-	@echo ... DSModel/LinearList/SeqList.i
-	@echo ... DSModel/LinearList/SeqList.s
+	@echo ... DSModel/Graph/MinSpanningTreeD.obj
+	@echo ... DSModel/Graph/MinSpanningTreeD.i
+	@echo ... DSModel/Graph/MinSpanningTreeD.s
 .PHONY : help
 
 

@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/ClionProject/DSPHomework/Graph/GraphDest.h
+iostream
+-
+queue
+-
+fstream
+-
+
+D:/ClionProject/DSPHomework/Graph/main.cpp
+iostream
+-
+GraphDest.h
+D:/ClionProject/DSPHomework/Graph/GraphDest.h
+

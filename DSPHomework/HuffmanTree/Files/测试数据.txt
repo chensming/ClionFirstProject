@@ -1,0 +1,6 @@
+31
+
+a b c d e f g h i j k l m n o p q r s t u v w x y z , . I M ?
+
+1 5 2 6 3 7 8 4 9 10   1 5 2 6 3 7 8 4 9 10  5 8 6 9 2 5 2 3 5 4 1
+
