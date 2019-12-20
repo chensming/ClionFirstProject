@@ -6,21 +6,7 @@
 
 #IncludeRegexTransform: 
 
-D:/ClionProject/FirstProject/DSModel/Tree/HuffmanTree.cpp
-utility
--
-vector
--
+D:/ClionProject/FirstProject/DSModel/LinearList/LinkedList.cpp
 iostream
--
-algorithm
--
-queue
--
-iomanip
--
-stack
--
-fstream
 -
 

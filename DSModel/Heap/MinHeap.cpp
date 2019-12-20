@@ -161,7 +161,7 @@ bool MinHeap<T>::IsEmpty() const
 template<class T>
 bool MinHeap<T>::IsFull() const
 {
-    return (currentSize == maxHeapSize) ? true : false;
+    return currentSize == maxHeapSize;
 }
 
 

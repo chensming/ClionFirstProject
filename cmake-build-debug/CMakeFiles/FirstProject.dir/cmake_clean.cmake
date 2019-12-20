@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/FirstProject.dir/DSModel/Heap/MinHeap.cpp.obj"
+  "CMakeFiles/FirstProject.dir/DSModel/LinearList/SeqList.cpp.obj"
   "FirstProject.exe"
   "FirstProject.exe.manifest"
   "FirstProject.pdb"

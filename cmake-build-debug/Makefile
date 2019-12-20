@@ -122,32 +122,32 @@ FirstProject/fast:
 	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/build
 .PHONY : FirstProject/fast
 
-DSModel/Heap/MinHeap.obj: DSModel/Heap/MinHeap.cpp.obj
+DSModel/LinearList/SeqList.obj: DSModel/LinearList/SeqList.cpp.obj
 
-.PHONY : DSModel/Heap/MinHeap.obj
+.PHONY : DSModel/LinearList/SeqList.obj
 
 # target to build an object file
-DSModel/Heap/MinHeap.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Heap/MinHeap.cpp.obj
-.PHONY : DSModel/Heap/MinHeap.cpp.obj
+DSModel/LinearList/SeqList.cpp.obj:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/LinearList/SeqList.cpp.obj
+.PHONY : DSModel/LinearList/SeqList.cpp.obj
 
-DSModel/Heap/MinHeap.i: DSModel/Heap/MinHeap.cpp.i
+DSModel/LinearList/SeqList.i: DSModel/LinearList/SeqList.cpp.i
 
-.PHONY : DSModel/Heap/MinHeap.i
+.PHONY : DSModel/LinearList/SeqList.i
 
 # target to preprocess a source file
-DSModel/Heap/MinHeap.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Heap/MinHeap.cpp.i
-.PHONY : DSModel/Heap/MinHeap.cpp.i
+DSModel/LinearList/SeqList.cpp.i:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/LinearList/SeqList.cpp.i
+.PHONY : DSModel/LinearList/SeqList.cpp.i
 
-DSModel/Heap/MinHeap.s: DSModel/Heap/MinHeap.cpp.s
+DSModel/LinearList/SeqList.s: DSModel/LinearList/SeqList.cpp.s
 
-.PHONY : DSModel/Heap/MinHeap.s
+.PHONY : DSModel/LinearList/SeqList.s
 
 # target to generate assembly for a file
-DSModel/Heap/MinHeap.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Heap/MinHeap.cpp.s
-.PHONY : DSModel/Heap/MinHeap.cpp.s
+DSModel/LinearList/SeqList.cpp.s:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/LinearList/SeqList.cpp.s
+.PHONY : DSModel/LinearList/SeqList.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... FirstProject
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... DSModel/Heap/MinHeap.obj
-	@echo ... DSModel/Heap/MinHeap.i
-	@echo ... DSModel/Heap/MinHeap.s
+	@echo ... DSModel/LinearList/SeqList.obj
+	@echo ... DSModel/LinearList/SeqList.i
+	@echo ... DSModel/LinearList/SeqList.s
 .PHONY : help
 
 

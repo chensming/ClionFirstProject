@@ -80,7 +80,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/ClionProject/FirstProject/DSModel/Heap/MinHeap.cpp">
+		<Unit filename="D:/ClionProject/FirstProject/DSModel/LinearList/SeqList.cpp">
 			<Option target="FirstProject"/>
 		</Unit>
 		<Unit filename="D:/ClionProject/FirstProject/CMakeLists.txt">
