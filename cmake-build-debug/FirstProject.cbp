@@ -80,7 +80,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/ClionProject/FirstProject/DSModel/Graph/MinSpanningTreeM.cpp">
+		<Unit filename="D:/ClionProject/FirstProject/DSModel/Graph/AOVMatrix.cpp">
 			<Option target="FirstProject"/>
 		</Unit>
 		<Unit filename="D:/ClionProject/FirstProject/CMakeLists.txt">

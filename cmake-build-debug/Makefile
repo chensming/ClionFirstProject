@@ -122,32 +122,32 @@ FirstProject/fast:
 	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/build
 .PHONY : FirstProject/fast
 
-DSModel/Graph/MinSpanningTreeM.obj: DSModel/Graph/MinSpanningTreeM.cpp.obj
+DSModel/Graph/AOVMatrix.obj: DSModel/Graph/AOVMatrix.cpp.obj
 
-.PHONY : DSModel/Graph/MinSpanningTreeM.obj
+.PHONY : DSModel/Graph/AOVMatrix.obj
 
 # target to build an object file
-DSModel/Graph/MinSpanningTreeM.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeM.cpp.obj
-.PHONY : DSModel/Graph/MinSpanningTreeM.cpp.obj
+DSModel/Graph/AOVMatrix.cpp.obj:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/AOVMatrix.cpp.obj
+.PHONY : DSModel/Graph/AOVMatrix.cpp.obj
 
-DSModel/Graph/MinSpanningTreeM.i: DSModel/Graph/MinSpanningTreeM.cpp.i
+DSModel/Graph/AOVMatrix.i: DSModel/Graph/AOVMatrix.cpp.i
 
-.PHONY : DSModel/Graph/MinSpanningTreeM.i
+.PHONY : DSModel/Graph/AOVMatrix.i
 
 # target to preprocess a source file
-DSModel/Graph/MinSpanningTreeM.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeM.cpp.i
-.PHONY : DSModel/Graph/MinSpanningTreeM.cpp.i
+DSModel/Graph/AOVMatrix.cpp.i:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/AOVMatrix.cpp.i
+.PHONY : DSModel/Graph/AOVMatrix.cpp.i
 
-DSModel/Graph/MinSpanningTreeM.s: DSModel/Graph/MinSpanningTreeM.cpp.s
+DSModel/Graph/AOVMatrix.s: DSModel/Graph/AOVMatrix.cpp.s
 
-.PHONY : DSModel/Graph/MinSpanningTreeM.s
+.PHONY : DSModel/Graph/AOVMatrix.s
 
 # target to generate assembly for a file
-DSModel/Graph/MinSpanningTreeM.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeM.cpp.s
-.PHONY : DSModel/Graph/MinSpanningTreeM.cpp.s
+DSModel/Graph/AOVMatrix.cpp.s:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/AOVMatrix.cpp.s
+.PHONY : DSModel/Graph/AOVMatrix.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... FirstProject
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... DSModel/Graph/MinSpanningTreeM.obj
-	@echo ... DSModel/Graph/MinSpanningTreeM.i
-	@echo ... DSModel/Graph/MinSpanningTreeM.s
+	@echo ... DSModel/Graph/AOVMatrix.obj
+	@echo ... DSModel/Graph/AOVMatrix.i
+	@echo ... DSModel/Graph/AOVMatrix.s
 .PHONY : help
 
 

@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeM.cpp.obj"
+  "CMakeFiles/FirstProject.dir/DSModel/Graph/AOVMatrix.cpp.obj"
   "FirstProject.exe"
   "FirstProject.exe.manifest"
   "FirstProject.pdb"

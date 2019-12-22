@@ -6,15 +6,9 @@
 
 #IncludeRegexTransform: 
 
-D:/ClionProject/FirstProject/DSModel/Graph/MinSpanningTreeM.cpp
+D:/ClionProject/FirstProject/DSModel/Graph/AOVMatrix.cpp
 iostream
 -
-queue
--
 iomanip
--
-vector
--
-algorithm
 -
 
