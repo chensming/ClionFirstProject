@@ -3,34 +3,39 @@
 //
 #include <iostream>
 #include <random>
-#include <ctime>
+#include <queue>
+#include "myClock.h"
+#include "MinHeap.h"
+
 const int MatchMax = 99999;
 
 using namespace std;
 
-class myClock {
-public:
-    void start() {
-        cout << "¿ªÊ¼¼ÆÊ±" << endl;
-        t1 = clock();
-    }
 
-    void end() {
-        t2 = clock();
-        cout << "¾­¹ıÊ±¼ä " << (double) (t2 - t1) / 1000 << "s" << endl;
-        cout << endl;
-    }
+//é”¦æ ‡èµ›æ’åºç”¨åˆ°,ä¸è¿‡æš‚æ—¶é”¦æ ‡èµ›æ’åºä»£ç æ²¡å†™æˆåŠŸ
+template<class T>
+struct MatchNode {
+    T data;
+    int id;
 
-private:
-    long t1;
-    long t2;
+    explicit MatchNode(T n = MatchMax, int id = -1) : data(n), id(id) {}
 };
 
-//½õ±êÈüÅÅĞòÓÃµ½
-struct MatchNode{
-    int data;
-    int id;
-    explicit MatchNode(int n = MatchMax, int id = -1):data(n),id(id){}
+//æ¡¶æ’åºè¦ç”¨åˆ°
+template<class T>
+struct NumNode {
+    T data;
+    NumNode *link;
+
+    NumNode() : link(nullptr) { data = T(); }
+};
+
+//æ¡¶æ’åºè¦ç”¨åˆ°
+template<class T>
+struct Bucket {
+    NumNode<T> *adj;
+
+    Bucket() : adj(nullptr) {}
 };
 
 
@@ -57,11 +62,23 @@ public:
 
     void QuickSort();
 
-    void ShellSort();
+    void ShellSort();//å¸Œå°”æ’åº
 
     void SelectSort();
 
-    void MatchSort();//½õ±êÈüÅÅĞò
+//    void MatchSort(); é”¦æ ‡èµ›æ’åº
+
+    void BucketSort(T minNum, T MaxNum);//æ¡¶æ’åº
+
+    void CountSort(T minNum, T MaxNum);//è®¡æ•°æ’åº
+
+    void HeapSort();//å †æ’åº
+
+    void MSDSort(int digits);//åŸºæ•°æ’åº
+
+    void MergeSort();//å½’å¹¶æ’åº
+
+    void MergeSort(int left, int right);
 
 
 private:
@@ -73,6 +90,8 @@ private:
     void swap(int i, int j);
 
     void QuickSort(int low, int high);
+
+    void Merge(int l, int m, int r);
 };
 
 template<class T>
@@ -84,7 +103,7 @@ LinearSort<T>::LinearSort() {
 
 template<class T>
 LinearSort<T>::LinearSort(T *a, int n) {
-    array = new T[n + 1]; //ÀË·ÑÒ»¸ö¿Õ¼äÓĞÓÃ
+    array = new T[n + 1]; //æµªè´¹ä¸€ä¸ªç©ºé—´æœ‰ç”¨
     for (int i = 0; i < n; i++)
         array[i] = a[i];
     currentSize = n;
@@ -92,7 +111,6 @@ LinearSort<T>::LinearSort(T *a, int n) {
 
 template<class T>
 LinearSort<T>::~LinearSort() {
-    if (array != nullptr)
         delete array;
 }
 
@@ -115,14 +133,14 @@ void LinearSort<T>::printArray() {
 }
 
 
-//ÉıĞò
+//å‡åº
 template<class T>
 void LinearSort<T>::BubbleSort() {
     if (!array)
         return;
     bool exchange;
     int i, j;
-    int count = 0;//Í³¼ÆÅÅĞòÌËÊı
+    int count = 0;//ç»Ÿè®¡æ’åºè¶Ÿæ•°
     for (i = 0; i < currentSize; i++) {
         exchange = false;
         for (j = 0; j < currentSize - 1; j++) {
@@ -135,7 +153,7 @@ void LinearSort<T>::BubbleSort() {
         if (!exchange)
             break;
     }
-    cout << "¾­¹ı " << count << "´ÎBubbleSortÅÅĞò»ñµÃÓĞĞòĞòÁĞ" << endl;
+    cout << "ç»è¿‡ " << count << "æ¬¡BubbleSortæ’åºè·å¾—æœ‰åºåºåˆ—" << endl;
 }
 
 template<class T>
@@ -146,7 +164,7 @@ void LinearSort<T>::BubbleSortBothWay() {
     int start[2] = {0, currentSize - 2};
     int end[2] = {currentSize - 1, -1};
     int move[2] = {1, -1};
-    int count = 0; // Í³¼ÆÅÅĞòµÄÌËÊı
+    int count = 0; // ç»Ÿè®¡æ’åºçš„è¶Ÿæ•°
     while (count < currentSize) {
         exchange = false;
         for (int i = start[count % 2]; i != end[count % 2]; i += move[count % 2]) {
@@ -168,7 +186,7 @@ void LinearSort<T>::BubbleSortBothWay() {
             break;
         count++;
     }
-    cout << "¾­¹ı " << count << " ´ÎË«ÏòBubbleSortÅÅĞò»ñµÃÓĞĞòĞòÁĞ" << endl;
+    cout << "ç»è¿‡ " << count << " æ¬¡åŒå‘BubbleSortæ’åºè·å¾—æœ‰åºåºåˆ—" << endl;
 }
 
 
@@ -177,13 +195,13 @@ void LinearSort<T>::InsertSort() {
     if (!array)
         return;
     int i, j;
-    //¶à¿ªÁËÒ»¸ö¿Õ¼ä£¬·ÅÔÚÁËarray[currentSize]
+    //å¤šå¼€äº†ä¸€ä¸ªç©ºé—´ï¼Œæ”¾åœ¨äº†array[currentSize]
     for (int i = 1; i < currentSize; i++) {
         array[currentSize] = array[i];
         j = i - 1;
         while (array[currentSize] < array[j] && j >= 0) {
-            //Èç¹ûarray[0]ÊÇ¶à¿ªµÄÀË·Ñ¿Õ¼äµÄ»°¿ÉÒÔ°ÑËü¿¼ÂÇÎªÉÚ±ø,
-            //ÕâÑù¾Í²»ÓÃÅĞ¶Ïj >= 0
+            //å¦‚æœarray[0]æ˜¯å¤šå¼€çš„æµªè´¹ç©ºé—´çš„è¯å¯ä»¥æŠŠå®ƒè€ƒè™‘ä¸ºå“¨å…µ,
+            //è¿™æ ·å°±ä¸ç”¨åˆ¤æ–­j >= 0
             array[j + 1] = array[j];
             j--;
         }
@@ -191,7 +209,7 @@ void LinearSort<T>::InsertSort() {
     }
 }
 
-/*ÓĞÉÚ±øµÄĞ´·¨
+/*æœ‰å“¨å…µçš„å†™æ³•
  * template<class T>
  *void LinearSort222<T>::InsertSort() {
  * int i,j;
@@ -220,10 +238,10 @@ void LinearSort<T>::BinaryInsertSort() {
             else
                 low = mid + 1;
         }
-        //ÓÉÕÛ°ë²éÕÒµ½µÄÕıÈ·²åÈëÎ»ÖÃÎªhigh+1»òÕßlow
+        //ç”±æŠ˜åŠæŸ¥æ‰¾åˆ°çš„æ­£ç¡®æ’å…¥ä½ç½®ä¸ºhigh+1æˆ–è€…low
         for (int j = i - 1; j >= high + 1; j--)
             array[j + 1] = array[j];
-        //ÔÚÕıÈ·Î»ÖÃ²åÈë¸´ÖÆ³öÀ´µÄ´ı²åÈëÔªËØ
+        //åœ¨æ­£ç¡®ä½ç½®æ’å…¥å¤åˆ¶å‡ºæ¥çš„å¾…æ’å…¥å…ƒç´ 
         array[high + 1] = temp;
     }
 }
@@ -258,10 +276,10 @@ void LinearSort<T>::swap(int i, int j) {
 template<class T>
 void LinearSort<T>::ShellSort() {
     int i, j, gap;
-    gap = currentSize/ 2;
+    gap = currentSize / 2;
     while (gap >= 1) {
         for (i = gap; i < currentSize; i++) {
-            array[currentSize] = array[i]; //array[currentSize]ÎªÀË·ÑµÄ¿Õ¼ä
+            array[currentSize] = array[i]; //array[currentSize]ä¸ºæµªè´¹çš„ç©ºé—´
             j = i - gap;
             while (array[currentSize] < array[j] && j >= 0) {
                 array[j + gap] = array[j];
@@ -280,22 +298,22 @@ int LinearSort<T>::QuickPass(int low, int high) {
     int down = low;
     int up = high;
     array[currentSize] = array[down];
-    //´ËÊ±array[down]¿Õ³öÀ´ÁË
+    //æ­¤æ—¶array[down]ç©ºå‡ºæ¥äº†
     while (down < up) {
         while (down < up && array[up] > array[currentSize])
-            up--;       //´ÓÓÒ±ßÕÒµ½µÚÒ»¸ö±È»ù×¼Öµarray[down]Ğ¡µÄ¾ÍÍ£ÏÂÀ´
+            up--;       //ä»å³è¾¹æ‰¾åˆ°ç¬¬ä¸€ä¸ªæ¯”åŸºå‡†å€¼array[down]å°çš„å°±åœä¸‹æ¥
         if (down < up)
             array[down++] = array[up];
-        //´ËÊ±array[up]¿Õ³öÀ´ÁË
+        //æ­¤æ—¶array[up]ç©ºå‡ºæ¥äº†
         while (down < up && array[down] <= array[currentSize])
             down++;
         if (down < up)
             array[up--] = array[down];
-        //´ËÊ±array[down]¿Õ³öÀ´ÁË
+        //æ­¤æ—¶array[down]ç©ºå‡ºæ¥äº†
     }
-    //´ËÊ±downÓëupÏàÓöÁË
+    //æ­¤æ—¶downä¸upç›¸é‡äº†
     array[down] = array[currentSize];
-    return down;//´ËÊ±returnµÄÊÇÒ»´Î²Ù×÷»ù×¼Öµ·ÅµÄÎ»ÖÃ
+    return down;//æ­¤æ—¶returnçš„æ˜¯ä¸€æ¬¡æ“ä½œåŸºå‡†å€¼æ”¾çš„ä½ç½®
 }
 
 template<class T>
@@ -303,7 +321,7 @@ void LinearSort<T>::SelectSort() {
     int i, j, pos;
     for (i = 0; i < currentSize; i++) {
         pos = i;
-        //Ç°i¸öµ¥ÔªÒÑ¾­ÓĞĞò
+        //å‰iä¸ªå•å…ƒå·²ç»æœ‰åº
         for (j = i + 1; j < currentSize; j++) {
             if (array[j] < array[pos])
                 pos = j;
@@ -314,8 +332,8 @@ void LinearSort<T>::SelectSort() {
     }
 }
 
-template<class T>
-void LinearSort<T>::MatchSort() {
+//template<class T>
+//void LinearSort<T>::MatchSort() {
 //    int nodeNum = 1;
 //    MatchNode *tree;
 //    while(nodeNum < currentSize){
@@ -342,7 +360,7 @@ void LinearSort<T>::MatchSort() {
 //    for(int i = 0; i < currentSize; i++)
 //    {
 //        array[i] = tree[0].data;
-//        int j = (i % 2 == 0) ? i - 1 : i + 1;//ÓÒº¢×Ó±àºÅÎªÅ¼Êı
+//        int j = (i % 2 == 0) ? i - 1 : i + 1;//å³å­©å­ç¼–å·ä¸ºå¶æ•°
 //        tree[(j - 1) / 2].data = tree[j].data;
 //        tree[(j - 1) / 2].id = tree[j].id;
 //        j = (j - 1) / 2;
@@ -351,42 +369,222 @@ void LinearSort<T>::MatchSort() {
 //            if(tree[j].data)
 //        }
 //    }
+//}
+
+//åŒ…æ‹¬minNum,ä½†ä¸åŒ…æ‹¬maxNum,èŒƒå›´å¤Ÿç”¨æ—¶å€™èŒƒå›´ç»™çš„è¶Šå°è¶Šçœç©ºé—´
+template<class T>
+void LinearSort<T>::BucketSort(T minNum, T maxNum) {
+    int bucketNum = maxNum - minNum;
+    auto *bucket = new Bucket<T>[bucketNum];
+    int i;
+    NumNode<T> *p = nullptr, *q = nullptr;
+    //æµªè´¹ä¸€ä¸ªç©ºé—´ä½¿ç®—æ³•ç»Ÿä¸€
+    for (i = 0; i < bucketNum; i++)
+        bucket[i].adj = new NumNode<T>;
+
+    int location = -1;
+    for (i = 0; i < currentSize; i++) {
+        location = array[i] - minNum;
+        p = bucket[location].adj;
+        q = new NumNode<T>;
+        q->data = array[i];
+        q->link = p->link;
+        p->link = q;
+    }
+
+    int count = 0;
+    for (i = 0; i < bucketNum; i++) {
+        p = bucket[i].adj->link;
+        while (p != nullptr) {
+            cout << p->data << " ";
+            array[count++] = p->data;
+            p = p->link;
+        }
+        if (count == currentSize)
+            break; //å·²ç»å­˜å®Œå…ƒç´ äº†
+    }
+
+    cout << endl;
+}
+
+//é€‚åˆé‡å¤æ•°æ®å¤šå¹¶ä¸”ä¸å¿…ä¿å­˜å…¶ä»–ä¿¡æ¯çš„æƒ…å†µ
+//åŒ…æ‹¬minNum,ä½†ä¸åŒ…æ‹¬maxNum,èŒƒå›´å¤Ÿç”¨æ—¶å€™èŒƒå›´ç»™çš„è¶Šå°è¶Šçœç©ºé—´
+template<class T>
+void LinearSort<T>::CountSort(T minNum, T MaxNum) {
+    int bucketNum = MaxNum - minNum;
+    T bucket[bucketNum];
+
+    int i, count = 0;
+    for (i = 0; i < bucketNum; i++)
+        bucket[i] = 0;
+    for (i = 0; i < currentSize; i++)
+        bucket[array[i] - minNum]++;
+    for (i = 0; i < bucketNum; i++) {
+        while (bucket[i] > 0) {
+            array[count] = i + minNum;
+            cout << array[count] << " ";
+            count++;
+            bucket[i]--;
+        }
+        if (count == currentSize)
+            break; //æ”¾å®Œæ•°äº†ï¼Œæ”¶å·¥
+    }
+    cout << endl;
+}
+
+template<class T>
+void LinearSort<T>::HeapSort() {
+    MinHeap<T> hp(array, currentSize);
+    for(int i = 0; i <currentSize; i++){
+        hp.RemoveMin(array[i]);
+    }
+}
+
+//digitä¸ºæœ€é«˜ä½ï¼Œexampleï¼š999 --> digit=3
+template<class T>
+void LinearSort<T>::MSDSort(int digits) {
+    queue<T> bucket[10];
+    //å½“ç„¶ä¹Ÿå¯ä»¥åˆå¹¶åˆ°ä¸Šé¢ï¼Œä¸è¿‡è¿™é‡Œä¸ºäº†ç›´è§‚
+    //å°±å•ç‹¬æ‹¿å‡ºæ¥äº†ï¼Œå–åä¸ºline
+    queue<T> line;
+    int weight, i;
+    T bucketNum, data;
+
+    for (i = 0; i < currentSize; i++) {
+        line.push(array[i]);
+    }
+
+    for (int times = 1; times <= digits; times++) {
+        //æ±‚æ¯”è¯¥ä½å¤§ä¸€ä½æ•°çš„æƒå€¼
+        weight = 1;
+        for (i = 1; i < times; i++)
+            weight = 10 * weight;
+
+        while (!line.empty()) {
+            data = line.front();
+            line.pop();
+            bucketNum = (data / weight) % 10;
+            bucket[bucketNum].push(data);
+        }
+        cout << "ç¬¬ " << times << "æ¬¡: ";
+        for (i = 0; i < 10; i++) {
+            while (!bucket[i].empty()) {
+                data = bucket[i].front();
+                cout << data << " ";
+                bucket[i].pop();
+                line.push(data);
+            }
+        }
+        cout << endl;
+    }
+
+    cout << "æœ€ç»ˆç»“æœ: " << endl;
+    i = 0;
+    while (!line.empty()) {
+        data = line.front();
+        line.pop();
+        cout << data << " ";
+        array[i++] = data;
+    }
+    cout << endl;
+}
+
+template<class T>
+void LinearSort<T>::MergeSort() {
+    MergeSort(0, currentSize - 1);
+}
+
+template<class T>
+void LinearSort<T>::MergeSort(int left, int right) {
+    if (left == right)
+        return;
+    int mid = (left + right) / 2;
+    MergeSort(left, mid);
+    MergeSort(mid + 1, right);
+    Merge(left, mid, right);
+}
+
+template<class T>
+void LinearSort<T>::Merge(int l, int m, int r) {
+    int n = r - l + 1, i = 0;
+    T* temp = new T[n];
+    int left = l;
+    int right = m + 1;
+    while(left <= m && right <= r){
+        if(array[left] <= array[right])
+            temp[i++] = array[left++];
+        else
+            temp[i++] = array[right++];
+    }
+    while(left <= m){
+        temp[i++] = array[left++];
+    }
+    while(right <= r){
+        temp[i++] = array[right++];
+    }
+    for(i = 0; i < n; i++)
+        array[l + i] = temp[i];
+    delete[] temp;
 }
 
 
 int main() {
     int test1[10] = {9, 8, 3, 7, 1, 6, 0, 5, 2, 4};
-    int test2[10] = {9, 1, 2, 3, 4, 5, 6, 7, 8, 0};
+    int test2[11] = {499, 158, 263, 348, 435, 575, 614, 758, 685, 10, 614};
+    int test4[11] = {9, 1, 2, 3, 4, 5, 6, 7, 8, 0, 5};
+    int test5[10] = {5, 3, 6, 7, 5, 3, 6, 8, 8, 3};
     int test3[10];
-    for (int i = 0; i < 10; i++)
+    srand(time(nullptr));
+    for (int i = 0; i < 15; i++)
         test3[i] = (int) (rand() % 1000);
 
+
     LinearSort<int> linear1;
-    linear1.changeArray(test1, 10);
-    linear1.BubbleSort();
+    linear1.changeArray(test3, 15);
+//    linear1.MergeSort();
+//    linear1.printArray();
+
+    linear1.HeapSort();
     linear1.printArray();
 
-//    cout << endl << "²åÈëÅÅĞò" << endl;
+
+//    linear1.changeArray(test2, 11);
+//    linear1.MSDSort(4);
+
+//    linear1.changeArray(test5, 10);
+//    linear1.CountSort(1, 12);
+//    linear1.printArray();
+
+
+//    linear1.changeArray(test4, 10);
+//    linear1.BucketSort(0,10);
+//    linear1.printArray();
+
+//    linear1.changeArray(test1, 8);
+//    linear1.BubbleSort();
+//    linear1.printArray();
+
+//    cout << endl << "æ’å…¥æ’åº" << endl;
 //    linear1.changeArray(test1, 10);
 //    linear1.InsertSort();
 //    linear1.printArray();
 
-//    cout << endl << "ÕÛ°ë²åÈëÅÅĞò" << endl;
+//    cout << endl << "æŠ˜åŠæ’å…¥æ’åº" << endl;
 //    linear1.changeArray(test1, 10);
 //    linear1.BinaryInsertSort();
 //    linear1.printArray();
 
-//    cout << endl << "¿ìËÙÅÅĞò" << endl;
+//    cout << endl << "å¿«é€Ÿæ’åº" << endl;
 //    linear1.changeArray(test1 ,10);
 //    linear1.QuickSort();
 //    linear1.printArray();
 
-//    cout << endl << "Ï£¶ûÅÅĞò" << endl;
+//    cout << endl << "å¸Œå°”æ’åº" << endl;
 ////    linear1.changeArray(test1 ,10);
 ////    linear1.ShellSort();
 ////    linear1.printArray();
 
-//    cout << endl << "Ñ¡ÔñÅÅĞò" << endl;
+//    cout << endl << "é€‰æ‹©æ’åº" << endl;
 //    linear1.changeArray(test1 ,10);
 //    linear1.SelectSort();
 //    linear1.printArray();

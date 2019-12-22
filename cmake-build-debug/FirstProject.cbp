@@ -80,7 +80,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/ClionProject/FirstProject/DSModel/Graph/AOVMatrix.cpp">
+		<Unit filename="D:/ClionProject/FirstProject/DSModel/SortClass/LinearSort.cpp">
+			<Option target="FirstProject"/>
+		</Unit>
+		<Unit filename="D:/ClionProject/FirstProject/DSModel/SortClass/MinHeap.h">
+			<Option target="FirstProject"/>
+		</Unit>
+		<Unit filename="D:/ClionProject/FirstProject/DSModel/SortClass/myClock.h">
 			<Option target="FirstProject"/>
 		</Unit>
 		<Unit filename="D:/ClionProject/FirstProject/CMakeLists.txt">

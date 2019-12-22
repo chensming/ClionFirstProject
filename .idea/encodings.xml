@@ -8,11 +8,16 @@
     <file url="file://$PROJECT_DIR$/DSModel/Graph/AOV.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/DSModel/Graph/AOVLinked.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/DSModel/Graph/AOVMatrix.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/DSModel/Graph/GraphBuildByMatrix.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/DSModel/Graph/GraphDest.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/DSModel/Graph/MinSpanningTreeD.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/DSModel/Graph/MinSpanningTreeM.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/DSModel/HashTable/HashTableOff.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/DSModel/HashTable/HashTableOn.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/DSModel/Linklist/LinkList.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/DSModel/Matrix/SpareMatrix.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/DSModel/Queue/SeqQueue.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/DSModel/SortClass/LinearSort.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/DSModel/Stack/LinkedStack.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/DSModel/Tree/HuffmanTree.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/DSModel/Tree/MinSpanningTree.cpp" charset="GBK" />

@@ -122,32 +122,32 @@ FirstProject/fast:
 	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/build
 .PHONY : FirstProject/fast
 
-DSModel/Graph/AOVMatrix.obj: DSModel/Graph/AOVMatrix.cpp.obj
+DSModel/SortClass/LinearSort.obj: DSModel/SortClass/LinearSort.cpp.obj
 
-.PHONY : DSModel/Graph/AOVMatrix.obj
+.PHONY : DSModel/SortClass/LinearSort.obj
 
 # target to build an object file
-DSModel/Graph/AOVMatrix.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/AOVMatrix.cpp.obj
-.PHONY : DSModel/Graph/AOVMatrix.cpp.obj
+DSModel/SortClass/LinearSort.cpp.obj:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/SortClass/LinearSort.cpp.obj
+.PHONY : DSModel/SortClass/LinearSort.cpp.obj
 
-DSModel/Graph/AOVMatrix.i: DSModel/Graph/AOVMatrix.cpp.i
+DSModel/SortClass/LinearSort.i: DSModel/SortClass/LinearSort.cpp.i
 
-.PHONY : DSModel/Graph/AOVMatrix.i
+.PHONY : DSModel/SortClass/LinearSort.i
 
 # target to preprocess a source file
-DSModel/Graph/AOVMatrix.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/AOVMatrix.cpp.i
-.PHONY : DSModel/Graph/AOVMatrix.cpp.i
+DSModel/SortClass/LinearSort.cpp.i:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/SortClass/LinearSort.cpp.i
+.PHONY : DSModel/SortClass/LinearSort.cpp.i
 
-DSModel/Graph/AOVMatrix.s: DSModel/Graph/AOVMatrix.cpp.s
+DSModel/SortClass/LinearSort.s: DSModel/SortClass/LinearSort.cpp.s
 
-.PHONY : DSModel/Graph/AOVMatrix.s
+.PHONY : DSModel/SortClass/LinearSort.s
 
 # target to generate assembly for a file
-DSModel/Graph/AOVMatrix.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/AOVMatrix.cpp.s
-.PHONY : DSModel/Graph/AOVMatrix.cpp.s
+DSModel/SortClass/LinearSort.cpp.s:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/SortClass/LinearSort.cpp.s
+.PHONY : DSModel/SortClass/LinearSort.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... FirstProject
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... DSModel/Graph/AOVMatrix.obj
-	@echo ... DSModel/Graph/AOVMatrix.i
-	@echo ... DSModel/Graph/AOVMatrix.s
+	@echo ... DSModel/SortClass/LinearSort.obj
+	@echo ... DSModel/SortClass/LinearSort.i
+	@echo ... DSModel/SortClass/LinearSort.s
 .PHONY : help
 
 

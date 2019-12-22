@@ -6,9 +6,29 @@
 
 #IncludeRegexTransform: 
 
-D:/ClionProject/FirstProject/DSModel/Graph/AOVMatrix.cpp
+D:/ClionProject/FirstProject/DSModel/SortClass/LinearSort.cpp
 iostream
 -
+random
+-
+queue
+-
+myClock.h
+D:/ClionProject/FirstProject/DSModel/SortClass/myClock.h
+MinHeap.h
+D:/ClionProject/FirstProject/DSModel/SortClass/MinHeap.h
+
+D:/ClionProject/FirstProject/DSModel/SortClass/MinHeap.h
 iomanip
+-
+iostream
+-
+queue
+-
+
+D:/ClionProject/FirstProject/DSModel/SortClass/myClock.h
+ctime
+-
+iostream
 -
 

@@ -4,19 +4,24 @@
 
 #include<iostream>
 #include<queue>
+#include <iomanip>
+
 using namespace std;
 
-
+const int maxWeight = 9999;
 const int DefaultSize = 30;
 
 template<class T, class E>
 struct Edge {
-    int dest;    //è¾¹çš„å¦ä¸€ä¸ªé¡¶ç‚¹ä½ç½®
-    E cost;			//è¾¹ä¸Šçš„æƒå€¼
-    Edge<T, E>* link;
+    int dest;    //±ßµÄÁíÒ»¸ö¶¥µãÎ»ÖÃ
+    E cost;            //±ßÉÏµÄÈ¨Öµ
+    Edge<T, E> *link;
+
     Edge() {}
-    Edge(int num, E weight) : dest(num),cost(weight),link(0){}
-    bool operator!= (Edge<T, E>& R)const {
+
+    Edge(int num, E weight) : dest(num), cost(weight), link(0) {}
+
+    bool operator!=(Edge<T, E> &R) const {
         return (dest != R.dest) ? true : false;
     }
 };
@@ -24,13 +29,14 @@ struct Edge {
 template<class T, class E>
 struct Vertex {
     T data;
-    Edge<T, E>* adj;
+    Edge<T, E> *adj;
 };
 
 template<class T, class E>
 class Graphlnk {
 public:
     Graphlnk(int sz = DefaultSize);
+
     ~Graphlnk();
 
     T getValue(int i) {
@@ -38,20 +44,27 @@ public:
     }
 
     E getWeight(int v1, int v2);
-    bool insertVertex(const T& vertex);
+
+    bool insertVertex(const T &vertex);
+
     bool removeVertex(int v);
+
     bool insertEdge(int v1, int v2, E weight);
+
     bool removeEdge(int v1, int v2);
 
     int getFirstNeighbor(int v);
+
     int getNextNeighbor(int v, int w);
 
     void CreateNodeTable();
-    void PrintDest(); //æŠŠé‚»æ¥è¡¨çš„æ ·å­è¾“å‡ºæ¥
 
+    void PrintDest(); //°ÑÁÚ½Ó±íµÄÑù×ÓÊä³öÀ´
+    void PrintMatrix(); //°ÑÁÚ½Ó¾ØÕóµÄÑù×ÓÊä³öÀ´
 
-    //éå†
+    //±éÀú
     void DFS();
+
     void BFS();
 
 
@@ -59,57 +72,46 @@ private:
     int numVertices;
     int maxVertices;
     int numEdges;
-    bool* visited; //ç”¨äºdfså’Œbfs
-    //ç»“ç‚¹è¡¨
-    Vertex<T, E>* NodeTable;
+    bool *visited; //ÓÃÓÚdfsºÍbfs
+    //½áµã±í
+    Vertex<T, E> *NodeTable;
 
 
     int getVertexPos(const T vertex) {
-        for (int i = 0; i < numVertices; i++)
-        {
+        for (int i = 0; i < numVertices; i++) {
             if (NodeTable[i].data == vertex)
                 return i;
         }
         return -1;
     }
+
     void DFS(int v);
 };
 
 
-
-
-
-
 template<class T, class E>
-Graphlnk<T, E>::Graphlnk(int sz)
-{
+Graphlnk<T, E>::Graphlnk(int sz) {
     maxVertices = sz;
     numVertices = 0;
     numEdges = 0;
+    visited = nullptr;
 
     NodeTable = new Vertex<T, E>[maxVertices];
-    if (NodeTable == 0)
-    {
-        cerr << "åˆ†å­˜åˆ†é…é”™è¯¯" << endl;
+    if (NodeTable == nullptr) {
+        cerr << "·Ö´æ·ÖÅä´íÎó" << endl;
         exit(1);
     }
-    for (int i = 0; i < maxVertices; i++)
-    {
-        NodeTable[i].adj = 0;
+    for (int i = 0; i < maxVertices; i++) {
+        NodeTable[i].adj = nullptr;
     }
 }
 
 
-
-
 template<class T, class E>
-Graphlnk<T, E>::~Graphlnk()
-{
-    for (int i = 0; i < numVertices; i++)
-    {
-        Edge<T, E>* p = NodeTable[i].adj;
-        while (p != 0)
-        {
+Graphlnk<T, E>::~Graphlnk() {
+    for (int i = 0; i < numVertices; i++) {
+        Edge<T, E> *p = NodeTable[i].adj;
+        while (p != nullptr) {
             NodeTable[i].adj = p->link;
             delete p;
             p = NodeTable[i].adj;
@@ -120,26 +122,21 @@ Graphlnk<T, E>::~Graphlnk()
 
 
 template<class T, class E>
-E Graphlnk<T, E>::getWeight(int v1, int v2)
-{
-    if (v1 >= 0 && v1 < numVertices && v2 >= 0 && v2 < numVertices)
-    {
-        Edge<T, E>* p = NodeTable[v1].adj;
-        while (p != 0 && p->dest != v2)
-        {
+E Graphlnk<T, E>::getWeight(int v1, int v2) {
+    if (v1 >= 0 && v1 < numVertices && v2 >= 0 && v2 < numVertices) {
+        Edge<T, E> *p = NodeTable[v1].adj;
+        while (p != 0 && p->dest != v2) {
             p = p->link;
         }
         if (p != 0)
-            return p->cost;  //æ‰¾åˆ°æ­¤è¾¹,è¿”å›æƒå€¼
+            return p->cost;  //ÕÒµ½´Ë±ß,·µ»ØÈ¨Öµ
     }
     return 0;
 }
 
 
-
 template<class T, class E>
-bool Graphlnk<T, E>::insertVertex(const T& vertex)
-{
+bool Graphlnk<T, E>::insertVertex(const T &vertex) {
     if (numVertices == maxVertices)
         return false;
     NodeTable[numVertices].data = vertex;
@@ -148,26 +145,23 @@ bool Graphlnk<T, E>::insertVertex(const T& vertex)
 }
 
 
-
 template<class T, class E>
-bool Graphlnk<T, E>::removeVertex(int v)
-{
+bool Graphlnk<T, E>::removeVertex(int v) {
     if (numVertices == 1 || v < 0 || v >= numVertices)
         return false;
-    Edge<T, E>* p, * s, * t;
+    Edge<T, E> *p, *s, *t;
     int i, k;
     while (NodeTable[v].adj != 0) {
         p = NodeTable[v].adj;
         k = p->dest;
-        s = NodeTable[k].adj;  //æ‰¾å¯¹ç§°å­˜æ”¾çš„è¾¹ç»“ç‚¹
-        t = 0;                 //t æ˜¯ sçš„å‰ä¸€ä¸ªæŒ‡é’ˆï¼Œè·Ÿç€sèµ°ï¼Œæ–¹ä¾¿åç»­åˆ é™¤ç»“ç‚¹
-        while (s != 0 && s->dest != v)
-        {
+        s = NodeTable[k].adj;  //ÕÒ¶Ô³Æ´æ·ÅµÄ±ß½áµã
+        t = nullptr;                 //t ÊÇ sµÄÇ°Ò»¸öÖ¸Õë£¬¸ú×Ås×ß£¬·½±ãºóĞøÉ¾³ı½áµã
+        while (s != 0 && s->dest != v) {
             t = s;
             s = s->link;
         }
-        if (s != 0) {
-            if (t == 0)
+        if (s != nullptr) {
+            if (t == nullptr)
                 NodeTable[k].adj = s->link;
             else
                 t->link = s->link;
@@ -179,45 +173,37 @@ bool Graphlnk<T, E>::removeVertex(int v)
         numEdges--;
     }
 
-    numVertices--;   //å›¾çš„é¡¶ç‚¹æ•°å‡1
-    NodeTable[v].data = NodeTable[numVertices].data;  //ç”¨æœ€åä¸€ä¸ªç»“ç‚¹æ¥å¡«è¡¥
+    numVertices--;   //Í¼µÄ¶¥µãÊı¼õ1
+    NodeTable[v].data = NodeTable[numVertices].data;  //ÓÃ×îºóÒ»¸ö½áµãÀ´Ìî²¹
     p = NodeTable[v].adj = NodeTable[numVertices].adj;
     while (p != 0) {
         s = NodeTable[p->dest].adj;
-        while (s != 0)
-        {
-            if (s->dest == numVertices)
-            {
+        while (s != nullptr) {
+            if (s->dest == numVertices) {
                 s->dest = v;
                 break;
-            }
-            else
+            } else
                 s = s->link;
         }
         ///////////////////////////////////////////////
-        //ä¹¦ä¸­æ²¡æœ‰è¿™å¥ä»£ç 
+        //ÊéÖĞÃ»ÓĞÕâ¾ä´úÂë
         p = p->link;
         //////////////////////////////////////////////
     }
 
-    //é—®é¢˜ï¼šæŠŠæœ€åä¸€ä¸ªç»“ç‚¹æ‹¿æ¥å¡«è¡¥ï¼Œé‚£ä¹ˆå…¶ä»–é¡¶ç‚¹æœ‰è¿æ¥åˆ°numVerticesçš„æ€ä¹ˆåŠ
+    //ÎÊÌâ£º°Ñ×îºóÒ»¸ö½áµãÄÃÀ´Ìî²¹£¬ÄÇÃ´ÆäËû¶¥µãÓĞÁ¬½Óµ½numVerticesµÄÔõÃ´°ì
     return true;
 }
 
 
-
-
-
 template<class T, class E>
-bool Graphlnk<T, E>::insertEdge(int v1, int v2, E weight)
-{
-    if (v1 >= 0 && v1 < numVertices && v2 >= 0 && v2 < numVertices)
-    {
-        Edge<T, E>* q, * p = NodeTable[v1].adj;
-        while (p != 0 && p->dest != v2)
+bool Graphlnk<T, E>::insertEdge(int v1, int v2, E weight) {
+    if (v1 >= 0 && v1 < numVertices && v2 >= 0 && v2 < numVertices) {
+        Edge<T, E> *q, *p = NodeTable[v1].adj;
+        while (p != nullptr && p->dest != v2)
             p = p->link;
-        if (p != 0)
-            return false; //å·²æœ‰æ­¤è¾¹,å¦åˆ™pæ­¤æ—¶å¿…ä¸º0
+        if (p != nullptr)
+            return false; //ÒÑÓĞ´Ë±ß,·ñÔòp´ËÊ±±ØÎª0
         p = new Edge<T, E>;
         q = new Edge<T, E>;
 
@@ -226,11 +212,11 @@ bool Graphlnk<T, E>::insertEdge(int v1, int v2, E weight)
         q->dest = v1;
         q->cost = weight;
 
-        //å¤´æ’å…¥v1çš„è¾¹é“¾è¡¨
+        //Í·²åÈëv1µÄ±ßÁ´±í
         p->link = NodeTable[v1].adj;
         NodeTable[v1].adj = p;
 
-        //å¤´æ’å…¥v2çš„è¾¹é“¾è¡¨
+        //Í·²åÈëv2µÄ±ßÁ´±í
         q->link = NodeTable[v2].adj;
         NodeTable[v2].adj = q;
 
@@ -242,41 +228,33 @@ bool Graphlnk<T, E>::insertEdge(int v1, int v2, E weight)
 }
 
 
-
-
 template<class T, class E>
-bool Graphlnk<T, E>::removeEdge(int v1, int v2)
-{
-    if (v1 >= 0 && v1 < numVertices && v2 >= 0 && v2 < numVertices)
-    {
-        Edge<T, E>* p = NodeTable[v1].adj;
-        Edge<T, E>* q = 0, *s = p; //qæ˜¯pä¸Šä¸€ä¸ªæŒ‡é’ˆ,æ–¹ä¾¿åˆ é™¤æ“ä½œ
+bool Graphlnk<T, E>::removeEdge(int v1, int v2) {
+    if (v1 >= 0 && v1 < numVertices && v2 >= 0 && v2 < numVertices) {
+        Edge<T, E> *p = NodeTable[v1].adj;
+        Edge<T, E> *q = nullptr, *s = p; //qÊÇpÉÏÒ»¸öÖ¸Õë,·½±ãÉ¾³ı²Ù×÷
 
-        while (p != 0 && p->dest != v2)
-        {
+        while (p != nullptr && p->dest != v2) {
             q = p;
             p = p->link;
         }
-        if (p != 0)
-        {
-            if (p == s)    //è¦åˆ çš„ç»“ç‚¹è¢«å¤´æŒ‡é’ˆæŒ‡ç€
+        if (p != nullptr) {
+            if (p == s)    //ÒªÉ¾µÄ½áµã±»Í·Ö¸ÕëÖ¸×Å
                 NodeTable[v1].adj = p->link;
-            else
+            else  //´ËÊ±²»ÊÇÍ·Ö¸ÕëÖ¸×ÅµÄ½áµãq±ØÈ»²»¿Õ
                 q->link = p->link;
             delete p;
-        }
-        else
-            return false; // p == 0ï¼Œæ²¡æ‰¾åˆ°è¿™æ¡è¾¹
+        } else
+            return false; // p == 0£¬Ã»ÕÒµ½ÕâÌõ±ß
 
-        p = NodeTable[v2].adj;  //v2å¯¹åº”è¾¹é“¾è¡¨ä¸­åˆ é™¤
-        q = 0;
+        p = NodeTable[v2].adj;  //v2¶ÔÓ¦±ßÁ´±íÖĞÉ¾³ı
+        q = nullptr;
         s = p;
-        while (p->dest != v1)
-        {
+        while (p->dest != v1) {
             q = p;
             p = p->link;
         }
-        if (p == s)   //è¦åˆ çš„ç»“ç‚¹è¢«å¤´æŒ‡é’ˆæŒ‡ç€
+        if (p == s)   //ÒªÉ¾µÄ½áµã±»Í·Ö¸ÕëÖ¸×Å
             NodeTable[v2].adj = p->link;
         else
             q->link = p->link;
@@ -287,77 +265,56 @@ bool Graphlnk<T, E>::removeEdge(int v1, int v2)
 }
 
 
-
-
-
-
-
 template<class T, class E>
-int Graphlnk<T, E>::getFirstNeighbor(int v)
-{
-    if (v >= 0 && v < numVertices)
-    {
-        Edge<T, E>* p = NodeTable[v].adj;
+int Graphlnk<T, E>::getFirstNeighbor(int v) {
+    if (v >= 0 && v < numVertices) {
+        Edge<T, E> *p = NodeTable[v].adj;
         if (p != 0)
-            return p->dest;//å­˜åœ¨ï¼Œè¿”å›ç¬¬ä¸€ä¸ªä¸´ç•Œç‚¹
+            return p->dest;//´æÔÚ£¬·µ»ØµÚÒ»¸öÁÙ½çµã
     }
     return -1;
 }
 
 
-
-
-
-
-
 template<class T, class E>
-int Graphlnk<T, E>::getNextNeighbor(int v, int w)
-{
-    if (v >= 0 && v < numVertices)
-    {
-        Edge<T, E>* p = NodeTable[v].adj;
+int Graphlnk<T, E>::getNextNeighbor(int v, int w) {
+    if (v >= 0 && v < numVertices) {
+        Edge<T, E> *p = NodeTable[v].adj;
         while (p != 0 && p->dest != w)
             p = p->link;
         if (p != 0 && p->link != 0)
             return p->link->dest;
     }
-    return -1;  //-1ä»£è¡¨ä¸å­˜åœ¨
+    return -1;  //-1´ú±í²»´æÔÚ
 }
 
 
-
-
-
-//å»ºç«‹é‚»æ¥è¡¨ç»“æ„
+//½¨Á¢ÁÚ½Ó±í½á¹¹
 template<class T, class E>
-void Graphlnk<T, E>::CreateNodeTable()
-{
+void Graphlnk<T, E>::CreateNodeTable() {
     int n, i, j, m;
-    Edge<T, E>* p;
+    Edge<T, E> *p;
 
-    cout << "è¯·è¾“å…¥è¦åˆ›å»ºçš„ç»“ç‚¹ä¸ªæ•°" << endl;
-    cin >> n; //ç»“ç‚¹ä¸ªæ•°
-    if (n > maxVertices)
-    {
-        cout << "è¶…è¿‡æœ€å¤§ç»“ç‚¹æ•°" << endl;
+    cout << "ÇëÊäÈëÒª´´½¨µÄ½áµã¸öÊı" << endl;
+    cin >> n; //½áµã¸öÊı
+    if (n > maxVertices) {
+        cout << "³¬¹ı×î´ó½áµãÊı" << endl;
         return;
     }
     numVertices = n;
-    for (i = 0; i < n; i++)
-    {
-        NodeTable[i].adj = 0;  //é¢„è®¾ä¸ºç©ºé“¾
-        cout << "è¯·è¾“å…¥ç¼–å·ä¸º " << i << "çš„ç»“ç‚¹çš„å€¼: ";
+    for (i = 0; i < n; i++) {
+        NodeTable[i].adj = 0;  //Ô¤ÉèÎª¿ÕÁ´
+        cout << "ÇëÊäÈë±àºÅÎª " << i << "µÄ½áµãµÄÖµ: ";
         cin >> NodeTable[i].data;
 
-        cout << "è¯·è¾“å…¥" << NodeTable[i].data << "çš„é‚»æ¥ç‚¹ä¸ªæ•°ï¼š";
+        cout << "ÇëÊäÈë" << NodeTable[i].data << "µÄÁÚ½Óµã¸öÊı£º";
         cin >> m;
-        cout << "è¯·è¾“å…¥å®ƒçš„ " << m << "ä¸ªé‚»æ¥ç‚¹(ç›¸é‚»é¡¶ç‚¹ç¼–å· æƒé‡)" << endl;
-        for (j = 0; j < m; j++)
-        {
+        cout << "ÇëÊäÈëËüµÄ " << m << "¸öÁÚ½Óµã(ÏàÁÚ¶¥µã±àºÅ È¨ÖØ)" << endl;
+        for (j = 0; j < m; j++) {
             p = new Edge<T, E>;
             cin >> p->dest;
             cin >> p->cost;
-            //å¤´æ’å…¥å»ºé“¾
+            //Í·²åÈë½¨Á´
             p->link = NodeTable[i].adj;
             NodeTable[i].adj = p;
         }
@@ -365,21 +322,12 @@ void Graphlnk<T, E>::CreateNodeTable()
 }
 
 
-
-
-
-
-
-
-
 template<class T, class E>
-void Graphlnk<T, E>::DFS(int v)
-{
+void Graphlnk<T, E>::DFS(int v) {
     visited[v] = true;
     cout << NodeTable[v].data << " ";
-    Edge<T, E>* p = NodeTable[v].adj;
-    while (p != 0)
-    {
+    Edge<T, E> *p = NodeTable[v].adj;
+    while (p != 0) {
         if (!visited[p->dest])
             DFS(p->dest);
         p = p->link;
@@ -387,48 +335,39 @@ void Graphlnk<T, E>::DFS(int v)
 }
 
 
-
-
 template<class T, class E>
-void Graphlnk<T, E>::DFS()
-{
+void Graphlnk<T, E>::DFS() {
     visited = new bool[numVertices];
     for (int i = 0; i < numVertices; i++)
         visited[i] = false;
     int v0;
-    cout << "è¯·è¾“å…¥æ·±åº¦ä¼˜å…ˆéå†çš„å‡ºå‘ç‚¹ç¼–å·ï¼š0è‡³ " << numVertices - 1 << endl;
+    cout << "ÇëÊäÈëÉî¶ÈÓÅÏÈ±éÀúµÄ³ö·¢µã±àºÅ£º0ÖÁ " << numVertices - 1 << endl;
     cin >> v0;
     DFS(v0);
     cout << endl << endl;
 }
 
 
-
-
 template<class T, class E>
-void Graphlnk<T, E>::BFS()
-{
+void Graphlnk<T, E>::BFS() {
     visited = new bool[numVertices];
     for (int i = 0; i < numVertices; i++)
         visited[i] = false;
     int v;
-    Edge<T, E>* p;
-    queue<int>Q;
-    cout << "è¯·è¾“å…¥å¹¿åº¦ä¼˜å…ˆéå†çš„å‡ºå‘ç‚¹ç¼–å·ï¼š0è‡³ " << numVertices - 1 << endl;
+    Edge<T, E> *p;
+    queue<int> Q;
+    cout << "ÇëÊäÈë¹ã¶ÈÓÅÏÈ±éÀúµÄ³ö·¢µã±àºÅ£º0ÖÁ " << numVertices - 1 << endl;
     cin >> v;
     Q.push(v);
 
-    while (!Q.empty())
-    {
+    while (!Q.empty()) {
         v = Q.front();
         Q.pop();
-        if (!visited[v])
-        {
+        if (!visited[v]) {
             visited[v] = true;
             cout << NodeTable[v].data << " ";
             p = NodeTable[v].adj;
-            while (p != 0)
-            {
+            while (p != 0) {
                 if (!visited[p->dest])
                     Q.push(p->dest);
                 p = p->link;
@@ -439,21 +378,14 @@ void Graphlnk<T, E>::BFS()
 }
 
 
-
-
-
-
 template<class T, class E>
-void Graphlnk<T, E>::PrintDest()
-{
-    Edge<T, E>* p;
-    for (int i = 0; i < numVertices; i++)
-    {
-        cout << "-----ä¸" << "ç¼–å·ä¸º " << i << " ,å€¼ä¸º ";
-        cout << NodeTable[i].data << " ç›¸è¿çš„ç‚¹ : é¡¶ç‚¹å€¼(ç¼–å·,æƒå€¼)" << endl;
+void Graphlnk<T, E>::PrintDest() {
+    Edge<T, E> *p;
+    for (int i = 0; i < numVertices; i++) {
+        cout << "-----Óë" << "±àºÅÎª " << i << " ,ÖµÎª ";
+        cout << NodeTable[i].data << " ÏàÁ¬µÄµã : ¶¥µãÖµ(±àºÅ,È¨Öµ)" << endl;
         p = NodeTable[i].adj;
-        while (p != 0)
-        {
+        while (p != 0) {
             cout << NodeTable[p->dest].data;
             cout << "( " << p->dest << ", " << p->cost << ")" << " ";
             p = p->link;
@@ -463,26 +395,48 @@ void Graphlnk<T, E>::PrintDest()
     cout << endl << endl;
 }
 
+template<class T, class E>
+void Graphlnk<T, E>::PrintMatrix() {
+    int i, j;
+    E matrix[numVertices][numVertices];
+
+    for (i = 0; i < numVertices; i++)
+        for (j = 0; j < numVertices; j++)
+            matrix[i][j] = (i == j) ? 0 : maxWeight;
 
 
+    Edge<T, E> *p;
+    for (i = 0; i < numVertices; i++) {
+        p = NodeTable[i].adj;
+        while (p != nullptr) {
+            matrix[i][p->dest] = p->cost;
+            p = p->link;
+        }
+    }
+
+    cout << "Í¼µÄÁÚ½Ó±íÓÃ¡°ÁÚ½Ó¾ØÕó¡±ĞÎÊ½±íÊ¾: " << endl;
+    cout << setw(8) << " ";
+    for (i = 0; i < numVertices; i++)
+        cout << setw(8) << NodeTable[i].data;
+    cout << endl;
+    for (i = 0; i < numVertices; i++) {
+        cout << setw(8) << NodeTable[i].data;
+        for (j = 0; j < numVertices; j++) {
+            cout << setw(8) << matrix[i][j];
+        }
+        cout << endl;
+    }
+    cout << endl << endl;
+}
 
 
-
-
-
-
-
-
-
-
-int main()
-{
+int main() {
     Graphlnk<char, double> a;
     //a.CreateNodeTable();
 
-    //æŠŠå›¾å…ˆå»ºç«‹èµ·æ¥
+    //°ÑÍ¼ÏÈ½¨Á¢ÆğÀ´
 
-    //å…ˆæ’å…¥é¡¶ç‚¹
+    //ÏÈ²åÈë¶¥µã
     a.insertVertex('a');
     a.insertVertex('b');
     a.insertVertex('c');
@@ -492,7 +446,7 @@ int main()
     a.insertVertex('g');
 
 
-    //æ’å…¥ä»–ä»¬ä¹‹é—´çš„è¾¹
+    //²åÈëËûÃÇÖ®¼äµÄ±ß
     a.insertEdge(0, 1, 3.1);
     a.insertEdge(0, 2, 2.6);
     a.insertEdge(0, 4, 2.7);
@@ -505,28 +459,28 @@ int main()
 
     a.PrintDest();
 
+//    a.PrintMatrix();
 
 
 
-    cout << "åˆ é™¤å¸¦ç‚¹eä¹‹å" << endl;
+    cout << "É¾³ı´øµãeÖ®ºó" << endl;
 
     a.removeVertex(4);
     a.PrintDest();
 
-    cout << endl << "åˆ é™¤è¾¹bfå..." << endl;
+    cout << endl << "É¾³ı±ßbfºó..." << endl;
     a.removeEdge(1, 5);
     a.PrintDest();
-
 
 
     a.BFS();
     a.DFS();
 /*
 	cout << endl << endl;
-	cout << "aå¹¿åº¦ä¼˜å…ˆéå†" << endl;
+	cout << "a¹ã¶ÈÓÅÏÈ±éÀú" << endl;
 	a.BFS();
 	cout << endl << endl;
-	cout << "aæ·±åº¦ä¼˜å…ˆéå†" << endl;
+	cout << "aÉî¶ÈÓÅÏÈ±éÀú" << endl;
 	a.DFS();
 */
     cout << endl;
