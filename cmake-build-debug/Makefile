@@ -122,32 +122,32 @@ FirstProject/fast:
 	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/build
 .PHONY : FirstProject/fast
 
-DSModel/SortClass/LinearSort.obj: DSModel/SortClass/LinearSort.cpp.obj
+STL/MinHeapByPriority.obj: STL/MinHeapByPriority.cpp.obj
 
-.PHONY : DSModel/SortClass/LinearSort.obj
+.PHONY : STL/MinHeapByPriority.obj
 
 # target to build an object file
-DSModel/SortClass/LinearSort.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/SortClass/LinearSort.cpp.obj
-.PHONY : DSModel/SortClass/LinearSort.cpp.obj
+STL/MinHeapByPriority.cpp.obj:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/STL/MinHeapByPriority.cpp.obj
+.PHONY : STL/MinHeapByPriority.cpp.obj
 
-DSModel/SortClass/LinearSort.i: DSModel/SortClass/LinearSort.cpp.i
+STL/MinHeapByPriority.i: STL/MinHeapByPriority.cpp.i
 
-.PHONY : DSModel/SortClass/LinearSort.i
+.PHONY : STL/MinHeapByPriority.i
 
 # target to preprocess a source file
-DSModel/SortClass/LinearSort.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/SortClass/LinearSort.cpp.i
-.PHONY : DSModel/SortClass/LinearSort.cpp.i
+STL/MinHeapByPriority.cpp.i:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/STL/MinHeapByPriority.cpp.i
+.PHONY : STL/MinHeapByPriority.cpp.i
 
-DSModel/SortClass/LinearSort.s: DSModel/SortClass/LinearSort.cpp.s
+STL/MinHeapByPriority.s: STL/MinHeapByPriority.cpp.s
 
-.PHONY : DSModel/SortClass/LinearSort.s
+.PHONY : STL/MinHeapByPriority.s
 
 # target to generate assembly for a file
-DSModel/SortClass/LinearSort.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/SortClass/LinearSort.cpp.s
-.PHONY : DSModel/SortClass/LinearSort.cpp.s
+STL/MinHeapByPriority.cpp.s:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/STL/MinHeapByPriority.cpp.s
+.PHONY : STL/MinHeapByPriority.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... FirstProject
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... DSModel/SortClass/LinearSort.obj
-	@echo ... DSModel/SortClass/LinearSort.i
-	@echo ... DSModel/SortClass/LinearSort.s
+	@echo ... STL/MinHeapByPriority.obj
+	@echo ... STL/MinHeapByPriority.i
+	@echo ... STL/MinHeapByPriority.s
 .PHONY : help
 
 

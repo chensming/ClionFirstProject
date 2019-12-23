@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/FirstProject.dir/DSModel/SortClass/LinearSort.cpp.obj"
+  "CMakeFiles/FirstProject.dir/STL/MinHeapByPriority.cpp.obj"
   "FirstProject.exe"
   "FirstProject.exe.manifest"
   "FirstProject.pdb"

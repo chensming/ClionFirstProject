@@ -11,7 +11,5 @@ set(CMAKE_CXX_STANDARD 14)
 #add_executable(FirstProject main.cpp)
 
 
-#add_executable(FirstProject DSModel/Heap/MinHeap.cpp)
-add_executable(FirstProject DSModel/SortClass/LinearSort.cpp
-        DSModel/SortClass/myClock.h DSModel/SortClass/MinHeap.h)
 
+add_executable(FirstProject STL/MinHeapByPriority.cpp)

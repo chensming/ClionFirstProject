@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "D:/ClionProject/FirstProject/DSModel/SortClass/LinearSort.cpp" "D:/ClionProject/FirstProject/cmake-build-debug/CMakeFiles/FirstProject.dir/DSModel/SortClass/LinearSort.cpp.obj"
+  "D:/ClionProject/FirstProject/STL/MinHeapByPriority.cpp" "D:/ClionProject/FirstProject/cmake-build-debug/CMakeFiles/FirstProject.dir/STL/MinHeapByPriority.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
