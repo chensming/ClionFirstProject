@@ -122,32 +122,32 @@ FirstProject/fast:
 	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/build
 .PHONY : FirstProject/fast
 
-STL/MinHeapByPriority.obj: STL/MinHeapByPriority.cpp.obj
+HuangYuLianTeacher/H3/ChangeBinToLinKedList.obj: HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.obj
 
-.PHONY : STL/MinHeapByPriority.obj
+.PHONY : HuangYuLianTeacher/H3/ChangeBinToLinKedList.obj
 
 # target to build an object file
-STL/MinHeapByPriority.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/STL/MinHeapByPriority.cpp.obj
-.PHONY : STL/MinHeapByPriority.cpp.obj
+HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.obj:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.obj
+.PHONY : HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.obj
 
-STL/MinHeapByPriority.i: STL/MinHeapByPriority.cpp.i
+HuangYuLianTeacher/H3/ChangeBinToLinKedList.i: HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.i
 
-.PHONY : STL/MinHeapByPriority.i
+.PHONY : HuangYuLianTeacher/H3/ChangeBinToLinKedList.i
 
 # target to preprocess a source file
-STL/MinHeapByPriority.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/STL/MinHeapByPriority.cpp.i
-.PHONY : STL/MinHeapByPriority.cpp.i
+HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.i:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.i
+.PHONY : HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.i
 
-STL/MinHeapByPriority.s: STL/MinHeapByPriority.cpp.s
+HuangYuLianTeacher/H3/ChangeBinToLinKedList.s: HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.s
 
-.PHONY : STL/MinHeapByPriority.s
+.PHONY : HuangYuLianTeacher/H3/ChangeBinToLinKedList.s
 
 # target to generate assembly for a file
-STL/MinHeapByPriority.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/STL/MinHeapByPriority.cpp.s
-.PHONY : STL/MinHeapByPriority.cpp.s
+HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.s:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.s
+.PHONY : HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... FirstProject
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... STL/MinHeapByPriority.obj
-	@echo ... STL/MinHeapByPriority.i
-	@echo ... STL/MinHeapByPriority.s
+	@echo ... HuangYuLianTeacher/H3/ChangeBinToLinKedList.obj
+	@echo ... HuangYuLianTeacher/H3/ChangeBinToLinKedList.i
+	@echo ... HuangYuLianTeacher/H3/ChangeBinToLinKedList.s
 .PHONY : help
 
 

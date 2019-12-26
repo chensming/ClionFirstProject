@@ -11,5 +11,4 @@ set(CMAKE_CXX_STANDARD 14)
 #add_executable(FirstProject main.cpp)
 
 
-
-add_executable(FirstProject STL/MinHeapByPriority.cpp)
+add_executable(FirstProject HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp)

@@ -4,17 +4,23 @@
 
 #include<iostream>
 #include<stack>
+#include <cassert>
+
 using namespace std;
 
 template<class T>
 struct BSTNode {
     T data;
-    BSTNode<T>* leftchild, * rightchild;
-    BSTNode() : leftchild(0), rightchild(0) { data = T(); }
-    BSTNode(T d) : data(d), leftchild(0), rightchild(0){}
-    ~BSTNode(){}
+    BSTNode<T> *leftChild, *rightChild;
+
+    BSTNode() : leftChild(nullptr), rightChild(nullptr) { data = T(); }
+
+    explicit BSTNode(T d) : data(d), leftChild(nullptr), rightChild(nullptr) {}
+
+    ~BSTNode() = default;
 
     void setData(T d) { data = d; }
+
     T getData() { return data; }
 };
 
@@ -22,279 +28,233 @@ struct BSTNode {
 template<class T>
 class BST {
 public:
-    BST() :root(0) { Refvalue = T(); }
-    BST(T value);
+    BST() : root(nullptr) { RefValue = T(); }
+
+    explicit BST(T value);
+
     ~BST() { makeEmpty(); }
 
-    //ç½®ç©ºï¼ˆåŒ…æ‹¬åˆ é™¤æ ¹èŠ‚ç‚¹ï¼‰
+    //ÖÃ¿Õ£¨°üÀ¨É¾³ı¸ù½Úµã£©
     void makeEmpty();
-    void makeEmpty(BSTNode<T>* ptr);
 
-    //é€’å½’ä¸éé€’å½’æœç´¢
-    bool Search(const T x) const;
-    BSTNode<T>* Search(const T x, BSTNode<T>* ptr)const;
-    BSTNode<T>* SearchNonRecursion(const T x) const;
+    void makeEmpty(BSTNode<T> *ptr);
 
-    //é€’å½’ä¸éé€’å½’æ’å…¥
-    bool Insert(const T x);
-    bool Insert(const T x, BSTNode<T>*& ptr);
-    bool InsertNonRecursion(const T x);
+    //µİ¹éÓë·Çµİ¹éËÑË÷
+    bool Search(T x) const;
 
-    //é€’å½’åˆ é™¤
-    bool Remove(const T x);
-    bool Remove(const T x, BSTNode<T>*& ptr);
-    //bool RemoveNonRecursion(const T x);éé€’å½’æ¯”è¾ƒéº»çƒ¦,è¿™é‡Œæ²¡å†™
+    BSTNode<T> *Search(T x, BSTNode<T> *ptr) const;
 
-    //å¹¿ä¹‰è¡¨è¾“å‡ºäºŒå‰æ ‘
+    BSTNode<T> *SearchNonRecursion(T x) const;
+
+    //µİ¹éÓë·Çµİ¹é²åÈë
+    bool Insert(T x);
+
+
+    bool InsertNonRecursion(T x);
+
+    //µİ¹éÉ¾³ı
+    bool Remove(T x);
+
+    bool Remove(T x, BSTNode<T> *&ptr);
+    //bool RemoveNonRecursion(const T x);·Çµİ¹é±È½ÏÂé·³,ÕâÀïÃ»Ğ´
+
+    //¹ãÒå±íÊä³ö¶ş²æÊ÷
     void PrintBinTree();
-    void PrintBinTree(BSTNode<T>* BT);
 
-    //ä¸­åºé€’å½’ä¸éé€’å½’éå†è¾“å‡º
+    void PrintBinTree(BSTNode<T> *BT);
+
+    //ÖĞĞòµİ¹éÓë·Çµİ¹é±éÀúÊä³ö
     void InOrder();
-    void InOrder(BSTNode<T>* subtree);
+
+    void InOrder(BSTNode<T> *subtree);
+
     void InOrderNonRecursion();
 
+    //µİ¹éËã·¨£¬ÕÒµ½·µ»Øtrue£¬ÕÒ²»µ½·µ»Øfalse²¢²åÈë
+    bool BuildIfNotFound(T x);
+
+    bool BuildIfNotFoundNonRecursion(T x);
+
 private:
-    BSTNode<T>* root;
-    T Refvalue; // è¾“å…¥çš„ç»ˆæ­¢æ ‡å¿—å€¼
+    BSTNode<T> *root;
+    T RefValue; // ÊäÈëµÄÖÕÖ¹±êÖ¾Öµ
+
+    bool Insert(T x, BSTNode<T> *&ptr);
+
+    bool BuildIfNotFound(T x, BSTNode<T> *&ptr);
 };
 
 
-
-
-
 template<class T>
-BST<T>::BST(T value)
-{
+BST<T>::BST(T value) {
     T x;
-    root = 0;
-    Refvalue = value;
-    cout << "è¯·åˆ†åˆ«è¾“å…¥äºŒå‰æœç´¢æ ‘çš„ç»“ç‚¹çš„å€¼" << endl;
+    root = nullptr;
+    RefValue = value;
+    cout << "Çë·Ö±ğÊäÈë¶ş²æËÑË÷Ê÷µÄ½áµãµÄÖµ" << endl;
     cin >> x;
-    while (x != Refvalue)
-    {
+    while (x != RefValue) {
         Insert(x, root);
         cin >> x;
     }
 }
 
 
-
-
-
-
 template<class T>
-void BST<T>::makeEmpty()
-{
+void BST<T>::makeEmpty() {
     makeEmpty(root);
-    root = 0;
+    root = nullptr;
 }
 
 
-
 template<class T>
-void BST<T>::makeEmpty(BSTNode<T>* ptr)
-{
-    if (ptr != 0)
-    {
-        makeEmpty(ptr->leftchild);
-        makeEmpty(ptr->rightchild);
+void BST<T>::makeEmpty(BSTNode<T> *ptr) {
+    if (ptr != nullptr) {
+        makeEmpty(ptr->leftChild);
+        makeEmpty(ptr->rightChild);
         delete ptr;
     }
 }
 
 
-
-
 template<class T>
-bool BST<T>::Search(const T x) const
-{
-    return (Search(x, root) != 0) ? true : false;
+bool BST<T>::Search(const T x) const {
+    return Search(x, root) != nullptr;
 }
 
 
-
 template<class T>
-BSTNode<T>* BST<T>::Search(const T x, BSTNode<T>* ptr) const
-{
-    if (ptr == 0)
-        return 0;
+BSTNode<T> *BST<T>::Search(const T x, BSTNode<T> *ptr) const {
+    if (ptr == nullptr)
+        return nullptr;
     else if (x < ptr->data)
-        return Search(x, ptr->leftchild);
+        return Search(x, ptr->leftChild);
     else if (x > ptr->data)
-        return Search(x, ptr->rightchild);
+        return Search(x, ptr->rightChild);
     else
         return ptr;
 }
 
 
-
-
 template<class T>
-BSTNode<T>* BST<T>::SearchNonRecursion(const T x) const
-{
-    BSTNode<T>* p = root;
-    while (p != 0)
-    {
+BSTNode<T> *BST<T>::SearchNonRecursion(const T x) const {
+    BSTNode<T> *p = root;
+    while (p != nullptr) {
         if (p->data == x)
             return p;
         else if (x < p->data)
-            p = p->leftchild;
+            p = p->leftChild;
         else
-            p = p->rightchild;
+            p = p->rightChild;
     }
-    return 0;
+    return nullptr;
 }
 
 
-
-
-
-
-
-
 template<class T>
-bool BST<T>::Insert(const T x)
-{
+bool BST<T>::Insert(const T x) {
     return Insert(x, root);
 }
 
 
-
-
-
 template<class T>
-bool BST<T>::Insert(const T x, BSTNode<T>*& ptr)
-{
-    if (ptr == 0)
-    {
+bool BST<T>::Insert(const T x, BSTNode<T> *&ptr) {
+    if (ptr == nullptr) {
         ptr = new BSTNode<T>(x);
-        if (ptr == 0)
-        {
-            cerr << "å†…å­˜åˆ†é…é”™è¯¯" << endl;
-            exit(1);
-        }
+        assert(ptr != nullptr);
         return true;
-    }
-    else if (x < ptr->data)
-        Insert(x, ptr->leftchild);
+    } else if (x < ptr->data)
+        return Insert(x, ptr->leftChild);
     else if (x > ptr->data)
-        Insert(x, ptr->rightchild);
-    else return false; //å·²åœ¨æ ‘ä¸­ï¼Œä¸éœ€è¦æ’å…¥
+        return Insert(x, ptr->rightChild);
+    else
+        return false; //ÒÑÔÚÊ÷ÖĞ£¬²»ĞèÒª²åÈë
 }
 
 
-
-
 template<class T>
-bool BST<T>::InsertNonRecursion(const T x)
-{
-    BSTNode<T>* BT, * f, * p;
+bool BST<T>::InsertNonRecursion(const T x) {
+    BSTNode<T> *BT, *f, *p;
     BT = root;
-    f = 0;
-    while (BT != 0)
-    {
+    f = nullptr;
+    while (BT != nullptr) {
         if (x == BT->data)
             return -1;
-        else if (x < BT->data)
-        {
+        else if (x < BT->data) {
             f = BT;
-            BT = BT->leftchild;
-        }
-        else
-        {
+            BT = BT->leftChild;
+        } else {
             f = BT;
-            BT = BT->rightchild;
+            BT = BT->rightChild;
         }
     }
-    p = new BSTNode<T>;
-    p->data = x;
-    p->leftchild = p->rightchild = 0;
-    if (f == 0)
+    p = new BSTNode<T>(x);
+    p->leftChild = p->rightChild = nullptr;
+    if (f == nullptr)
         root = p;
-    else if (x > p->data)
-        f->rightchild = p;
+    else if (x > f->data)
+        f->rightChild = p;
     else
-        f->rightchild = p;
+        f->leftChild = p;
     return true;
 }
 
 
 template<class T>
-bool BST<T>::Remove(const T x)
-{
+bool BST<T>::Remove(const T x) {
     return Remove(x, root);
 }
 
 
-
-
-
-
 template<class T>
-bool BST<T>::Remove(const T x, BSTNode<T>*& ptr)
-{
-    BSTNode<T>* temp;
-    if (ptr != 0)
-    {
+bool BST<T>::Remove(const T x, BSTNode<T> *&ptr) {
+    BSTNode<T> *temp;
+    if (ptr != nullptr) {
         if (x < ptr->data)
-            return Remove(x, ptr->leftchild);
+            return Remove(x, ptr->leftChild);
         else if (x > ptr->data)
-            return Remove(x, ptr->rightchild);
-            //ç­‰äºçš„æƒ…å†µ
-        else if (ptr->leftchild != 0 && ptr->rightchild != 0)
-        {
-            temp = ptr->rightchild;
-            while (temp->leftchild != 0)
-                temp = temp->leftchild;
+            return Remove(x, ptr->rightChild);
+            //µÈÓÚµÄÇé¿ö
+        else if (ptr->leftChild != nullptr && ptr->rightChild != nullptr) {
+            temp = ptr->rightChild;
+            while (temp->leftChild != nullptr)
+                temp = temp->leftChild;
             ptr->data = temp->data;
-            Remove(ptr->data, ptr->rightchild);
+            Remove(ptr->data, ptr->rightChild);
             return true;
-        }
-        else {
-            //å¼•ç”¨çš„ä½œç”¨åœ¨ä¸‹é¢ifå’Œelseè¯­å¥ä¸­ä½“ç°äº†
+        } else {
+            //ÒıÓÃµÄ×÷ÓÃÔÚÏÂÃæifºÍelseÓï¾äÖĞÌåÏÖÁË
             temp = ptr;
-            //è¿æ¥å³å­æ ‘æˆ–å°†å…¶ç½®ç©º
-            if (ptr->leftchild == 0)
-                ptr = ptr->rightchild;
+            //Á¬½ÓÓÒ×ÓÊ÷»ò½«ÆäÖÃ¿Õ
+            if (ptr->leftChild == nullptr)
+                ptr = ptr->rightChild;
             else
-                ptr = ptr->leftchild;
+                ptr = ptr->leftChild;
             delete temp;
             return true;
         }
     }
+    return false;
 }
 
 
-
-
-
-
-
 template<class T>
-void BST<T>::PrintBinTree()
-{
+void BST<T>::PrintBinTree() {
     PrintBinTree(root);
+    cout << endl;
 }
 
 
-
-
 template<class T>
-void BST<T>::PrintBinTree(BSTNode<T> * BT)
-{
-    if (BT != 0)
-    {
+void BST<T>::PrintBinTree(BSTNode<T> *BT) {
+    if (BT != nullptr) {
         cout << BT->data;
-        if (BT->leftchild != 0 || BT->rightchild != 0)
-        {
+        if (BT->leftChild != nullptr || BT->rightChild != nullptr) {
             cout << "(";
-            if (BT->leftchild != 0)
-                PrintBinTree(BT->leftchild);
-            if (BT->rightchild != 0)
-            {
+            if (BT->leftChild != nullptr)
+                PrintBinTree(BT->leftChild);
+            if (BT->rightChild != nullptr) {
                 cout << ",";
-                PrintBinTree(BT->rightchild);
+                PrintBinTree(BT->rightChild);
             }
             cout << ")";
         }
@@ -303,82 +263,95 @@ void BST<T>::PrintBinTree(BSTNode<T> * BT)
 }
 
 
-
-
-
 template<class T>
-void BST<T>::InOrder()
-{
+void BST<T>::InOrder() {
     InOrder(root);
     cout << endl;
 }
 
 
-
-
 template<class T>
-void BST<T>::InOrder(BSTNode<T>* subtree)
-{
-    if (subtree != 0)
-    {
-        InOrder(subtree->leftchild);
+void BST<T>::InOrder(BSTNode<T> *subtree) {
+    if (subtree != nullptr) {
+        InOrder(subtree->leftChild);
         cout << subtree->data << " ";
-        InOrder(subtree->rightchild);
+        InOrder(subtree->rightChild);
     }
 }
 
 
-
-
-
-
 template<class T>
-void BST<T>::InOrderNonRecursion()
-{
-    if (root == 0)
-    {
-        cout << "è¯¥æ ‘ä¸ºç©º" << endl;
+void BST<T>::InOrderNonRecursion() {
+    if (root == nullptr) {
+        cout << "¸ÃÊ÷Îª¿Õ" << endl;
         return;
     }
-    stack<BSTNode<T>*>S;
-    BSTNode<T>* p = root;
-    while (p != 0 || !S.empty())
-    {
-        while (p != 0)
-        {
+    stack<BSTNode<T> *> S;
+    BSTNode<T> *p = root;
+    while (p != nullptr || !S.empty()) {
+        while (p != nullptr) {
             S.push(p);
-            p = p->leftchild;
+            p = p->leftChild;
         }
-        if (!S.empty())
-        {
+        if (!S.empty()) {
             p = S.top();
             S.pop();
             cout << p->data << " ";
-            p = p->rightchild;
+            p = p->rightChild;
         }
     }
     cout << endl;
 }
 
+template<class T>
+bool BST<T>::BuildIfNotFound(T x) {
+    return BuildIfNotFound(x, root);
+}
+
+template<class T>
+bool BST<T>::BuildIfNotFound(T x, BSTNode<T> *&ptr) {
+    if (ptr == nullptr) {
+        ptr = new BSTNode<T>(x);
+        assert(ptr != nullptr);
+        cout << "ÕÒ²»µ½ " << x << ", È»ºóÒÑ½«Æä²åÈëµ½¶ş²æÊ÷..." << endl;
+        return false;
+    } else if (x == ptr->data) {
+        return true;
+    } else if (x < ptr->data) {
+        return BuildIfNotFound(x, ptr->leftChild);
+    } else {
+        return BuildIfNotFound(x, ptr->rightChild);
+    }
+}
+
+template<class T>
+bool BST<T>::BuildIfNotFoundNonRecursion(T x) {
+    BSTNode<T> *pre = nullptr, *ptr = root;
+    while (ptr != nullptr) {
+        if (x == ptr->data)
+            return true; //ÕÒµ½ÁË
+        else if (x < ptr->data) {
+            pre = ptr;
+            ptr = ptr->leftChild;
+        } else {
+            pre = ptr;
+            ptr = ptr->rightChild;
+        }
+    }
+    ptr = new BSTNode<T>(x);
+    if(pre == nullptr)
+        root = ptr;
+    else if(x < pre->data){
+        pre->leftChild = ptr;
+    } else {
+        pre->rightChild = ptr;
+    }
+    cout << "Ã»ÕÒµ½ " << x << " ,ÏÖÒÑ¾­½«Æä²åÈëµ½¶ş²æËÑË÷Ê÷ÖĞ" << endl;
+    return false;
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-int main()
-{
+int main() {
     BST<int> a;
 
     a.Insert(16);
@@ -393,57 +366,57 @@ int main()
     a.Insert(-7);
 
 
-
     cout << endl;
-    cout << "ä»¥å¹¿ä¹‰è¡¨è¾“å‡ºæ ‘ç»“ç‚¹çš„å€¼" << endl;
-    a.PrintBinTree();
-
-    cout << endl << endl;
-    if (a.Search(24))
-        cout << "æœç´¢ 24 æˆåŠŸ" << endl;
-    else
-        cout << "æœç´¢ 24 å¤±è´¥" << endl;
-    cout << endl;
-
-    if (a.SearchNonRecursion(36) != 0)
-        cout << "æœç´¢ 36 æˆåŠŸ" << endl;
-    else
-        cout << "æœç´¢ 36 å¤±è´¥" << endl;
-    cout << endl;
-
-    if (a.Remove(-6))
-        cout << "åˆ é™¤ -6 æˆåŠŸ" << endl;
-    else
-        cout << "åˆ é™¤ -6 å¤±è´¥" << endl;
-    cout << endl;
-
-    if (a.Search(-6))
-        cout << "æœç´¢ -6 æˆåŠŸ" << endl;
-    else
-        cout << "æœç´¢ -6 å¤±è´¥" << endl;
-    cout << endl;
-
-
-    cout << endl;
-    cout << "ä»¥å¹¿ä¹‰è¡¨è¾“å‡ºæ ‘ç»“ç‚¹çš„å€¼" << endl;
+    cout << "ÒÔ¹ãÒå±íÊä³öÊ÷½áµãµÄÖµ" << endl;
     a.PrintBinTree();
 
 
     a.InsertNonRecursion(100);
+    cout << endl;
+    cout << "ÒÔ¹ãÒå±íÊä³öÊ÷½áµãµÄÖµ" << endl;
+    a.PrintBinTree();
     a.InsertNonRecursion(30);
+    cout << endl;
+    cout << "ÒÔ¹ãÒå±íÊä³öÊ÷½áµãµÄÖµ" << endl;
+    a.PrintBinTree();
     a.InsertNonRecursion(20);
     cout << endl;
-    cout << "ä»¥å¹¿ä¹‰è¡¨è¾“å‡ºæ ‘ç»“ç‚¹çš„å€¼" << endl;
+    cout << "ÒÔ¹ãÒå±íÊä³öÊ÷½áµãµÄÖµ" << endl;
     a.PrintBinTree();
 
-    cout << "ä¸­åºéå†" << endl;
+    a.InsertNonRecursion(19);
+    cout << endl;
+    cout << "ÒÔ¹ãÒå±íÊä³öÊ÷½áµãµÄÖµ" << endl;
+    a.PrintBinTree();
+
+    a.InsertNonRecursion(9);
+    cout << endl;
+    cout << "ÒÔ¹ãÒå±íÊä³öÊ÷½áµãµÄÖµ" << endl;
+    a.PrintBinTree();
+
+    cout << endl;
+    int x = 37;
+    if (a.BuildIfNotFoundNonRecursion(x))
+        cout << "ÕÒµ½ " << x << " ÁË" << endl;
+    cout << endl;
+    cout << "ÒÔ¹ãÒå±íÊä³öÊ÷½áµãµÄÖµ" << endl;
+    a.PrintBinTree();
+
+    x = 21;
+    if (a.BuildIfNotFoundNonRecursion(x))
+        cout << "ÕÒµ½ " << x << " ÁË" << endl;
+    cout << endl;
+    cout << "ÒÔ¹ãÒå±íÊä³öÊ÷½áµãµÄÖµ" << endl;
+    a.PrintBinTree();
+
+    cout << "ÖĞĞò±éÀú" << endl;
     a.InOrder();
 
-    cout << "éé€’å½’ä¸­åºéå†" << endl;
+    cout << "·Çµİ¹éÖĞĞò±éÀú" << endl;
     a.InOrderNonRecursion();
 
     cout << endl;
-    system("pause");
+//    system("pause");
 }
 
 

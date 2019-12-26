@@ -4,6 +4,7 @@
 #include <iostream>
 #include <random>
 #include <queue>
+#include <stack>
 #include "myClock.h"
 #include "MinHeap.h"
 
@@ -62,6 +63,8 @@ public:
 
     void QuickSort();
 
+    void QuiSortNonRecursion();
+
     void ShellSort();//希尔排序
 
     void SelectSort();
@@ -79,6 +82,10 @@ public:
     void MergeSort();//归并排序
 
     void MergeSort(int left, int right);
+
+    void QuickSortByStackNonRecursion();
+
+    void QuickSortByQueueNonRecursion();
 
 
 private:
@@ -111,7 +118,7 @@ LinearSort<T>::LinearSort(T *a, int n) {
 
 template<class T>
 LinearSort<T>::~LinearSort() {
-        delete array;
+    delete array;
 }
 
 
@@ -253,17 +260,79 @@ void LinearSort<T>::QuickSort() {
 }
 
 template<class T>
+int LinearSort<T>::QuickPass(int low, int high) {
+    int down = low;
+    int up = high;
+    array[currentSize] = array[down];
+    //此时array[down]空出来了
+    while (down < up) {
+        while (down < up && array[up] > array[currentSize])
+            up--;       //从右边找到第一个比基准值array[down]小的就停下来
+        if (down < up)
+            array[down++] = array[up];
+        //此时array[up]空出来了
+        while (down < up && array[down] <= array[currentSize])
+            down++;
+        if (down < up)
+            array[up--] = array[down];
+        //此时array[down]空出来了
+    }
+    //此时down与up相遇了
+    array[down] = array[currentSize];
+    return down;//此时return的是一次操作基准值放的位置
+}
+
+template<class T>
 void LinearSort<T>::QuickSort(int low, int high) {
+    //这里判断只是为了排除没有数组的情况
+    //实际上写快排算法不用的
     if (!array)
         return;
-    int mid;
     if (low < high) {
-        mid = QuickPass(low, high);
+        int mid = QuickPass(low, high);
         QuickSort(low, mid - 1);
         QuickSort(mid + 1, high);
     }
 }
 
+
+template<class T>
+void LinearSort<T>::QuiSortNonRecursion() {
+    //这里判断只是为了排除没有数组的情况
+    //实际上写快排算法不用的
+    if (!array)
+        return;
+    stack<int> st;
+    int low = 0, high = currentSize - 1;
+    if (low < high) {
+        int mid = QuickPass(low, high);
+        if (mid - 1 > low) {
+            st.push(mid - 1);
+            st.push(low);//逆序存放弹出来就会顺序啦
+        }
+        if (mid + 1 < high) {
+            st.push(high);
+            st.push(mid + 1);
+        }
+
+        while (!st.empty()) {
+            // p < ... < q
+            int p = st.top();
+            st.pop();
+            int q = st.top();
+            st.pop();
+            mid = QuickPass(p, q);
+            if (mid - 1 > p) {
+                st.push(mid - 1);
+                st.push(p);
+            }
+            if (mid + 1 < high) {
+                st.push(high);
+                st.push(mid + 1);
+            }
+        }
+    }
+}
 
 template<class T>
 void LinearSort<T>::swap(int i, int j) {
@@ -293,28 +362,6 @@ void LinearSort<T>::ShellSort() {
     }
 }
 
-template<class T>
-int LinearSort<T>::QuickPass(int low, int high) {
-    int down = low;
-    int up = high;
-    array[currentSize] = array[down];
-    //此时array[down]空出来了
-    while (down < up) {
-        while (down < up && array[up] > array[currentSize])
-            up--;       //从右边找到第一个比基准值array[down]小的就停下来
-        if (down < up)
-            array[down++] = array[up];
-        //此时array[up]空出来了
-        while (down < up && array[down] <= array[currentSize])
-            down++;
-        if (down < up)
-            array[up--] = array[down];
-        //此时array[down]空出来了
-    }
-    //此时down与up相遇了
-    array[down] = array[currentSize];
-    return down;//此时return的是一次操作基准值放的位置
-}
 
 template<class T>
 void LinearSort<T>::SelectSort() {
@@ -435,7 +482,7 @@ void LinearSort<T>::CountSort(T minNum, T MaxNum) {
 template<class T>
 void LinearSort<T>::HeapSort() {
     MinHeap<T> hp(array, currentSize);
-    for(int i = 0; i <currentSize; i++){
+    for (int i = 0; i < currentSize; i++) {
         hp.RemoveMin(array[i]);
     }
 }
@@ -507,33 +554,98 @@ void LinearSort<T>::MergeSort(int left, int right) {
 template<class T>
 void LinearSort<T>::Merge(int l, int m, int r) {
     int n = r - l + 1, i = 0;
-    T* temp = new T[n];
+    T *temp = new T[n];
     int left = l;
     int right = m + 1;
-    while(left <= m && right <= r){
-        if(array[left] <= array[right])
+    while (left <= m && right <= r) {
+        if (array[left] <= array[right])
             temp[i++] = array[left++];
         else
             temp[i++] = array[right++];
     }
-    while(left <= m){
+    while (left <= m) {
         temp[i++] = array[left++];
     }
-    while(right <= r){
+    while (right <= r) {
         temp[i++] = array[right++];
     }
-    for(i = 0; i < n; i++)
+    for (i = 0; i < n; i++)
         array[l + i] = temp[i];
     delete[] temp;
 }
 
+struct quNode {
+    int low;
+    int high;
+};
+
+template<class T>
+void LinearSort<T>::QuickSortByQueueNonRecursion() {
+    int mid; //mid为一趟快速排序后，基准记录所在位置指示器
+
+    quNode xNode, yNode;
+    queue<quNode> qu;
+
+    xNode.low = 0;
+    xNode.high = currentSize - 1;
+    qu.push(xNode);
+
+    while (!qu.empty()) {
+        xNode = qu.front();
+        qu.pop();
+        mid = QuickPass(xNode.low, xNode.high);
+        if (xNode.low < mid - 1) { //当左侧序列大于1则排序
+            yNode.low = xNode.low;
+            yNode.high = mid - 1;
+            qu.push(yNode);
+        }
+        if (xNode.high > mid + 1) {//当右侧序列大于1则排序
+            yNode.low = mid + 1;
+            yNode.high = xNode.high;
+            qu.push(yNode);
+        }
+    }
+}
+
+struct stNode {
+    int low;
+    int high;
+};
+
+template<class T>
+void LinearSort<T>::QuickSortByStackNonRecursion() {
+    int mid;
+
+    stNode xNode, yNode;
+    stack<stNode> st;
+
+    xNode.low = 0;
+    xNode.high = currentSize - 1;
+    st.push(xNode);
+    while(!st.empty()){
+        xNode = st.top();
+        st.pop();
+        mid = QuickPass(xNode.low, xNode.high);
+        if(xNode.low < mid - 1){ //当左侧序列大于1则排序
+            yNode.low = xNode.low;
+            yNode.high = mid - 1;
+            st.push(yNode);
+        }
+        if(xNode.high > mid + 1){//当右侧序列大于1则排序
+            yNode.low = mid + 1;
+            yNode.high = xNode.high;
+            st.push(yNode);
+        }
+    }
+}
+
 
 int main() {
-    int test1[10] = {9, 8, 3, 7, 1, 6, 0, 5, 2, 4};
+//    int test1[10] = {9, 8, 3, 7, 1, 6, 0, 5, 2, 4};
     int test2[11] = {499, 158, 263, 348, 435, 575, 614, 758, 685, 10, 614};
-    int test4[11] = {9, 1, 2, 3, 4, 5, 6, 7, 8, 0, 5};
-    int test5[10] = {5, 3, 6, 7, 5, 3, 6, 8, 8, 3};
-    int test3[10];
+//    int test4[11] = {9, 1, 2, 3, 4, 5, 6, 7, 8, 0, 5};
+//    int test5[10] = {5, 3, 6, 7, 5, 3, 6, 8, 8, 3};
+    int test3[15];
     srand(time(nullptr));
     for (int i = 0; i < 15; i++)
         test3[i] = (int) (rand() % 1000);
@@ -544,7 +656,7 @@ int main() {
 //    linear1.MergeSort();
 //    linear1.printArray();
 
-    linear1.HeapSort();
+    linear1.QuickSortByStackNonRecursion();
     linear1.printArray();
 
 

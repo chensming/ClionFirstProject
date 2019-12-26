@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/FirstProject.dir/STL/MinHeapByPriority.cpp.obj"
+  "CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.obj"
   "FirstProject.exe"
   "FirstProject.exe.manifest"
   "FirstProject.pdb"
