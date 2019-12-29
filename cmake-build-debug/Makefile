@@ -122,32 +122,32 @@ FirstProject/fast:
 	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/build
 .PHONY : FirstProject/fast
 
-HuangYuLianTeacher/H3/ChangeBinToLinKedList.obj: HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.obj
+HuangYuLianTeacher/H4/SeqFullBinaryTree.obj: HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.obj
 
-.PHONY : HuangYuLianTeacher/H3/ChangeBinToLinKedList.obj
+.PHONY : HuangYuLianTeacher/H4/SeqFullBinaryTree.obj
 
 # target to build an object file
-HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.obj
-.PHONY : HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.obj
+HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.obj:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.obj
+.PHONY : HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.obj
 
-HuangYuLianTeacher/H3/ChangeBinToLinKedList.i: HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.i
+HuangYuLianTeacher/H4/SeqFullBinaryTree.i: HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.i
 
-.PHONY : HuangYuLianTeacher/H3/ChangeBinToLinKedList.i
+.PHONY : HuangYuLianTeacher/H4/SeqFullBinaryTree.i
 
 # target to preprocess a source file
-HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.i
-.PHONY : HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.i
+HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.i:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.i
+.PHONY : HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.i
 
-HuangYuLianTeacher/H3/ChangeBinToLinKedList.s: HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.s
+HuangYuLianTeacher/H4/SeqFullBinaryTree.s: HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.s
 
-.PHONY : HuangYuLianTeacher/H3/ChangeBinToLinKedList.s
+.PHONY : HuangYuLianTeacher/H4/SeqFullBinaryTree.s
 
 # target to generate assembly for a file
-HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.s
-.PHONY : HuangYuLianTeacher/H3/ChangeBinToLinKedList.cpp.s
+HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.s:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.s
+.PHONY : HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... FirstProject
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... HuangYuLianTeacher/H3/ChangeBinToLinKedList.obj
-	@echo ... HuangYuLianTeacher/H3/ChangeBinToLinKedList.i
-	@echo ... HuangYuLianTeacher/H3/ChangeBinToLinKedList.s
+	@echo ... HuangYuLianTeacher/H4/SeqFullBinaryTree.obj
+	@echo ... HuangYuLianTeacher/H4/SeqFullBinaryTree.i
+	@echo ... HuangYuLianTeacher/H4/SeqFullBinaryTree.s
 .PHONY : help
 
 

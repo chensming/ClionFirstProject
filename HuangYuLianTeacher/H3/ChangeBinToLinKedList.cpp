@@ -11,7 +11,8 @@ template<class T>
 struct linkNode {
     T data;
     linkNode<T> *link;
-    explicit linkNode(T x) : data(x), link(nullptr){}
+
+    explicit linkNode(T x) : data(x), link(nullptr) {}
 };
 
 
@@ -160,17 +161,17 @@ template<class T>
 linkNode<T> *BinaryTree<T>::SpanLeavesLinkedList() {
     if (root == nullptr)
         return nullptr;
-    stack<BinTreeNode<T>*> st;
-    BinTreeNode<T>* p = root;
-    linkNode<T>* head = nullptr, *q = nullptr, *newNode;
+    stack<BinTreeNode<T> *> st;
+    BinTreeNode<T> *p = root;
+    linkNode<T> *head = nullptr, *q = nullptr, *newNode;
     //该链表浪费一个表头空间让算法变得统一
     head = new linkNode<T>(RefValue);
     q = head;
-    do{
-        while(p != nullptr){
+    do {
+        while (p != nullptr) {
             st.push(p);
             //////////////////////////////////////
-            if(p->child[0] == nullptr && p->child[1] == nullptr){
+            if (p->child[0] == nullptr && p->child[1] == nullptr) {
                 newNode = new linkNode<T>(p->data);
                 q->link = newNode;
                 q = q->link;
@@ -178,13 +179,27 @@ linkNode<T> *BinaryTree<T>::SpanLeavesLinkedList() {
             //////////////////////////////////////
             p = p->child[0];
         }
-        if(!st.empty()){
+        if (!st.empty()) {
             p = st.top();
             st.pop();
             p = p->child[1];
         }
-    }while(p != nullptr || !st.empty());
+    } while (p != nullptr || !st.empty());
     return head;
+}
+
+
+template<class T>
+void display(linkNode<T>* head) {
+    if(head == nullptr){
+        cout << "the linkedList is null " << endl;
+        return;
+    }
+    linkNode<T>* p = head->link;
+    while(p != nullptr){
+        cout << p->data << " ";
+        p = p->link;
+    }
 }
 
 
@@ -199,4 +214,7 @@ int main() {
     cout << endl;
     cout << "InOrder: " << endl;
     b1.InOrderNonRecursion();
+    cout << endl;
+    auto *link1 = b1.SpanLeavesLinkedList();
+    display(link1);
 }
