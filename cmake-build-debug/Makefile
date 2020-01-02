@@ -122,32 +122,32 @@ FirstProject/fast:
 	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/build
 .PHONY : FirstProject/fast
 
-HuangYuLianTeacher/H4/SeqFullBinaryTree.obj: HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.obj
+HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.obj: HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.obj
 
-.PHONY : HuangYuLianTeacher/H4/SeqFullBinaryTree.obj
+.PHONY : HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.obj
 
 # target to build an object file
-HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.obj
-.PHONY : HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.obj
+HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.obj:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.obj
+.PHONY : HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.obj
 
-HuangYuLianTeacher/H4/SeqFullBinaryTree.i: HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.i
+HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.i: HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.i
 
-.PHONY : HuangYuLianTeacher/H4/SeqFullBinaryTree.i
+.PHONY : HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.i
 
 # target to preprocess a source file
-HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.i
-.PHONY : HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.i
+HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.i:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.i
+.PHONY : HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.i
 
-HuangYuLianTeacher/H4/SeqFullBinaryTree.s: HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.s
+HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.s: HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.s
 
-.PHONY : HuangYuLianTeacher/H4/SeqFullBinaryTree.s
+.PHONY : HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.s
 
 # target to generate assembly for a file
-HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.s
-.PHONY : HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.s
+HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.s:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.s
+.PHONY : HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... FirstProject
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... HuangYuLianTeacher/H4/SeqFullBinaryTree.obj
-	@echo ... HuangYuLianTeacher/H4/SeqFullBinaryTree.i
-	@echo ... HuangYuLianTeacher/H4/SeqFullBinaryTree.s
+	@echo ... HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.obj
+	@echo ... HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.i
+	@echo ... HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.s
 .PHONY : help
 
 

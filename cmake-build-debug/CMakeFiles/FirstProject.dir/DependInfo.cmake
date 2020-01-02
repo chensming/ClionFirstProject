@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "D:/ClionProject/FirstProject/HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp" "D:/ClionProject/FirstProject/cmake-build-debug/CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp.obj"
+  "D:/ClionProject/FirstProject/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp" "D:/ClionProject/FirstProject/cmake-build-debug/CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

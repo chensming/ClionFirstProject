@@ -6,13 +6,11 @@
 
 #IncludeRegexTransform: 
 
-D:/ClionProject/FirstProject/HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp
+D:/ClionProject/FirstProject/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp
 iostream
 -
-stack
--
-queue
--
 cassert
+-
+stack
 -
 
