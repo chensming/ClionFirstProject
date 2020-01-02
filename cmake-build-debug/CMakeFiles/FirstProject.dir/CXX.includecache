@@ -6,10 +6,12 @@
 
 #IncludeRegexTransform: 
 
-D:/ClionProject/FirstProject/HuangYuLianTeacher/H3/FindParent.cpp
+D:/ClionProject/FirstProject/HuangYuLianTeacher/H4/SeqFullBinaryTree.cpp
 iostream
 -
 stack
+-
+queue
 -
 cassert
 -

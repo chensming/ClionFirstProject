@@ -162,7 +162,7 @@ void BinaryTree<T>::Orders(int d, void (*visit)(BinTreeNode<T> *p)) {
                 if (d == 2)
                     visit(t);
                 /////////////////////////////////
-                t = nullptr;
+                t = nullptr; //没有这个则后序排序不会停止
             } else {
                 ///////////中序遍历//////////////
                 if (d == 1)
