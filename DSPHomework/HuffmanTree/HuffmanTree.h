@@ -128,7 +128,7 @@ HuffmanTree::HuffmanTree(const float w[], const char ch[], int n) {
     //已经包括这个情况了
     root = nullptr;
     vector<HuffmanNode> hp;
-    HuffmanNode *parent = nullptr, *first, *second, *work;
+    HuffmanNode *parent = nullptr, *first, *second,work;
     HuffmanNode tempFirst, tempSecond;
     charactor = new char[n];
     //存可编码的字符
@@ -139,13 +139,12 @@ HuffmanTree::HuffmanTree(const float w[], const char ch[], int n) {
 
 
     for (int i = 0; i < n; i++) {
-        work = new HuffmanNode;
-        work->data = w[i];
-        work->ch = ch[i];
-        work->leftchild = nullptr;
-        work->rightchild = nullptr;
-        work->parent = nullptr;
-        hp.push_back(*work);
+        work.data = w[i];
+        work.ch = ch[i];
+        work.leftchild = nullptr;
+        work.rightchild = nullptr;
+        work.parent = nullptr;
+        hp.push_back(work);
         //make_heap(hp.begin(), hp.end(), cmp);
         //sort_heap(hp.begin(), hp.end(), cmp);
     }

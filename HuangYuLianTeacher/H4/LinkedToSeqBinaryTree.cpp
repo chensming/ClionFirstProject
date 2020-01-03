@@ -14,15 +14,6 @@ enum orderType {
 
 
 template<class T>
-struct linkNode {
-    T data;
-    linkNode<T> *link;
-
-    explicit linkNode(T x) : data(x), link(nullptr) {}
-};
-
-
-template<class T>
 struct BinTreeNode {
     T data;
     BinTreeNode<T> *child[2];
@@ -46,11 +37,11 @@ public:
 
     void create(T *a, int arraySize, T endValue);
 
-    void destroy(BinTreeNode<T> * t);
+    void destroy(BinTreeNode<T> *t);
 
     void ThreeOrder(orderType order);
 
-    void ChangeToSeq(T* a, int& size);
+    void ChangeToSeq(T *&a, int &size);
 
     int SizeNonRecursionByPreOrder();
 
@@ -72,7 +63,7 @@ BinaryTree<T>::~BinaryTree() {
 
 template<class T>
 void BinaryTree<T>::destroy(BinTreeNode<T> *t) {
-    if(t != nullptr){
+    if (t != nullptr) {
         destroy(t->child[0]);
         destroy(t->child[1]);
         delete t;
@@ -146,49 +137,70 @@ void BinaryTree<T>::ThreeOrder(orderType order) {
 
 //a为传入的指针，size为返回的数组的大小
 template<class T>
-void BinaryTree<T>::ChangeToSeq(T *a, int& size) {
+void BinaryTree<T>::ChangeToSeq(T *&a, int &size) {
     size = SizeNonRecursionByPreOrder();
     a = new T[size];
-    stack<BinTreeNode<T>*> st;
-    BinTreeNode<T>* p = root;
-    while(p != nullptr || !st.empty()){
-        while(p != nullptr){
+    for (int i = 0; i < size; i++)
+        a[i] = RefValue;
+    stack<BinTreeNode<T> *> st;
+    stack<int> stSeq;
+    BinTreeNode<T> *p = root;
+    int v = 0;
+    while (p != nullptr || !st.empty()) {
+        while (p != nullptr) {
+            st.push(p);
+            stSeq.push(v);
+            a[v] = p->data;
             p = p->child[0];
-            //....
+            v = 2 * v + 1;
         }
-        //....
+        if (!st.empty()) {
+            p = st.top();
+            st.pop();
+            v = stSeq.top();
+            stSeq.pop();
+            p = p->child[1];
+            v = v * 2 + 2;
+        }
     }
+    for (int i = 0; i < size; i++)
+        cout << a[i] << endl;
 }
 
 template<class T>
 int BinaryTree<T>::SizeNonRecursionByPreOrder() {
-    if (root == 0)
+    if (root == nullptr)
         return 0;
-    stack<BinTreeNode<T>*> S;
-    BinTreeNode<T>* p = root;
+    stack<BinTreeNode<T> *> S;
+    BinTreeNode<T> *p = root;
     int size = 0;  //结点计数器
-    do
-    {
-        while (p != 0)
-        {
+    do {
+        while (p != nullptr) {
             S.push(p);
             size++;
             p = p->child[0];
         }
-        if (!S.empty())
-        {
+        if (!S.empty()) {
             p = S.top();
             S.pop();
             p = p->child[1];
         }
-    } while (p != 0 || !S.empty());
+    } while (p != nullptr || !S.empty());
     return size;
 }
 
 
-int main(){
-    char test[11] = {'a', 'b', 'd', '#', '#', '#', 'c', 'e', '#', '#', '#'};
-    BinaryTree<char> b1(test, 11, '#');
+int main() {
+    char test[23] = {'a' ,'b', 'd', 'h', '#', '#', 'i', '#', '#',
+                   'e', 'j', '#', '#', 'k', '#', '#', 'c', 'f',
+                   '#', '#', 'g', '#', '#'};
+    BinaryTree<char> b1(test, 23, '#');
 
     b1.ThreeOrder(preOrder);
+
+    char *a = nullptr;
+    int aSize = 0;
+    b1.ChangeToSeq(a, aSize);
+//    for (int i = 0; i < aSize; i++)
+//        cout << a[i] << endl;
 }

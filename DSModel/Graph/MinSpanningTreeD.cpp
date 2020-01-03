@@ -427,7 +427,7 @@ void GraphLinked<T, E>::KruskalMinTree() {
         visited[i] = false;
     }
 
-    MSTEdgeNode<T, E> *p, leastNode;
+    MSTEdgeNode<T, E> p, leastNode;
     vector<MSTEdgeNode<T, E>> hp;
     UFsets fsets(numVertices);
 
@@ -437,13 +437,11 @@ void GraphLinked<T, E>::KruskalMinTree() {
         edgePtr = NodeTable[i].adj;
         while (edgePtr != nullptr) {
             if (!visited[edgePtr->dest]) {
-
+                p.tail = i;
+                p.head = edgePtr->dest;
+                p.cost = edgePtr->cost;
+                hp.push_back(p);
             }
-            p = new MSTEdgeNode<T, E>;
-            p->tail = i;
-            p->head = edgePtr->dest;
-            p->cost = edgePtr->cost;
-            hp.push_back(*p);
             edgePtr = edgePtr->link;
         }
     }
@@ -478,7 +476,7 @@ void GraphLinked<T, E>::PrimMinTree() {
     if (mst != nullptr)
         delete mst;
     mst = new MSTEdgeNode<T, E>[numVertices];
-    MSTEdgeNode<T, E> *p, leastNode;
+    MSTEdgeNode<T, E> p, leastNode;
     vector<MSTEdgeNode<T, E>> hp;
     UFsets fsets(numVertices);
     if (visited != nullptr)
@@ -504,12 +502,10 @@ void GraphLinked<T, E>::PrimMinTree() {
         edgePtr = NodeTable[u].adj;
         while (edgePtr != nullptr) {
             if (!visited[edgePtr->dest]) {
-                p = new MSTEdgeNode<T, E>;
-                p->tail = u;
-                p->head = edgePtr->dest;
-                p->cost = edgePtr->cost;
-
-                hp.push_back(*p);
+                p.tail = u;
+                p.head = edgePtr->dest;
+                p.cost = edgePtr->cost;
+                hp.push_back(p);
             }
             edgePtr = edgePtr->link;
         }
@@ -637,11 +633,11 @@ int main() {
 
     a.PrintDest();
 
-//    cout << endl << "kruskal: " << endl;
-//    a.KruskalMinTree();
+    cout << endl << "kruskal: " << endl;
+    a.KruskalMinTree();
 
-//    cout << endl << "prim: " << endl;
-//    a.PrimMinTree();
+    cout << endl << "prim: " << endl;
+    a.PrimMinTree();
 
     a.Dijkstra();
 

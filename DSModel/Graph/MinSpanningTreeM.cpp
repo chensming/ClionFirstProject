@@ -307,7 +307,7 @@ void Graphmtx<T, E>::KruskalMinTree() {
     mst = new MSTEdgeNode<T, E>[numVertices];
 
 
-    MSTEdgeNode<T, E>* p, leastNode;
+    MSTEdgeNode<T, E> p, leastNode;
     vector<MSTEdgeNode<T, E>> hp;
     UFsets ufset(numVertices);
 
@@ -317,11 +317,10 @@ void Graphmtx<T, E>::KruskalMinTree() {
     for (int u = 0; u < numVertices; u++)
         for (int v = u + 1; v < numVertices; v++)  //无向图邻接矩阵对称
             if (Edge[u][v] < maxWeight) {
-                p = new MSTEdgeNode<T, E>;
-                p->tail = u;
-                p->head = v;
-                p->cost = Edge[u][v];
-                hp.push_back(*p);
+                p.tail = u;
+                p.head = v;
+                p.cost = Edge[u][v];
+                hp.push_back(p);
             }
     make_heap(hp.begin(), hp.end(), cmp<T, E>);
     sort_heap(hp.begin(), hp.end(), cmp<T, E>);
@@ -353,7 +352,7 @@ void Graphmtx<T, E>::PrimMinTree() {
         delete mst;
     mst = new MSTEdgeNode<T, E>[numVertices];
 
-    MSTEdgeNode<T, E>* p, leastNode;
+    MSTEdgeNode<T, E> p, leastNode;
     vector<MSTEdgeNode<T, E>> hp;
     UFsets ufset(numVertices);
     bool visited[numVertices];
@@ -375,12 +374,11 @@ void Graphmtx<T, E>::PrimMinTree() {
     while (count < numVertices) {
         for (int v = 0; v < numVertices; v++) {
             if ((visited[v] == false) && Edge[u][v] < maxWeight) {
-                p = new MSTEdgeNode<T, E>;
-                p->tail = u;
-                p->head = v;
-                p->cost = Edge[u][v];
+                p.tail = u;
+                p.head = v;
+                p.cost = Edge[u][v];
 
-                hp.push_back(*p);
+                hp.push_back(p);
                 make_heap(hp.begin(), hp.end(), cmp<T, E>);
                 sort_heap(hp.begin(), hp.end(), cmp<T, E>);
             }

@@ -20,13 +20,13 @@ struct HuffmanNode {
     float data;
     char ch;
     string code;
-    HuffmanNode *leftchild, *rightchild, *parent;
+    HuffmanNode *leftChild, *rightChild, *parent;
 
-    HuffmanNode() : data(-1), ch('$'), code(""), leftchild(nullptr), rightchild(nullptr), parent(nullptr) {}
+    HuffmanNode() : data(-1), ch('$'), code(""), leftChild(nullptr), rightChild(nullptr), parent(nullptr) {}
 
     //HuffmanNode(const HuffmanNode& h);
     HuffmanNode(float elem, HuffmanNode *left = nullptr, HuffmanNode *right = nullptr, HuffmanNode *pr = nullptr) :
-            data(elem), leftchild(left), rightchild(right), parent(pr) {}
+            data(elem), leftChild(left), rightChild(right), parent(pr) {}
 
     bool operator<=(HuffmanNode &R) { return data <= R.data; }
 
@@ -37,8 +37,8 @@ struct HuffmanNode {
 HuffmanNode::HuffmanNode(const HuffmanNode& h)
 {
 	data = h.data;
-	leftchild = h.leftchild;
-	rightchild = h.rightchild;
+	leftChild = h.leftChild;
+	rightChild = h.rightChild;
 	//其实parent这个写不写无所谓，因为如果parent！=null，
 	//就证明已经和其他节点合成一个父节点了,不会被放到堆里面
 	parent = h.parent;
@@ -127,7 +127,7 @@ HuffmanTree::HuffmanTree(const float w[], const char ch[], int n) {
     //已经包括这个情况了
     root = nullptr;
     vector<HuffmanNode> hp;
-    HuffmanNode *parent = nullptr, *first, *second, *work;
+    HuffmanNode *parent = nullptr, *first, *second, work;
     HuffmanNode tempFirst, tempSecond;
     charactor = new char[n];
     //存可编码的字符
@@ -138,13 +138,12 @@ HuffmanTree::HuffmanTree(const float w[], const char ch[], int n) {
 
 
     for (int i = 0; i < n; i++) {
-        work = new HuffmanNode;
-        work->data = w[i];
-        work->ch = ch[i];
-        work->leftchild = nullptr;
-        work->rightchild = nullptr;
-        work->parent = nullptr;
-        hp.push_back(*work);
+        work.data = w[i];
+        work.ch = ch[i];
+        work.leftChild = nullptr;
+        work.rightChild = nullptr;
+        work.parent = nullptr;
+        hp.push_back(work);
         //make_heap(hp.begin(), hp.end(), cmp);
         //sort_heap(hp.begin(), hp.end(), cmp);
     }
@@ -159,8 +158,8 @@ HuffmanTree::HuffmanTree(const float w[], const char ch[], int n) {
         first = new HuffmanNode();
         first->data = tempFirst.data;
         first->ch = tempFirst.ch;
-        first->leftchild = tempFirst.leftchild;
-        first->rightchild = tempFirst.rightchild;
+        first->leftChild = tempFirst.leftChild;
+        first->rightChild = tempFirst.rightChild;
         first->parent = tempFirst.parent;
         hp.erase(hp.begin());
 
@@ -172,8 +171,8 @@ HuffmanTree::HuffmanTree(const float w[], const char ch[], int n) {
         second = new HuffmanNode();
         second->data = tempSecond.data;
         second->ch = tempSecond.ch;
-        second->leftchild = tempSecond.leftchild;
-        second->rightchild = tempSecond.rightchild;
+        second->leftChild = tempSecond.leftChild;
+        second->rightChild = tempSecond.rightChild;
         second->parent = tempSecond.parent;
         hp.erase(hp.begin());
 
@@ -221,8 +220,8 @@ void HuffmanTree::buildHuffmanTree(const float w[], const char ch[], int n) {
         work = new HuffmanNode;
         work->data = w[i];
         work->ch = ch[i];
-        work->leftchild = nullptr;
-        work->rightchild = nullptr;
+        work->leftChild = nullptr;
+        work->rightChild = nullptr;
         work->parent = nullptr;
         hp.push_back(*work);
         //make_heap(hp.begin(), hp.end(), cmp);
@@ -239,8 +238,8 @@ void HuffmanTree::buildHuffmanTree(const float w[], const char ch[], int n) {
         first = new HuffmanNode();
         first->data = tempFirst.data;
         first->ch = tempFirst.ch;
-        first->leftchild = tempFirst.leftchild;
-        first->rightchild = tempFirst.rightchild;
+        first->leftChild = tempFirst.leftChild;
+        first->rightChild = tempFirst.rightChild;
         first->parent = tempFirst.parent;
         hp.erase(hp.begin());
 
@@ -252,8 +251,8 @@ void HuffmanTree::buildHuffmanTree(const float w[], const char ch[], int n) {
         second = new HuffmanNode();
         second->data = tempSecond.data;
         second->ch = tempSecond.ch;
-        second->leftchild = tempSecond.leftchild;
-        second->rightchild = tempSecond.rightchild;
+        second->leftChild = tempSecond.leftChild;
+        second->rightChild = tempSecond.rightChild;
         second->parent = tempSecond.parent;
         hp.erase(hp.begin());
 
@@ -277,8 +276,8 @@ void HuffmanTree::buildHuffmanTree(const float w[], const char ch[], int n) {
 
 void HuffmanTree::deleteTree(HuffmanNode *t) {
     if (t != nullptr) {
-        deleteTree(t->leftchild);
-        deleteTree(t->rightchild);
+        deleteTree(t->leftChild);
+        deleteTree(t->rightChild);
         delete t;
     }
     root = nullptr;
@@ -287,8 +286,8 @@ void HuffmanTree::deleteTree(HuffmanNode *t) {
 
 void HuffmanTree::mergeTree(HuffmanNode *h1, HuffmanNode *h2, HuffmanNode *&parent) {
     parent = new HuffmanNode;
-    parent->leftchild = h2;//让数据靠右边
-    parent->rightchild = h1;
+    parent->leftChild = h2;//让数据靠右边
+    parent->rightChild = h1;
     parent->data = h1->data + h2->data;
     h1->parent = h2->parent = parent;
 }
@@ -323,10 +322,10 @@ void HuffmanTree::LevelOrder() {
             cout << setw(4) << p->data << "__" << setw(3) << p->ch;
             if (IsEven && i != width - 1)
                 cout << " , ";
-            if (p->leftchild != 0)
-                Q.push(p->leftchild);
-            if (p->rightchild != 0)
-                Q.push(p->rightchild);
+            if (p->leftChild != 0)
+                Q.push(p->leftChild);
+            if (p->rightChild != 0)
+                Q.push(p->rightChild);
         }
         cout << endl;
     }
@@ -343,12 +342,12 @@ void HuffmanTree::PrintGeneralizedList() {
 void HuffmanTree::PrintGeneralizedList(HuffmanNode *BT) {
     if (BT != nullptr) {
         cout << BT->data << "  " << BT->ch;
-        if (BT->leftchild != 0 || BT->rightchild != 0) {
+        if (BT->leftChild != 0 || BT->rightChild != 0) {
             cout << "(";
-            PrintGeneralizedList(BT->leftchild);
-            if (BT->rightchild != 0) {
+            PrintGeneralizedList(BT->leftChild);
+            if (BT->rightChild != 0) {
                 cout << ",";
-                PrintGeneralizedList(BT->rightchild);
+                PrintGeneralizedList(BT->rightChild);
             }
             cout << ")";
         }
@@ -367,8 +366,8 @@ void HuffmanTree::setCode() {
 void HuffmanTree::setCode(string s, HuffmanNode *ptr) {
     if (ptr != nullptr) {
         ptr->code = s;
-        setCode(s + "0", ptr->leftchild);
-        setCode(s + "1", ptr->rightchild);
+        setCode(s + "0", ptr->leftChild);
+        setCode(s + "1", ptr->rightChild);
     }
 }
 
@@ -382,18 +381,18 @@ void HuffmanTree::getCode() {
     do {
         while (p != nullptr) {
             S.push(p);
-            if (p->leftchild == nullptr && p->rightchild == nullptr) {
+            if (p->leftChild == nullptr && p->rightChild == nullptr) {
                 map[p->ch] = p->code;
                 charactor[charactorSize] = p->ch;
                 charactorSize++;
                 cout << p->ch << ":" << p->code << " ";
             }
-            p = p->leftchild;
+            p = p->leftChild;
         }
         if (!S.empty()) {
             p = S.top();
             S.pop();
-            p = p->rightchild;
+            p = p->rightChild;
         }
     } while (p != nullptr || !S.empty());
     cout << endl << "编码成功";
@@ -450,17 +449,17 @@ void HuffmanTree::BuildDeCodingTree() {
         //到倒数第二个编码，留下最后一个编码单独处理
         for (int j = 0; j < code.length() - 1; j++) {
             if (code[j] == '0') {
-                if (p->leftchild == nullptr) {
+                if (p->leftChild == nullptr) {
                     q = new HuffmanNode;
-                    p->leftchild = q;
+                    p->leftChild = q;
                 }
-                p = p->leftchild;
+                p = p->leftChild;
             } else { //code[j] == '1'
-                if (p->rightchild == nullptr) {
+                if (p->rightChild == nullptr) {
                     q = new HuffmanNode;
-                    p->rightchild = q;
+                    p->rightChild = q;
                 }
-                p = p->rightchild;
+                p = p->rightChild;
             }
         }
         //最为编码的一定是叶子结点，肯定要new
@@ -468,9 +467,9 @@ void HuffmanTree::BuildDeCodingTree() {
         //只有ch要用到，其他默认即可
         q->ch = ch;
         if (code[code.length() - 1] == '0') {
-            p->leftchild = q;
+            p->leftChild = q;
         } else {
-            p->rightchild = q;
+            p->rightChild = q;
         }
     }
     cout << "建立译码树完毕." << endl << endl;
@@ -499,14 +498,14 @@ void HuffmanTree::deCoding(string encodingFile, string outputFile) {
         else if (ch == '\n')
             outfile << '\n';
         else {
-            if (ch == '0' && p->leftchild != nullptr) {
+            if (ch == '0' && p->leftChild != nullptr) {
                 //不是叶子结点，没有数据，向左
-                p = p->leftchild;
-            } else if (ch == '1' && p->rightchild != nullptr) {
+                p = p->leftChild;
+            } else if (ch == '1' && p->rightChild != nullptr) {
                 //不是叶子结点，没有数据，向左
-                p = p->rightchild;
+                p = p->rightChild;
             }
-            if (p->leftchild == nullptr && p->rightchild == nullptr) {
+            if (p->leftChild == nullptr && p->rightChild == nullptr) {
                 //是叶子结点，有数据，开始下一次查找
                 outfile << p->ch;
                 p = root;
@@ -522,12 +521,12 @@ void HuffmanTree::deCoding(string encodingFile, string outputFile) {
 
 int main() {
 
-//    char ch[31] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-//                   'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ',', '.', 'I', 'M', '?'};
-//    float weight[31] = {1, 5, 2, 6, 3, 7, 8, 4, 9, 10, 1, 5, 2, 6, 3, 7, 8, 4,
-//                        9, 10, 5, 8, 6, 9, 2, 5, 2, 3, 5, 4, 1};
-//    HuffmanTree ht1(weight, ch, 31);
-    HuffmanTree ht1;
+    char ch[31] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+                   'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ',', '.', 'I', 'M', '?'};
+    float weight[31] = {1, 5, 2, 6, 3, 7, 8, 4, 9, 10, 1, 5, 2, 6, 3, 7, 8, 4,
+                        9, 10, 5, 8, 6, 9, 2, 5, 2, 3, 5, 4, 1};
+    HuffmanTree ht1(weight, ch, 31);
+//    HuffmanTree ht1;
     cout << "构建成功" << endl;
 
     cout << "树的结构" << endl;
@@ -546,6 +545,6 @@ int main() {
     ht1.deCoding("encodedFile.txt", "b.txt");
 
     cout << endl;
-    system("pause");
+//    system("pause");
 }
 
