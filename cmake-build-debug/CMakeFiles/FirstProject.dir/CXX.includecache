@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-D:/ClionProject/FirstProject/DSModel/Graph/MinSpanningTreeM.cpp
+D:/ClionProject/FirstProject/DSModel/Graph/MinSpanningTreeD.cpp
 iostream
 -
 queue
@@ -17,4 +17,10 @@ vector
 -
 algorithm
 -
+memory.h
+-
+UFsets.h
+D:/ClionProject/FirstProject/DSModel/Graph/UFsets.h
+
+D:/ClionProject/FirstProject/DSModel/Graph/UFsets.h
 

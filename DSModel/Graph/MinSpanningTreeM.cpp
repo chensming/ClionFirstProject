@@ -88,7 +88,7 @@ public:
 
     void KruskalMinTree();
 
-    void PrimMinTree();
+    void PrimMinTree(int v0);
 
     void Dijkstra();
 
@@ -347,57 +347,50 @@ void Graphmtx<T, E>::KruskalMinTree() {
 
 
 template<class T, class E>
-void Graphmtx<T, E>::PrimMinTree() {
-    if (mst != nullptr)
-        delete mst;
+void Graphmtx<T, E>::PrimMinTree(int v0) {
+    delete mst;
     mst = new MSTEdgeNode<T, E>[numVertices];
 
-    MSTEdgeNode<T, E> p, leastNode;
+
+    int v = v0;
     vector<MSTEdgeNode<T, E>> hp;
-    UFsets ufset(numVertices);
-    bool visited[numVertices];
+    MSTEdgeNode<T, E> temp;
+    temp.tail = v;
 
-    for (int i = 0; i < numVertices; i++)
-        visited[i] = false;
-
-    cout << "请输入出发点编号 0至" << numVertices - 1 << endl;
-    int u;
-    cin >> u;
-    if (u < 0 || u > numVertices - 1) {
-        cout << "输入有误" << endl;
-        return;
+    Edge[v][v] = -1;
+    for(int col = 0; col < numVertices; col++) {
+        temp.head = col;
+        temp.cost = Edge[v][col];
+        hp.push_back(temp);
     }
+    make_heap(hp.begin(), hp.end(), cmp<T, E>);
+    sort_heap(hp.begin(), hp.end(), cmp<T, E>);
 
-    visited[u] = true;
+
     int count = 1;
-
     while (count < numVertices) {
-        for (int v = 0; v < numVertices; v++) {
-            if ((visited[v] == false) && Edge[u][v] < maxWeight) {
-                p.tail = u;
-                p.head = v;
-                p.cost = Edge[u][v];
-
-                hp.push_back(p);
-                make_heap(hp.begin(), hp.end(), cmp<T, E>);
-                sort_heap(hp.begin(), hp.end(), cmp<T, E>);
+        temp = hp.front();
+        hp.erase(hp.begin());
+        if (Edge[temp.head][temp.head] != -1) {
+            Edge[temp.head][temp.head] = -1;
+            mst[count - 1] = temp;
+            temp.tail = temp.head;
+            for(int col = 0; col < numVertices; col++) {
+                temp.head = col;
+                temp.cost = Edge[temp.tail][col];
+                hp.push_back(temp);
             }
-        }
-        while (!hp.empty() && count < numVertices) {
-            leastNode = hp.front();
-            hp.erase(hp.begin());
-            if (!visited[leastNode.head]) {
-                mst[count - 1] = leastNode;
-                cout << leastNode.tail << "->" << leastNode.head << "(" << leastNode.cost << ") ";
-                u = leastNode.head;
-                visited[u] = true;
-                count++;
-                break;
-            }
+            make_heap(hp.begin(), hp.end(), cmp<T, E>);
+            sort_heap(hp.begin(), hp.end(), cmp<T, E>);
+            count++;
         }
     }
-    cout << endl;
-
+    if (count == numVertices)
+        cout << "最小生成树生成" << endl;
+    for(int row = 0; row < numVertices; row++)
+        for(int col = 0; col < numVertices; col++)
+            if(row == col)
+                Edge[col][col] = 0;
 }
 
 
@@ -469,6 +462,7 @@ void Graphmtx<T, E>::printMinTree() {
 }
 
 
+
 int main() {
     Graphmtx<char, double> a;
     a.insertVertex('a');
@@ -501,10 +495,13 @@ int main() {
     a.KruskalMinTree();
 
     cout << endl << "Prim: " << endl;
-    a.PrimMinTree();
+    a.PrimMinTree(0);
+    a.printMinTree();
+//    a.showMatrix();
 
     cout << endl << "Dijkstra: " << endl;
     a.Dijkstra();
+//    a.showMatrix();
 
     cout << endl;
 }

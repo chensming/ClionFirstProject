@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.obj"
+  "CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.obj"
   "FirstProject.exe"
   "FirstProject.exe.manifest"
   "FirstProject.pdb"

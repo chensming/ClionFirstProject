@@ -1,31 +1,38 @@
+#include <vector>
 #include <iostream>
-#include <stack>
 
 using namespace std;
 
-template<class T>
-struct test {
-    T data1;
-    T data2;
-    test<T> *link;
+class NumArray
+{
+public:
+    NumArray(vector<int> &nums)
+    {
+        sums.push_back(nums[0]);
+        for (int i = 1; i <= nums.size(); i++)
+            sums[i] = sums[i - 1] + nums[i];
+    }
 
-    explicit test(test<T> *link1 = nullptr) :
-            link(link1) { data1 = data2 = T(); }
+    int sumRange(int i, int j)
+    {
+        return sums[j + 1] - sums[i];
+    }
+
+private:
+    vector<int> sums;
 };
 
-int main() {
-    stack<test<char>> st;
-    test<char> t;
-    for (int i = 0; i < 26; i++) {
-        t.data1 = 'A' + i;
-        t.data2 = 'a' + i;
-        st.push(t);
-    }
-    while (!st.empty()) {
-        t = st.top();
-        st.pop();
-        cout << "t.data1: " << t.data1;
-        cout << " t.data2: " << t.data2 << endl;
-    }
-    cout << endl;
+
+int main(){
+    vector<int> nums;
+    nums.push_back(-2);
+    nums.push_back(0);
+    nums.push_back(3);
+    nums.push_back(-5);
+    nums.push_back(2);
+    nums.push_back(-1);
+    NumArray * obj = new NumArray(nums);
+    cout << obj->sumRange(0, 2) << endl;
+    cout << obj->sumRange(2, 5) << endl;
+    cout << obj->sumRange(0, 5) << endl;
 }

@@ -11,4 +11,6 @@ set(CMAKE_CXX_STANDARD 14)
 #add_executable(FirstProject main.cpp)
 
 
-add_executable(FirstProject HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp)
+#add_executable(FirstProject Calc/CalGrades.cpp)
+#add_executable(FirstProject Test/main.cpp)
+add_executable(FirstProject DSModel/Graph/MinSpanningTreeD.cpp)

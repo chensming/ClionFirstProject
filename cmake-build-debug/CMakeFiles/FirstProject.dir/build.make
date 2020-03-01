@@ -56,27 +56,27 @@ include CMakeFiles/FirstProject.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/FirstProject.dir/flags.make
 
-CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.obj: CMakeFiles/FirstProject.dir/flags.make
-CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.obj: ../HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\ClionProject\FirstProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.obj"
-	C:\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\FirstProject.dir\HuangYuLianTeacher\H4\LinkedToSeqBinaryTree.cpp.obj -c D:\ClionProject\FirstProject\HuangYuLianTeacher\H4\LinkedToSeqBinaryTree.cpp
+CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.obj: CMakeFiles/FirstProject.dir/flags.make
+CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.obj: ../DSModel/Graph/MinSpanningTreeD.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\ClionProject\FirstProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.obj"
+	C:\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\FirstProject.dir\DSModel\Graph\MinSpanningTreeD.cpp.obj -c D:\ClionProject\FirstProject\DSModel\Graph\MinSpanningTreeD.cpp
 
-CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.i"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\ClionProject\FirstProject\HuangYuLianTeacher\H4\LinkedToSeqBinaryTree.cpp > CMakeFiles\FirstProject.dir\HuangYuLianTeacher\H4\LinkedToSeqBinaryTree.cpp.i
+CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.i"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\ClionProject\FirstProject\DSModel\Graph\MinSpanningTreeD.cpp > CMakeFiles\FirstProject.dir\DSModel\Graph\MinSpanningTreeD.cpp.i
 
-CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.s"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\ClionProject\FirstProject\HuangYuLianTeacher\H4\LinkedToSeqBinaryTree.cpp -o CMakeFiles\FirstProject.dir\HuangYuLianTeacher\H4\LinkedToSeqBinaryTree.cpp.s
+CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.s"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\ClionProject\FirstProject\DSModel\Graph\MinSpanningTreeD.cpp -o CMakeFiles\FirstProject.dir\DSModel\Graph\MinSpanningTreeD.cpp.s
 
 # Object files for target FirstProject
 FirstProject_OBJECTS = \
-"CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.obj"
+"CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.obj"
 
 # External object files for target FirstProject
 FirstProject_EXTERNAL_OBJECTS =
 
-FirstProject.exe: CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.obj
+FirstProject.exe: CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.obj
 FirstProject.exe: CMakeFiles/FirstProject.dir/build.make
 FirstProject.exe: CMakeFiles/FirstProject.dir/linklibs.rsp
 FirstProject.exe: CMakeFiles/FirstProject.dir/objects1.rsp

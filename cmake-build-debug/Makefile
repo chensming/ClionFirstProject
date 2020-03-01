@@ -122,32 +122,32 @@ FirstProject/fast:
 	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/build
 .PHONY : FirstProject/fast
 
-HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.obj: HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.obj
+DSModel/Graph/MinSpanningTreeD.obj: DSModel/Graph/MinSpanningTreeD.cpp.obj
 
-.PHONY : HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.obj
+.PHONY : DSModel/Graph/MinSpanningTreeD.obj
 
 # target to build an object file
-HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.obj:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.obj
-.PHONY : HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.obj
+DSModel/Graph/MinSpanningTreeD.cpp.obj:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.obj
+.PHONY : DSModel/Graph/MinSpanningTreeD.cpp.obj
 
-HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.i: HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.i
+DSModel/Graph/MinSpanningTreeD.i: DSModel/Graph/MinSpanningTreeD.cpp.i
 
-.PHONY : HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.i
+.PHONY : DSModel/Graph/MinSpanningTreeD.i
 
 # target to preprocess a source file
-HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.i:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.i
-.PHONY : HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.i
+DSModel/Graph/MinSpanningTreeD.cpp.i:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.i
+.PHONY : DSModel/Graph/MinSpanningTreeD.cpp.i
 
-HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.s: HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.s
+DSModel/Graph/MinSpanningTreeD.s: DSModel/Graph/MinSpanningTreeD.cpp.s
 
-.PHONY : HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.s
+.PHONY : DSModel/Graph/MinSpanningTreeD.s
 
 # target to generate assembly for a file
-HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.s:
-	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.s
-.PHONY : HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.cpp.s
+DSModel/Graph/MinSpanningTreeD.cpp.s:
+	$(MAKE) -f CMakeFiles\FirstProject.dir\build.make CMakeFiles/FirstProject.dir/DSModel/Graph/MinSpanningTreeD.cpp.s
+.PHONY : DSModel/Graph/MinSpanningTreeD.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... FirstProject
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.obj
-	@echo ... HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.i
-	@echo ... HuangYuLianTeacher/H4/LinkedToSeqBinaryTree.s
+	@echo ... DSModel/Graph/MinSpanningTreeD.obj
+	@echo ... DSModel/Graph/MinSpanningTreeD.i
+	@echo ... DSModel/Graph/MinSpanningTreeD.s
 .PHONY : help
 
 

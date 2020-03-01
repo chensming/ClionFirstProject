@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <vector>
 #include <algorithm>
+#include <memory.h>
 
 
 using namespace std;
@@ -35,7 +36,7 @@ struct Edge {
 
     Edge() : dest(-1), cost(-1), link(nullptr) {}
 
-    Edge(int num, E weight) : dest(num), cost(weight), link(0) {}
+    Edge(int num, E weight) : dest(num), cost(weight), link(nullptr) {}
 };
 
 template<class T, class E>
@@ -74,7 +75,7 @@ public:
     void PrintDest(); //把邻接表的样子输出来
     void KruskalMinTree();
 
-    void PrimMinTree();
+    void PrimMinTree(int v0 = 0);
 
     void Dijkstra();
 
@@ -472,61 +473,51 @@ void GraphLinked<T, E>::KruskalMinTree() {
 
 
 template<class T, class E>
-void GraphLinked<T, E>::PrimMinTree() {
-    if (mst != nullptr)
-        delete mst;
+void GraphLinked<T, E>::PrimMinTree(int v0) {
+    delete mst;
     mst = new MSTEdgeNode<T, E>[numVertices];
-    MSTEdgeNode<T, E> p, leastNode;
-    vector<MSTEdgeNode<T, E>> hp;
-    UFsets fsets(numVertices);
-    if (visited != nullptr)
-        delete[] visited;
+    delete[] visited;
     visited = new bool[numVertices];
+    memset(visited, false, sizeof(visited));
 
-    for (int i = 0; i < numVertices; i++)
-        visited[i] = false;
-
-    cout << "请输入出发点编号 0至" << numVertices - 1 << endl;
-    int u;
-    cin >> u;
-    if (u < 0 || u > numVertices - 1) {
-        cout << "输入有误" << endl;
-        return;
+    int v = v0;
+    vector<MSTEdgeNode<T, E>> hp;
+    MSTEdgeNode<T, E> temp;
+    temp.tail = v;
+    Edge<T, E> *p = NodeTable[v].adj;
+    visited[v] = true;
+    while (p != nullptr) {
+        temp.head = p->dest;
+        temp.cost = p->cost;
+        hp.push_back(temp);
+        p = p->link;
     }
+    make_heap(hp.begin(), hp.end(), cmp<T, E>);
+    sort_heap(hp.begin(), hp.end(), cmp<T, E>);
 
-    visited[u] = true;
+
     int count = 1;
-
-    Edge<T, E> *edgePtr;
     while (count < numVertices) {
-        edgePtr = NodeTable[u].adj;
-        while (edgePtr != nullptr) {
-            if (!visited[edgePtr->dest]) {
-                p.tail = u;
-                p.head = edgePtr->dest;
-                p.cost = edgePtr->cost;
-                hp.push_back(p);
+        temp = hp.front();
+        hp.erase(hp.begin());
+        if (!visited[temp.head]) {
+            visited[temp.head] = true;
+            mst[count - 1] = temp;
+            p = NodeTable[temp.head].adj;
+            temp.tail = temp.head;
+            while (p != nullptr) {
+                temp.head = p->dest;
+                temp.cost = p->cost;
+                hp.push_back(temp);
+                p = p->link;
             }
-            edgePtr = edgePtr->link;
-        }
-        make_heap(hp.begin(), hp.end(), cmp<T, E>);
-        sort_heap(hp.begin(), hp.end(), cmp<T, E>);
-        while (!hp.empty() && count < numVertices) {
-            leastNode = hp.front();
-            hp.erase(hp.begin());
-            if (!visited[leastNode.head]) {
-                mst[count - 1] = leastNode;
-                cout << leastNode.tail << "(" << NodeTable[leastNode.tail].data << ")->";
-                cout << leastNode.head << "(" << NodeTable[leastNode.head].data;
-                cout << "),w(" << leastNode.cost << ")  ";
-                u = leastNode.head;
-                visited[u] = true;
-                count++;
-                break;
-            }
+            make_heap(hp.begin(), hp.end(), cmp<T, E>);
+            sort_heap(hp.begin(), hp.end(), cmp<T, E>);
+            count++;
         }
     }
-    cout << endl;
+    if (count == numVertices)
+        cout << "最小生成树生成" << endl;
 }
 
 template<class T, class E>
@@ -601,7 +592,7 @@ void display(vector<MSTEdgeNode<T, E>> &v)//使用vector迭代器遍历
 
 template<class T, class E>
 void GraphLinked<T, E>::printMinTree() {
-    if (mst == 0) {
+    if (mst == nullptr) {
         cout << "最小生成树为空" << endl;
         return;
     }
@@ -637,9 +628,10 @@ int main() {
     a.KruskalMinTree();
 
     cout << endl << "prim: " << endl;
-    a.PrimMinTree();
+    a.PrimMinTree(0);
+    a.printMinTree();
 
-    a.Dijkstra();
+//    a.Dijkstra();
 
     cout << endl;
 }
